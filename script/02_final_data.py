@@ -181,16 +181,20 @@ def compute_statistics(df: pl.DataFrame) -> dict:
         ).alias("n_languages")
     )
 
+    # Count excluded unknowns for methodology
+    stats["excluded_unknown"] = df.filter(pl.col("n_languages") == 0).height
+
     multilingual_yearly = []
     for year in sorted(df["year"].unique().to_list()):
         year_df = df.filter(pl.col("year") == year)
-        n_sites = len(year_df)
+        # Exclude unknowns (sites with no languages detected)
+        year_df_known = year_df.filter(pl.col("n_languages") >= 1)
+        n_sites = len(year_df_known)
 
-        mono = year_df.filter(pl.col("n_languages") == 1).height
-        bi = year_df.filter(pl.col("n_languages") == 2).height
-        tri = year_df.filter(pl.col("n_languages") == 3).height
-        quad_plus = year_df.filter(pl.col("n_languages") >= 4).height
-        zero = year_df.filter(pl.col("n_languages") == 0).height
+        mono = year_df_known.filter(pl.col("n_languages") == 1).height
+        bi = year_df_known.filter(pl.col("n_languages") == 2).height
+        tri = year_df_known.filter(pl.col("n_languages") == 3).height
+        quad_plus = year_df_known.filter(pl.col("n_languages") >= 4).height
 
         multilingual_yearly.append(
             {
@@ -201,7 +205,6 @@ def compute_statistics(df: pl.DataFrame) -> dict:
                 "quadlingual_plus": round(quad_plus / n_sites * 100, 2)
                 if n_sites > 0
                 else 0,
-                "unknown": round(zero / n_sites * 100, 2) if n_sites > 0 else 0,
             }
         )
 
@@ -219,13 +222,14 @@ def compute_statistics(df: pl.DataFrame) -> dict:
             if row[lang]:
                 langs.append(LANGUAGE_LABELS[lang])
         if not langs:
-            return "Unknown"
+            return None  # Will be filtered out
         return " + ".join(sorted(langs))
 
     combos = {}
     for row in latest_df.iter_rows(named=True):
         combo = get_combo(row)
-        combos[combo] = combos.get(combo, 0) + 1
+        if combo is not None:  # Skip unknowns
+            combos[combo] = combos.get(combo, 0) + 1
 
     # Sort by count and take top 12
     sorted_combos = sorted(combos.items(), key=lambda x: x[1], reverse=True)[:12]
@@ -306,6 +310,7 @@ def main():
 
     # Add methodology stats
     stats["methodology"] = methodology_stats
+    stats["methodology"]["excluded_unknown"] = stats.pop("excluded_unknown")
 
     # Save as JSON
     print("\n[SAVE] Writing stats.json...")
