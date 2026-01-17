@@ -5,8 +5,13 @@ description = "Blog"
 readme = "README.md"
 requires-python = "==3.11.10"
 dependencies = [
+    "aiohttp>=3.13.3",
+    "ipykernel>=7.1.0",
     "matplotlib>=3.10.8",
+    "pandas>=2.3.3",
     "polars>=1.37.1",
+    "pyarrow>=22.0.0",
+    "tqdm>=4.67.1",
 ]
 
 [tool.uv]
