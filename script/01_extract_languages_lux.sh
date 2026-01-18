@@ -8,8 +8,8 @@
 #SBATCH --time=04:00:00
 #SBATCH --account=p200804
 #SBATCH --qos=default
-#SBATCH --error="/project/home/p200812/blog/website_languages_lux/script/slurm/01_extract_languages_lux.err"
-#SBATCH --output="/project/home/p200812/blog/website_languages_lux/script/slurm/01_extract_languages_lux.out"
+#SBATCH --error="/project/home/p200812/blog/script/slurm/01_extract_languages_lux.err"
+#SBATCH --output="/project/home/p200812/blog/script/slurm/01_extract_languages_lux.out"
 
 
 echo "================================================================================"
@@ -24,7 +24,7 @@ echo "==========================================================================
 # =============================================================================
 
 # Base directory paths
-BLOG_DIR=/project/home/p200812/blog/website_languages_lux
+BLOG_DIR=/project/home/p200812/blog
 VLLM_DIR=/project/home/p200812/01_inskill/vllm_magistral
 SCRIPT_DIR=${BLOG_DIR}/script
 DATA_DIR=/project/home/p201125/firm_websites/data

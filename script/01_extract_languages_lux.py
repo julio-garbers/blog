@@ -53,11 +53,9 @@ cli.add_argument("--pipeline-parallel-size")
 args, _ = cli.parse_known_args()
 
 # Directories
-SAMPLE_FILE = Path(
-    "/project/home/p200812/blog/website_languages_lux/data/lux_sample_for_llm.parquet"
-)
+SAMPLE_FILE = Path("/project/home/p200812/blog/data/lux_sample_for_llm.parquet")
 RAW_DATA_DIR = Path("/project/home/p201125/firm_websites/data/raw/luxembourg")
-OUTPUT_DIR = Path("/project/home/p200812/blog/website_languages_lux/data")
+OUTPUT_DIR = Path("/project/home/p200812/blog/data")
 OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
 
 OUTPUT_FILE = OUTPUT_DIR / "lux_sample_with_languages.parquet"
