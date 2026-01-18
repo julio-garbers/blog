@@ -48,14 +48,13 @@ The analysis uses a three-tier detection approach, prioritizing the most reliabl
 
 ```
 blog/
-├── website_languages_lux/
-│   ├── script/
-│   │   ├── 00_prepare_data_lux.py      # Sample preparation
-│   │   ├── 01_extract_languages_lux.py # Language extraction (LLM + regex)
-│   │   ├── 01_extract_languages_lux.sh # SLURM job script for HPC
-│   │   └── 02_final_data.py            # Statistics generation
-│   ├── data/                           # Intermediate data files
-│   └── output/                         # Final output (stats.json)
+├── script/
+│   ├── 00_prepare_data_lux.py          # Sample preparation
+│   ├── 01_extract_languages_lux.py     # Language extraction (LLM + regex)
+│   ├── 01_extract_languages_lux.sh     # SLURM job script for HPC
+│   └── 02_final_data.py                # Statistics generation
+├── data/                               # Intermediate data files
+├── output/                             # Final output (stats.json)
 ├── pyproject.toml                      # Python dependencies
 └── uv.lock                             # Dependency lock file
 ```
