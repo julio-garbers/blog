@@ -23,12 +23,12 @@ import polars as pl
 
 # Input files
 LLM_RESULTS_FILE = Path(
-    "/project/home/p200812/blog/data/lux_sample_with_languages.parquet"
+    "/project/home/p200812/blog/website_languages_lux/data/lux_sample_with_languages.parquet"
 )
 FASTTEXT_DATA_DIR = Path("/project/home/p201125/firm_websites/data/clean/luxembourg")
 
 # Output
-OUTPUT_DIR = Path("/project/home/p200812/blog/output")
+OUTPUT_DIR = Path("/project/home/p200812/blog/website_languages_lux/output")
 OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
 OUTPUT_JSON = OUTPUT_DIR / "stats.json"
 

@@ -48,13 +48,14 @@ The analysis uses a three-tier detection approach, prioritizing the most reliabl
 
 ```
 blog/
-├── script/
-│   ├── 00_prepare_data_lux.py          # Sample preparation
-│   ├── 01_extract_languages_lux.py     # Language extraction (LLM + regex)
-│   ├── 01_extract_languages_lux.sh     # SLURM job script for HPC
-│   └── 02_final_data.py                # Statistics generation
-├── data/                               # Intermediate data files
-├── output/                             # Final output (stats.json)
+├── website_languages_lux/
+│   ├── script/
+│   │   ├── 00_prepare_data_lux.py      # Sample preparation
+│   │   ├── 01_extract_languages_lux.py # Language extraction (LLM + regex)
+│   │   ├── 01_extract_languages_lux.sh # SLURM job script for HPC
+│   │   └── 02_final_data.py            # Statistics generation
+│   ├── data/                           # Intermediate data files
+│   └── output/                         # Final output (stats.json)
 ├── pyproject.toml                      # Python dependencies
 └── uv.lock                             # Dependency lock file
 ```
@@ -87,7 +88,7 @@ This creates a virtual environment and installs all dependencies from `pyproject
 Filter .lu domains from CommonCrawl data:
 
 ```bash
-uv run python website_languages_lux/script/00_prepare_data_lux.py
+uv run website_languages_lux/script/00_prepare_data_lux.py
 ```
 
 ### 2. Extract languages
@@ -110,7 +111,7 @@ This script:
 Combine results and compute visualization data:
 
 ```bash
-uv run python website_languages_lux/script/02_final_data.py
+uv run website_languages_lux/script/02_final_data.py
 ```
 
 Outputs `stats.json` with yearly trends, multilingual patterns, and language combinations.

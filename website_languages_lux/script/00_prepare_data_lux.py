@@ -18,7 +18,7 @@ import polars as pl
 # =============================================================================
 
 DATA_DIR = Path("/project/home/p201125/firm_websites/data/clean/luxembourg")
-OUTPUT_DIR = Path("/project/home/p200812/blog/data")
+OUTPUT_DIR = Path("/project/home/p200812/blog/website_languages_lux/data")
 OUTPUT_DIR.mkdir(exist_ok=True)
 
 OUTPUT_FILE = OUTPUT_DIR / "lux_sample_for_llm.parquet"
