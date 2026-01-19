@@ -1,7 +1,7 @@
 [project]
-name = "blog"
+name = "website_languages_lux"
 version = "0.1.0"
-description = "Blog"
+description = "Analyzing language availability on Luxembourg (.lu) websites from 2013 to 2024 using CommonCrawl archives."
 readme = "README.md"
 requires-python = "==3.11.10"
 dependencies = [
