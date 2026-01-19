@@ -1,9 +1,12 @@
 # Files
 *.parquet
+*.pkl
+*.npy
 
 # Folders
 slurm
 .venv
+models
 
 # Scripts
 test.ipynb
