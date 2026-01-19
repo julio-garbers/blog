@@ -1,9 +1,0 @@
-# Files
-*.parquet
-
-# Folders
-slurm
-.venv
-
-# Scripts
-test.ipynb
