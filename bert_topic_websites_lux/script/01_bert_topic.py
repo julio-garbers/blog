@@ -1,27 +1,32 @@
 """
-Luxembourg Website Topic Analysis - Step 1: BERTopic Analysis
-=============================================================
-Runs BERTopic on aggregated website text to discover topics for a single year.
+Luxembourg Website Topic Analysis - Step 1: BERTopic Analysis (Page-Level)
+==========================================================================
+Runs BERTopic on individual web pages to discover topics for a single year.
+After clustering, aggregates results back to website-year level.
+
+Each page gets a single topic assignment. A website can have multiple topics
+through its different pages, providing a richer topic distribution per website.
+
 Designed to be called via SLURM array job, with YEAR passed as environment variable.
 
 Pipeline:
-1. Load aggregated website text for the specified year
+1. Load individual pages for the specified year
 2. Generate sentence embeddings using SentenceTransformer
 3. Run BERTopic (UMAP + HDBSCAN + c-TF-IDF) to discover topics
-4. Save topic assignments, summaries, and visualizations
+4. Aggregate page-level results to website-year level
+5. Save page topics, website topics, summaries, and visualizations
 
-Input:  data/yearly/websites_{YEAR}.parquet (from 00_prepare_data.py)
-Output: output/{YEAR}/website_topics.parquet, topic_summary.csv, visualizations
+Input:  data/yearly/pages_{YEAR}.parquet (from 00_prepare_data.py)
+Output: output/{YEAR}/page_topics.parquet, website_topics.parquet, topic_summary.csv
 
 Author: Julio Garbers with contributions from Claude
-Date: January 2026
+Date: February 2026
 """
 
 from __future__ import annotations
 
 import json
 import os
-import pickle
 import warnings
 from pathlib import Path
 
@@ -108,8 +113,11 @@ MIN_TOPIC_SIZE = 10
 TOP_N_WORDS = 10
 EMBEDDING_MODEL = "paraphrase-multilingual-MiniLM-L12-v2"
 
-# Text processing
-MAX_TEXT_LENGTH = 15000
+# Text processing (per page — individual pages are shorter than aggregated text)
+MAX_TEXT_LENGTH = 10000
+
+# Visualization subsampling (UMAP scatter is slow with 100k+ points)
+MAX_VIZ_POINTS = 20000
 
 
 # =============================================================================
@@ -118,23 +126,24 @@ MAX_TEXT_LENGTH = 15000
 
 
 def load_year_data(year: int) -> pl.DataFrame:
-    input_file = DATA_DIR / f"websites_{year}.parquet"
+    input_file = DATA_DIR / f"pages_{year}.parquet"
 
     if not input_file.exists():
         raise FileNotFoundError(f"Data file not found: {input_file}")
 
-    print(f"\n[LOAD] Loading data for {year}...", flush=True)
+    print(f"\n[LOAD] Loading pages for {year}...", flush=True)
     df = pl.read_parquet(input_file)
-    print(f"   Loaded: {len(df):,} websites", flush=True)
+    n_websites = df["website_url"].n_unique()
+    print(f"   Loaded: {len(df):,} pages from {n_websites:,} websites", flush=True)
 
-    # Truncate very long texts
+    # Truncate very long pages
     df = df.with_columns(
-        pl.col("aggregated_text").str.slice(0, MAX_TEXT_LENGTH).alias("text")
+        pl.col("page_text").str.slice(0, MAX_TEXT_LENGTH).alias("text")
     )
 
-    # Filter out very short texts
+    # Filter out very short pages
     df = df.filter(pl.col("text").str.len_chars() >= 50)
-    print(f"   After filtering: {len(df):,} websites", flush=True)
+    print(f"   After filtering: {len(df):,} pages", flush=True)
 
     return df
 
@@ -148,13 +157,13 @@ def run_bertopic(
     texts: list[str],
 ) -> tuple[BERTopic, list[int], pl.DataFrame, np.ndarray]:
     print("\n" + "=" * 70, flush=True)
-    print("[BERTOPIC] Running BERTopic Analysis", flush=True)
+    print("[BERTOPIC] Running BERTopic Analysis (Page-Level)", flush=True)
     print("=" * 70, flush=True)
 
     # Generate embeddings
-    print("\n   Generating embeddings...", flush=True)
+    print(f"\n   Generating embeddings for {len(texts):,} pages...", flush=True)
     embedding_model = SentenceTransformer(EMBEDDING_MODEL, cache_folder=str(MODEL_DIR))
-    embeddings = embedding_model.encode(texts, show_progress_bar=True)
+    embeddings = embedding_model.encode(texts, show_progress_bar=True, batch_size=256)
     print(f"   [OK] Embeddings shape: {embeddings.shape}", flush=True)
 
     # Configure UMAP for dimensionality reduction
@@ -207,9 +216,78 @@ def run_bertopic(
     outlier_pct = n_outliers / len(topics) * 100
 
     print(f"\n   [OK] Discovered {n_topics} topics", flush=True)
-    print(f"   [OK] Outliers: {n_outliers:,} ({outlier_pct:.1f}%)", flush=True)
+    print(f"   [OK] Page outliers: {n_outliers:,} ({outlier_pct:.1f}%)", flush=True)
 
     return topic_model, topics, topic_info, embeddings
+
+
+# =============================================================================
+# Website-Level Aggregation
+# =============================================================================
+
+
+def aggregate_to_websites(
+    df: pl.DataFrame, topics: list[int]
+) -> tuple[pl.DataFrame, pl.DataFrame]:
+    """Aggregate page-level topics to website-year level.
+
+    Returns:
+        page_df: Page-level DataFrame with topic assignments
+        website_summary: Website-level summary with primary topic and stats
+    """
+    print("\n[AGGREGATE] Computing website-level topic distributions...", flush=True)
+
+    page_df = df.select(["website_url", "year"]).with_columns(
+        pl.Series("topic", topics)
+    )
+
+    n_websites = page_df["website_url"].n_unique()
+
+    # Primary topic per website: most frequent non-outlier topic
+    primary_topics = (
+        page_df.filter(pl.col("topic") != -1)
+        .group_by(["website_url", "year", "topic"])
+        .agg(pl.len().alias("topic_pages"))
+        .sort(["website_url", "year", "topic_pages"], descending=[False, False, True])
+        .group_by(["website_url", "year"])
+        .first()
+        .select(["website_url", "year", "topic"])
+        .rename({"topic": "primary_topic"})
+    )
+
+    # Website summary
+    website_summary = (
+        page_df.group_by(["website_url", "year"])
+        .agg(
+            [
+                pl.len().alias("n_pages"),
+                (pl.col("topic") != -1).sum().alias("n_classified"),
+                pl.col("topic")
+                .filter(pl.col("topic") != -1)
+                .n_unique()
+                .alias("n_topics"),
+            ]
+        )
+        .join(primary_topics, on=["website_url", "year"], how="left")
+        .with_columns(pl.col("primary_topic").fill_null(-1))
+    )
+
+    n_classified = website_summary.filter(pl.col("primary_topic") != -1).height
+    n_outlier = website_summary.filter(pl.col("primary_topic") == -1).height
+
+    # Avg topics per classified website
+    classified = website_summary.filter(pl.col("n_topics") > 0)
+    avg_topics = classified["n_topics"].mean() if len(classified) > 0 else 0
+
+    print(f"   Total websites: {n_websites:,}", flush=True)
+    print(
+        f"   Classified websites: {n_classified:,} ({n_classified/n_websites*100:.1f}%)",
+        flush=True,
+    )
+    print(f"   Outlier websites (all pages outlier): {n_outlier:,}", flush=True)
+    print(f"   Avg topics per classified website: {avg_topics:.1f}", flush=True)
+
+    return page_df, website_summary
 
 
 # =============================================================================
@@ -217,22 +295,13 @@ def run_bertopic(
 # =============================================================================
 
 
-def save_model(topic_model: BERTopic, year: int) -> Path:
-    MODEL_DIR.mkdir(parents=True, exist_ok=True)
-    model_path = MODEL_DIR / f"bertopic_{year}.pkl"
-
-    with open(model_path, "wb") as f:
-        pickle.dump(topic_model, f)
-
-    print(f"\n   [OK] Model saved: {model_path}", flush=True)
-    return model_path
-
-
 def save_results(
     df: pl.DataFrame,
     topic_model: BERTopic,
     topics: list[int],
     topic_info: pl.DataFrame,
+    page_df: pl.DataFrame,
+    website_summary: pl.DataFrame,
     embeddings: np.ndarray,
     year: int,
 ) -> None:
@@ -241,22 +310,54 @@ def save_results(
 
     print(f"\n[SAVE] Saving results to {year_output_dir}", flush=True)
 
-    # 1. Website-topic assignments
-    df_results = df.with_columns(pl.Series("topic", topics))
-    df_results.write_parquet(
+    # 1. Page-level topic assignments (without text to save space)
+    page_df.write_parquet(
+        year_output_dir / "page_topics.parquet",
+        compression="zstd",
+        compression_level=10,
+    )
+    print(
+        f"   [OK] Page topics: page_topics.parquet ({len(page_df):,} pages)", flush=True
+    )
+
+    # 2. Website-level summary
+    website_summary.write_parquet(
         year_output_dir / "website_topics.parquet",
         compression="zstd",
         compression_level=10,
     )
-    print("   [OK] Website topics: website_topics.parquet", flush=True)
+    print(
+        f"   [OK] Website topics: website_topics.parquet ({len(website_summary):,} websites)",
+        flush=True,
+    )
 
-    # 2. Topic summary
+    # 3. Topic summary with both page and website counts
+    website_counts = (
+        page_df.filter(pl.col("topic") != -1)
+        .group_by("topic")
+        .agg(pl.col("website_url").n_unique().alias("website_count"))
+    )
+    website_count_dict = dict(
+        zip(
+            website_counts["topic"].to_list(),
+            website_counts["website_count"].to_list(),
+        )
+    )
+
+    n_outlier_websites = website_summary.filter(pl.col("primary_topic") == -1).height
+
     topic_summary = []
     for row in topic_info.iter_rows(named=True):
         topic_id = row["Topic"]
+        page_count = row["Count"]
+
+        if topic_id == -1:
+            website_count = n_outlier_websites
+        else:
+            website_count = website_count_dict.get(topic_id, 0)
 
         # Get representative docs
-        if topic_id != -1 and row["Count"] >= 3:
+        if topic_id != -1 and page_count >= 3:
             try:
                 rep_docs = topic_model.get_representative_docs(topic_id)[:3]
                 rep_docs_str = "\n---\n".join(
@@ -281,7 +382,8 @@ def save_results(
         topic_summary.append(
             {
                 "topic_id": topic_id,
-                "count": row["Count"],
+                "page_count": page_count,
+                "website_count": website_count,
                 "name": row["Name"],
                 "top_words": top_words,
                 "representative_docs": rep_docs_str,
@@ -292,16 +394,35 @@ def save_results(
     topic_summary_df.write_csv(year_output_dir / "topic_summary.csv")
     print("   [OK] Topic summary: topic_summary.csv", flush=True)
 
-    # 3. Embeddings (for later analysis)
+    # 4. Embeddings
     np.save(year_output_dir / "embeddings.npy", embeddings)
-    print("   [OK] Embeddings: embeddings.npy", flush=True)
+    print(
+        f"   [OK] Embeddings: embeddings.npy ({embeddings.nbytes / 1e6:.1f} MB)",
+        flush=True,
+    )
 
-    # 4. Metadata
+    # 5. Metadata
+    n_pages = len(df)
+    n_websites = df["website_url"].n_unique()
+    n_outlier_pages = sum(1 for t in topics if t == -1)
+    n_classified_websites = website_summary.filter(pl.col("primary_topic") != -1).height
+
+    classified = website_summary.filter(pl.col("n_topics") > 0)
+    avg_topics = (
+        round(classified["n_topics"].mean(), 1) if len(classified) > 0 else 0
+    )
+
     metadata = {
         "year": year,
-        "n_websites": len(df),
+        "n_pages": n_pages,
+        "n_websites": n_websites,
         "n_topics": len(topic_info) - 1,
-        "n_outliers": sum(1 for t in topics if t == -1),
+        "n_outlier_pages": n_outlier_pages,
+        "n_outlier_websites": n_outlier_websites,
+        "page_outlier_pct": round(n_outlier_pages / n_pages * 100, 1),
+        "website_outlier_pct": round(n_outlier_websites / n_websites * 100, 1),
+        "n_classified_websites": n_classified_websites,
+        "avg_topics_per_website": avg_topics,
         "embedding_model": EMBEDDING_MODEL,
         "min_topic_size": MIN_TOPIC_SIZE,
     }
@@ -338,8 +459,10 @@ def create_visualizations(
         )
         ax.set_yticks(range(len(topics_sorted)))
         ax.set_yticklabels(topics_sorted["Name"], fontsize=9)
-        ax.set_xlabel("Number of Documents", fontsize=11)
-        ax.set_title(f"Topic Distribution - {year}", fontsize=14, fontweight="bold")
+        ax.set_xlabel("Number of Pages", fontsize=11)
+        ax.set_title(
+            f"Topic Distribution (Pages) - {year}", fontsize=14, fontweight="bold"
+        )
         ax.spines["top"].set_visible(False)
         ax.spines["right"].set_visible(False)
         plt.tight_layout()
@@ -389,8 +512,21 @@ def create_visualizations(
     except Exception as e:
         print(f"   [WARN] Skipped topic_words: {e}", flush=True)
 
-    # 3. UMAP 2D scatter
+    # 3. UMAP 2D scatter (subsampled for large datasets)
     try:
+        if len(embeddings) > MAX_VIZ_POINTS:
+            print(
+                f"   Subsampling {MAX_VIZ_POINTS:,} of {len(embeddings):,} pages for UMAP scatter...",
+                flush=True,
+            )
+            rng = np.random.RandomState(42)
+            idx = rng.choice(len(embeddings), MAX_VIZ_POINTS, replace=False)
+            viz_embeddings = embeddings[idx]
+            viz_topics = np.array(topics)[idx]
+        else:
+            viz_embeddings = embeddings
+            viz_topics = np.array(topics)
+
         umap_2d = UMAP(
             n_neighbors=15,
             n_components=2,
@@ -398,23 +534,21 @@ def create_visualizations(
             metric="cosine",
             random_state=42,
         )
-        embeddings_2d = umap_2d.fit_transform(embeddings)
+        embeddings_2d = umap_2d.fit_transform(viz_embeddings)
 
         fig, ax = plt.subplots(figsize=(12, 10))
 
-        # Color by topic, with outliers in gray
-        topic_array = np.array(topics)
-        unique_topics = sorted(set(topics))
+        unique_topics = sorted(set(viz_topics))
 
         # Plot outliers first (in gray)
-        outlier_mask = topic_array == -1
+        outlier_mask = viz_topics == -1
         if outlier_mask.any():
             ax.scatter(
                 embeddings_2d[outlier_mask, 0],
                 embeddings_2d[outlier_mask, 1],
                 c="lightgray",
-                alpha=0.3,
-                s=20,
+                alpha=0.2,
+                s=10,
                 label="Outliers",
             )
 
@@ -423,17 +557,19 @@ def create_visualizations(
         colors = plt.cm.tab20(np.linspace(0, 1, len(non_outlier_topics)))
 
         for idx, topic_id in enumerate(non_outlier_topics[:20]):
-            mask = topic_array == topic_id
+            mask = viz_topics == topic_id
             ax.scatter(
                 embeddings_2d[mask, 0],
                 embeddings_2d[mask, 1],
                 c=[colors[idx % 20]],
-                alpha=0.6,
-                s=30,
+                alpha=0.5,
+                s=15,
                 label=f"Topic {topic_id}",
             )
 
-        ax.set_title(f"Website Topics (UMAP) - {year}", fontsize=14, fontweight="bold")
+        ax.set_title(
+            f"Page Topics (UMAP) - {year}", fontsize=14, fontweight="bold"
+        )
         ax.set_xlabel("UMAP 1")
         ax.set_ylabel("UMAP 2")
         ax.spines["top"].set_visible(False)
@@ -477,7 +613,9 @@ def create_visualizations(
             ax.set_yticklabels([f"T{t}" for t in topic_ids], fontsize=9)
 
             plt.colorbar(im, ax=ax, label="Cosine Similarity")
-            ax.set_title(f"Topic Similarity - {year}", fontsize=14, fontweight="bold")
+            ax.set_title(
+                f"Topic Similarity - {year}", fontsize=14, fontweight="bold"
+            )
 
             plt.tight_layout()
             plt.savefig(
@@ -496,7 +634,7 @@ def create_visualizations(
 
 def main():
     print("=" * 70, flush=True)
-    print(f"Luxembourg Website Topic Analysis - Year {YEAR}", flush=True)
+    print(f"Luxembourg Website Topic Analysis - Year {YEAR} (Page-Level)", flush=True)
     print("=" * 70, flush=True)
     print("\nConfiguration:", flush=True)
     print(f"   Year: {YEAR}", flush=True)
@@ -509,32 +647,43 @@ def main():
     texts = df["text"].to_list()
 
     if len(texts) < 50:
-        print(f"\n[WARN] Only {len(texts)} websites. Results may not be meaningful.", flush=True)
+        print(
+            f"\n[WARN] Only {len(texts)} pages. Results may not be meaningful.",
+            flush=True,
+        )
 
     # Run BERTopic
     topic_model, topics, topic_info, embeddings = run_bertopic(texts)
 
-    # Save model
-    save_model(topic_model, YEAR)
+    # Aggregate to website level
+    page_df, website_summary = aggregate_to_websites(df, topics)
 
     # Save results
-    save_results(df, topic_model, topics, topic_info, embeddings, YEAR)
+    save_results(
+        df, topic_model, topics, topic_info, page_df, website_summary, embeddings, YEAR
+    )
 
     # Create visualizations
     create_visualizations(topic_model, topics, embeddings, YEAR)
 
     # Print top topics
     print("\n" + "=" * 70, flush=True)
-    print(f"TOP TOPICS FOR {YEAR}", flush=True)
+    print(f"TOP TOPICS FOR {YEAR} (by website count)", flush=True)
     print("=" * 70, flush=True)
 
-    topic_info_sorted = topic_info.filter(pl.col("Topic") != -1).sort(
-        "Count", descending=True
+    topic_summary = pl.read_csv(OUTPUT_DIR / str(YEAR) / "topic_summary.csv")
+    top = (
+        topic_summary.filter(pl.col("topic_id") != -1)
+        .sort("website_count", descending=True)
+        .head(10)
     )
 
-    for row in topic_info_sorted.head(10).iter_rows(named=True):
-        print(f"\n   Topic {row['Topic']} (n={row['Count']})", flush=True)
-        print(f"   {row['Name']}", flush=True)
+    for row in top.iter_rows(named=True):
+        print(
+            f"\n   Topic {row['topic_id']} ({row['website_count']} websites, {row['page_count']} pages)",
+            flush=True,
+        )
+        print(f"   {row['name']}", flush=True)
 
     print("\n" + "=" * 70, flush=True)
     print(f"DONE! Results saved to: {OUTPUT_DIR / str(YEAR)}", flush=True)
