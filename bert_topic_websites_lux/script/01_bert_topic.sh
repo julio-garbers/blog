@@ -33,6 +33,9 @@ module load Python/3.11.10-GCCcore-13.3.0
 
 source /project/home/p200812/blog/.venv/bin/activate
 
+# Cache embedding model in project directory
+export SENTENCE_TRANSFORMERS_HOME=/project/home/p200812/blog/bert_topic_websites_lux/models
+
 # =============================================================================
 # Run BERTopic Analysis
 # =============================================================================

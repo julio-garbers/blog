@@ -153,7 +153,7 @@ def run_bertopic(
 
     # Generate embeddings
     print("\n   Generating embeddings...", flush=True)
-    embedding_model = SentenceTransformer(EMBEDDING_MODEL)
+    embedding_model = SentenceTransformer(EMBEDDING_MODEL, cache_folder=str(MODEL_DIR))
     embeddings = embedding_model.encode(texts, show_progress_bar=True)
     print(f"   [OK] Embeddings shape: {embeddings.shape}", flush=True)
 
