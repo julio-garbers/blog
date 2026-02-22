@@ -8,6 +8,7 @@ CLAUDE.md
 slurm
 .venv
 models
+.claude
 
 # Scripts
 test.ipynb
