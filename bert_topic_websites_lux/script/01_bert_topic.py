@@ -31,7 +31,6 @@ import polars as pl
 from bertopic import BERTopic
 from hdbscan import HDBSCAN
 from sentence_transformers import SentenceTransformer
-from sklearn.decomposition import PCA
 from sklearn.feature_extraction.text import CountVectorizer
 from stopwordsiso import stopwords
 from umap import UMAP
@@ -326,60 +325,186 @@ def create_visualizations(
     embeddings: np.ndarray,
     year: int,
 ) -> None:
-    """Create and save visualizations."""
+    """Create and save static visualizations."""
     year_output_dir = OUTPUT_DIR / str(year)
     year_output_dir.mkdir(parents=True, exist_ok=True)
 
     print("\n[VIZ] Creating visualizations...")
 
-    # 1. Topic barchart
-    try:
-        fig = topic_model.visualize_barchart(top_n_topics=15, n_words=8)
-        fig.write_html(str(year_output_dir / "topic_barchart.html"))
-        print("   [OK] topic_barchart.html")
-    except Exception as e:
-        print(f"   [WARN] Skipped barchart: {e}")
+    # Get topic info
+    topic_info = topic_model.get_topic_info()
+    topic_info_filtered = topic_info[topic_info["Topic"] != -1].head(15)
 
-    # 2. Topic map (intertopic distance)
+    # 1. Topic distribution (horizontal bar chart)
     try:
-        fig = topic_model.visualize_topics()
-        fig.write_html(str(year_output_dir / "topic_map.html"))
-        print("   [OK] topic_map.html")
-    except Exception as e:
-        print(f"   [WARN] Skipped topic map: {e}")
+        fig, ax = plt.subplots(figsize=(10, 8))
+        topics_sorted = topic_info_filtered.sort_values("Count", ascending=True)
 
-    # 3. Topic hierarchy
-    try:
-        fig = topic_model.visualize_hierarchy()
-        fig.write_html(str(year_output_dir / "topic_hierarchy.html"))
-        print("   [OK] topic_hierarchy.html")
-    except Exception as e:
-        print(f"   [WARN] Skipped hierarchy: {e}")
-
-    # 4. 2D scatter plot using PCA
-    try:
-        pca = PCA(n_components=2, random_state=42)
-        embeddings_2d = pca.fit_transform(embeddings)
-
-        plt.figure(figsize=(12, 8))
-        scatter = plt.scatter(
-            embeddings_2d[:, 0],
-            embeddings_2d[:, 1],
-            c=topics,
-            cmap="tab20",
-            alpha=0.6,
-            s=50,
+        colors = plt.cm.viridis(np.linspace(0.2, 0.8, len(topics_sorted)))
+        ax.barh(
+            range(len(topics_sorted)),
+            topics_sorted["Count"],
+            color=colors,
         )
-        plt.colorbar(scatter, label="Topic")
-        plt.title(f"Luxembourg Website Topics - {year}", fontsize=14, fontweight="bold")
-        plt.xlabel("First Principal Component")
-        plt.ylabel("Second Principal Component")
+        ax.set_yticks(range(len(topics_sorted)))
+        ax.set_yticklabels(topics_sorted["Name"], fontsize=9)
+        ax.set_xlabel("Number of Documents", fontsize=11)
+        ax.set_title(f"Topic Distribution - {year}", fontsize=14, fontweight="bold")
+        ax.spines["top"].set_visible(False)
+        ax.spines["right"].set_visible(False)
         plt.tight_layout()
-        plt.savefig(year_output_dir / "topic_scatter.png", dpi=300, bbox_inches="tight")
+        plt.savefig(
+            year_output_dir / "topic_distribution.png", dpi=300, bbox_inches="tight"
+        )
         plt.close()
-        print("   [OK] topic_scatter.png")
+        print("   [OK] topic_distribution.png")
     except Exception as e:
-        print(f"   [WARN] Skipped scatter: {e}")
+        print(f"   [WARN] Skipped topic_distribution: {e}")
+
+    # 2. Top words per topic (grid of horizontal bar charts)
+    try:
+        n_topics = min(12, len(topic_info_filtered))
+        n_cols = 3
+        n_rows = (n_topics + n_cols - 1) // n_cols
+
+        fig, axes = plt.subplots(n_rows, n_cols, figsize=(14, n_rows * 2.5))
+        axes = axes.flatten() if n_topics > 1 else [axes]
+
+        for idx, topic_id in enumerate(topic_info_filtered["Topic"].head(n_topics)):
+            ax = axes[idx]
+            words_scores = topic_model.get_topic(topic_id)[:8]
+            words = [w for w, _ in words_scores]
+            scores = [s for _, s in words_scores]
+
+            colors = plt.cm.Blues(np.linspace(0.4, 0.9, len(words)))
+            ax.barh(range(len(words)), scores[::-1], color=colors[::-1])
+            ax.set_yticks(range(len(words)))
+            ax.set_yticklabels(words[::-1], fontsize=8)
+            ax.set_title(f"Topic {topic_id}", fontsize=10, fontweight="bold")
+            ax.spines["top"].set_visible(False)
+            ax.spines["right"].set_visible(False)
+            ax.tick_params(axis="x", labelsize=7)
+
+        # Hide empty subplots
+        for idx in range(n_topics, len(axes)):
+            axes[idx].set_visible(False)
+
+        plt.suptitle(
+            f"Top Words per Topic - {year}", fontsize=14, fontweight="bold", y=1.02
+        )
+        plt.tight_layout()
+        plt.savefig(year_output_dir / "topic_words.png", dpi=300, bbox_inches="tight")
+        plt.close()
+        print("   [OK] topic_words.png")
+    except Exception as e:
+        print(f"   [WARN] Skipped topic_words: {e}")
+
+    # 3. UMAP 2D scatter (better than PCA for topic visualization)
+    try:
+        # Use UMAP for 2D projection (better cluster separation)
+        umap_2d = UMAP(
+            n_neighbors=15,
+            n_components=2,
+            min_dist=0.1,
+            metric="cosine",
+            random_state=42,
+        )
+        embeddings_2d = umap_2d.fit_transform(embeddings)
+
+        fig, ax = plt.subplots(figsize=(12, 10))
+
+        # Color by topic, with outliers in gray
+        topic_array = np.array(topics)
+        unique_topics = sorted(set(topics))
+
+        # Plot outliers first (in gray)
+        outlier_mask = topic_array == -1
+        if outlier_mask.any():
+            ax.scatter(
+                embeddings_2d[outlier_mask, 0],
+                embeddings_2d[outlier_mask, 1],
+                c="lightgray",
+                alpha=0.3,
+                s=20,
+                label="Outliers",
+            )
+
+        # Plot topics with colors
+        non_outlier_topics = [t for t in unique_topics if t != -1]
+        colors = plt.cm.tab20(np.linspace(0, 1, len(non_outlier_topics)))
+
+        for idx, topic_id in enumerate(
+            non_outlier_topics[:20]
+        ):  # Limit to 20 topics for readability
+            mask = topic_array == topic_id
+            ax.scatter(
+                embeddings_2d[mask, 0],
+                embeddings_2d[mask, 1],
+                c=[colors[idx % 20]],
+                alpha=0.6,
+                s=30,
+                label=f"Topic {topic_id}",
+            )
+
+        ax.set_title(f"Website Topics (UMAP) - {year}", fontsize=14, fontweight="bold")
+        ax.set_xlabel("UMAP 1")
+        ax.set_ylabel("UMAP 2")
+        ax.spines["top"].set_visible(False)
+        ax.spines["right"].set_visible(False)
+
+        # Legend outside plot
+        ax.legend(
+            bbox_to_anchor=(1.02, 1),
+            loc="upper left",
+            fontsize=8,
+            frameon=False,
+        )
+
+        plt.tight_layout()
+        plt.savefig(year_output_dir / "topic_umap.png", dpi=300, bbox_inches="tight")
+        plt.close()
+        print("   [OK] topic_umap.png")
+    except Exception as e:
+        print(f"   [WARN] Skipped topic_umap: {e}")
+
+    # 4. Topic similarity heatmap
+    try:
+        # Get topic embeddings (average of document embeddings per topic)
+        topic_ids = [t for t in sorted(set(topics)) if t != -1][:15]
+        topic_embeddings = []
+
+        for topic_id in topic_ids:
+            mask = np.array(topics) == topic_id
+            if mask.any():
+                topic_embeddings.append(embeddings[mask].mean(axis=0))
+
+        if len(topic_embeddings) > 1:
+            topic_embeddings = np.array(topic_embeddings)
+
+            # Compute cosine similarity
+            from sklearn.metrics.pairwise import cosine_similarity
+
+            similarity_matrix = cosine_similarity(topic_embeddings)
+
+            fig, ax = plt.subplots(figsize=(10, 8))
+            im = ax.imshow(similarity_matrix, cmap="YlOrRd", aspect="auto")
+
+            ax.set_xticks(range(len(topic_ids)))
+            ax.set_yticks(range(len(topic_ids)))
+            ax.set_xticklabels([f"T{t}" for t in topic_ids], fontsize=9)
+            ax.set_yticklabels([f"T{t}" for t in topic_ids], fontsize=9)
+
+            plt.colorbar(im, ax=ax, label="Cosine Similarity")
+            ax.set_title(f"Topic Similarity - {year}", fontsize=14, fontweight="bold")
+
+            plt.tight_layout()
+            plt.savefig(
+                year_output_dir / "topic_similarity.png", dpi=300, bbox_inches="tight"
+            )
+            plt.close()
+            print("   [OK] topic_similarity.png")
+    except Exception as e:
+        print(f"   [WARN] Skipped topic_similarity: {e}")
 
 
 # =============================================================================

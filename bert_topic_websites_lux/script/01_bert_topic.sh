@@ -7,7 +7,7 @@
 #SBATCH --time=04:00:00
 #SBATCH --account=p200812
 #SBATCH --qos=default
-#SBATCH --array=0-11
+#SBATCH --array=0 #-11
 
 # =============================================================================
 # Job Information
