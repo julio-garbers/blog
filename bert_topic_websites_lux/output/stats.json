@@ -1,0 +1,2674 @@
+{
+  "summary": {
+    "first_year": 2013,
+    "last_year": 2024,
+    "years_covered": 12,
+    "total_website_years": 81585,
+    "avg_topics_per_year": 73.7
+  },
+  "yearly": [
+    {
+      "year": 2013,
+      "n_websites": 2051,
+      "n_topics": 1,
+      "n_outliers": 0,
+      "outlier_pct": 0.0,
+      "top_topics": [
+        {
+          "topic_id": 0,
+          "name": "0_2013_luxembourg_2012_contact",
+          "count": 2022,
+          "top_words": "2013, luxembourg, 2012, contact, 00, 352, 12, services, 05, news"
+        },
+        {
+          "topic_id": 1,
+          "name": "1_flash_hotel_flash player_player",
+          "count": 29,
+          "top_words": "flash, hotel, flash player, player, parc, hotel parc, version, volkswagen, golf, adobe flash"
+        }
+      ],
+      "government_topics": [
+        0
+      ],
+      "government_count": 2022,
+      "government_pct": 98.6
+    },
+    {
+      "year": 2014,
+      "n_websites": 1856,
+      "n_topics": 1,
+      "n_outliers": 0,
+      "outlier_pct": 0.0,
+      "top_topics": [
+        {
+          "topic_id": 0,
+          "name": "0_2014_luxembourg_00_contact",
+          "count": 1838,
+          "top_words": "2014, luxembourg, 00, contact, 2013, 352, services, 30, 12, rue"
+        },
+        {
+          "topic_id": 1,
+          "name": "1_flash_flash player_player_version",
+          "count": 18,
+          "top_words": "flash, flash player, player, version, adobe flash, adobe, requires version, version adobe, content requires, casino"
+        }
+      ],
+      "government_topics": [
+        0
+      ],
+      "government_count": 1838,
+      "government_pct": 99.0
+    },
+    {
+      "year": 2015,
+      "n_websites": 1774,
+      "n_topics": 28,
+      "n_outliers": 797,
+      "outlier_pct": 44.9,
+      "top_topics": [
+        {
+          "topic_id": 0,
+          "name": "0_luxembourg_2015_services_allianz",
+          "count": 240,
+          "top_words": "luxembourg, 2015, services, allianz, contact, 2014, 352, nbsp, international, eur"
+        },
+        {
+          "topic_id": 1,
+          "name": "1_2015_seniors_match_saison",
+          "count": 90,
+          "top_words": "2015, seniors, match, saison, 2014, fc, club, dames, 25, women"
+        },
+        {
+          "topic_id": 2,
+          "name": "2_cactus_voir_prix_audi",
+          "count": 56,
+          "top_words": "cactus, voir, prix, audi, css, catalogue, js, efficience, modèles, configurateur"
+        },
+        {
+          "topic_id": 3,
+          "name": "3_commune_communale_communal_administration",
+          "count": 51,
+          "top_words": "commune, communale, communal, administration, administration communale, conseil communal, associations, adresse, service, 00"
+        },
+        {
+          "topic_id": 4,
+          "name": "4_maison_max_000_appartement",
+          "count": 32,
+          "top_words": "maison, max, 000, appartement, maisons, jumelée, surface, maison jumelée, immobilier, location"
+        }
+      ],
+      "government_topics": [
+        0,
+        3,
+        5,
+        14,
+        15,
+        16,
+        22,
+        24
+      ],
+      "government_count": 427,
+      "government_pct": 24.1
+    },
+    {
+      "year": 2016,
+      "n_websites": 5627,
+      "n_topics": 72,
+      "n_outliers": 2831,
+      "outlier_pct": 50.3,
+      "top_topics": [
+        {
+          "topic_id": 0,
+          "name": "0_luxembourg_allianz_services_international",
+          "count": 353,
+          "top_words": "luxembourg, allianz, services, international, management, nbsp, contact, 2016, investment, business"
+        },
+        {
+          "topic_id": 1,
+          "name": "1_chauffage_gaz_bruleur_ultimate",
+          "count": 171,
+          "top_words": "chauffage, gaz, bruleur, ultimate, installations, énergie, énergétique, hotcity, energy, sanitaire"
+        },
+        {
+          "topic_id": 2,
+          "name": "2_352_luxembourg_plombier_fax",
+          "count": 138,
+          "top_words": "352, luxembourg, plombier, fax, rue, 26, mdiation, 352 26, fax 352, 000"
+        },
+        {
+          "topic_id": 3,
+          "name": "3_commune_communale_communal_administration",
+          "count": 124,
+          "top_words": "commune, communale, communal, administration, administration communale, conseil communal, agenda, associations, service, conseil"
+        },
+        {
+          "topic_id": 4,
+          "name": "4_seniors_2016_fc_saison",
+          "count": 121,
+          "top_words": "seniors, 2016, fc, saison, 2015, club, 16, coupe, volleyball, progres"
+        }
+      ],
+      "government_topics": [
+        0,
+        1,
+        2,
+        3,
+        6,
+        10,
+        19,
+        21,
+        32,
+        41,
+        45,
+        46,
+        55,
+        61
+      ],
+      "government_count": 1107,
+      "government_pct": 19.7
+    },
+    {
+      "year": 2017,
+      "n_websites": 7177,
+      "n_topics": 85,
+      "n_outliers": 3305,
+      "outlier_pct": 46.0,
+      "top_topics": [
+        {
+          "topic_id": 0,
+          "name": "0_luxembourg_services_investment_management",
+          "count": 234,
+          "top_words": "luxembourg, services, investment, management, fund, financial, tax, asset, clients, private"
+        },
+        {
+          "topic_id": 1,
+          "name": "1_jpg_eis_kontakt_signal",
+          "count": 229,
+          "top_words": "jpg, eis, kontakt, signal, 2017, 00, telechargement, beki, aktuelles, 18"
+        },
+        {
+          "topic_id": 2,
+          "name": "2_restaurant_50_sauce_menu",
+          "count": 184,
+          "top_words": "restaurant, 50, sauce, menu, 90, 00, carte, salade, cuisine, jour"
+        },
+        {
+          "topic_id": 3,
+          "name": "3_iphone_écran_luxembourg_352",
+          "count": 180,
+          "top_words": "iphone, écran, luxembourg, 352, réparation, rue, ipad, vitre, 26, 00"
+        },
+        {
+          "topic_id": 4,
+          "name": "4_prof_chauffage_installations_installation",
+          "count": 176,
+          "top_words": "prof, chauffage, installations, installation, énergétique, gaz, sanitaire, anfragen, 00, energie"
+        }
+      ],
+      "government_topics": [
+        0,
+        3,
+        5,
+        8,
+        11,
+        15,
+        18,
+        19,
+        21,
+        26,
+        31,
+        32,
+        52,
+        59,
+        60,
+        63,
+        75,
+        82,
+        83
+      ],
+      "government_count": 1207,
+      "government_pct": 16.8
+    },
+    {
+      "year": 2018,
+      "n_websites": 8203,
+      "n_topics": 92,
+      "n_outliers": 3748,
+      "outlier_pct": 45.7,
+      "top_topics": [
+        {
+          "topic_id": 0,
+          "name": "0_restaurant_50_menu_carte",
+          "count": 369,
+          "top_words": "restaurant, 50, menu, carte, sauce, hotel, salade, 00, 90, cuisine"
+        },
+        {
+          "topic_id": 1,
+          "name": "1_empfängers_00_katalog_angaben",
+          "count": 214,
+          "top_words": "empfängers, 00, katalog, angaben, weiterempfehlen, mail, senden, 18 00, praktische, präsentationsseite"
+        },
+        {
+          "topic_id": 2,
+          "name": "2_véhicules_véhicule_pneus_renault",
+          "count": 209,
+          "top_words": "véhicules, véhicule, pneus, renault, garage, voitures, diesel, voiture, occasions, vw"
+        },
+        {
+          "topic_id": 3,
+          "name": "3_chauffage_installation_installations_nettoyage",
+          "count": 204,
+          "top_words": "chauffage, installation, installations, nettoyage, chaleur, incendie, 352, sanitaire, eau, énergétique"
+        },
+        {
+          "topic_id": 4,
+          "name": "4_luxembourg_services_tax_business",
+          "count": 187,
+          "top_words": "luxembourg, services, tax, business, management, financial, corporate, clients, abbl, accounting"
+        }
+      ],
+      "government_topics": [
+        4,
+        6,
+        9,
+        13,
+        18,
+        21,
+        24,
+        30,
+        31,
+        33,
+        37,
+        38,
+        40,
+        60,
+        72,
+        79,
+        80
+      ],
+      "government_count": 981,
+      "government_pct": 12.0
+    },
+    {
+      "year": 2019,
+      "n_websites": 9456,
+      "n_topics": 92,
+      "n_outliers": 3939,
+      "outlier_pct": 41.7,
+      "top_topics": [
+        {
+          "topic_id": 0,
+          "name": "0_restaurant_00_menu_50",
+          "count": 574,
+          "top_words": "restaurant, 00, menu, 50, sauce, carte, 90, salade, hotel, mozzarella"
+        },
+        {
+          "topic_id": 1,
+          "name": "1_00_08_produit_08 00",
+          "count": 297,
+          "top_words": "00, 08, produit, 08 00, cookies, produits services, fr_fr dernière, 18 00, echangez, echangez partagez"
+        },
+        {
+          "topic_id": 2,
+          "name": "2_00_portes_construction_bois",
+          "count": 279,
+          "top_words": "00, portes, construction, bois, 00 17, house, 17 00, rénovation, peinture, cookies"
+        },
+        {
+          "topic_id": 3,
+          "name": "3_véhicule_véhicules_auto_pneus",
+          "count": 278,
+          "top_words": "véhicule, véhicules, auto, pneus, diesel, carburant, voiture, occasions, peugeot, garage"
+        },
+        {
+          "topic_id": 4,
+          "name": "4_352_contact_mail_service",
+          "count": 220,
+          "top_words": "352, contact, mail, service, rue, 26, 00, services, adresse, info"
+        }
+      ],
+      "government_topics": [
+        1,
+        4,
+        5,
+        7,
+        8,
+        12,
+        14,
+        16,
+        21,
+        28,
+        36,
+        38,
+        43,
+        55,
+        70,
+        79,
+        87
+      ],
+      "government_count": 1694,
+      "government_pct": 17.9
+    },
+    {
+      "year": 2020,
+      "n_websites": 9988,
+      "n_topics": 111,
+      "n_outliers": 5070,
+      "outlier_pct": 50.8,
+      "top_topics": [
+        {
+          "topic_id": 0,
+          "name": "0_restaurant_mozzarella_carte_00",
+          "count": 303,
+          "top_words": "restaurant, mozzarella, carte, 00, salade, 50, tomate, sauce, menu, tomates"
+        },
+        {
+          "topic_id": 1,
+          "name": "1_luxembourg_2020_membre_membres",
+          "count": 198,
+          "top_words": "luxembourg, 2020, membre, membres, association, 2018, 2019, news, luxembourgeoise, contact"
+        },
+        {
+          "topic_id": 2,
+          "name": "2_rhum_352_26_contact",
+          "count": 188,
+          "top_words": "rhum, 352, 26, contact, mail, 352 26, clément, rue, info, services"
+        },
+        {
+          "topic_id": 3,
+          "name": "3_services_management_tax_investment",
+          "count": 188,
+          "top_words": "services, management, tax, investment, luxembourg, fund, business, law, funds, accounting"
+        },
+        {
+          "topic_id": 4,
+          "name": "4_diesel_bmw_véhicules_voiture",
+          "count": 183,
+          "top_words": "diesel, bmw, véhicules, voiture, véhicule, jaguar, garage, auto, pneus, carburant"
+        }
+      ],
+      "government_topics": [
+        1,
+        2,
+        3,
+        6,
+        7,
+        12,
+        16,
+        24,
+        29,
+        39,
+        44,
+        50,
+        65,
+        68,
+        77,
+        78,
+        95,
+        97
+      ],
+      "government_count": 1297,
+      "government_pct": 13.0
+    },
+    {
+      "year": 2021,
+      "n_websites": 9856,
+      "n_topics": 116,
+      "n_outliers": 4639,
+      "outlier_pct": 47.1,
+      "top_topics": [
+        {
+          "topic_id": 0,
+          "name": "0_management_solutions_services_data",
+          "count": 474,
+          "top_words": "management, solutions, services, data, business, marketing, clients, contact, digital, entreprise"
+        },
+        {
+          "topic_id": 1,
+          "name": "1_luxembourg_management_services_investment",
+          "count": 323,
+          "top_words": "luxembourg, management, services, investment, data, company, fund, business, financial, tax"
+        },
+        {
+          "topic_id": 2,
+          "name": "2_00_recommandé autoriser_nécessite consentement_navigateur autorisez",
+          "count": 276,
+          "top_words": "00, recommandé autoriser, nécessite consentement, navigateur autorisez, changement culture, complète nécessite, fonctionnalité complète, culture recommandé, fournir fonctionnalité, personnalisé changement"
+        },
+        {
+          "topic_id": 3,
+          "name": "3_jpg_véhicules_auto_bmw",
+          "count": 218,
+          "top_words": "jpg, véhicules, auto, bmw, véhicule, diesel, voiture, pneus, garage, jaguar"
+        },
+        {
+          "topic_id": 4,
+          "name": "4_luxembourg_membres_2021_association",
+          "count": 215,
+          "top_words": "luxembourg, membres, 2021, association, europe, 2020, luxemburg, luxembourgeoise, july, membre"
+        }
+      ],
+      "government_topics": [
+        0,
+        1,
+        4,
+        9,
+        15,
+        28,
+        40,
+        70,
+        82,
+        84,
+        88,
+        100,
+        102,
+        110,
+        114
+      ],
+      "government_count": 1370,
+      "government_pct": 13.9
+    },
+    {
+      "year": 2022,
+      "n_websites": 9395,
+      "n_topics": 101,
+      "n_outliers": 4620,
+      "outlier_pct": 49.2,
+      "top_topics": [
+        {
+          "topic_id": 0,
+          "name": "0_massage_pharmacie_dr_yoga",
+          "count": 228,
+          "top_words": "massage, pharmacie, dr, yoga, soins, institut, centre, corps, rendez, cookies"
+        },
+        {
+          "topic_id": 1,
+          "name": "1_eau_installations_chauffage_installation",
+          "count": 204,
+          "top_words": "eau, installations, chauffage, installation, air, énergie, éclairage, climatisation, entretien, nettoyage"
+        },
+        {
+          "topic_id": 2,
+          "name": "2_véhicule_véhicules_pneus_voiture",
+          "count": 194,
+          "top_words": "véhicule, véhicules, pneus, voiture, auto, audi, garage, jaguar, carrosserie, voitures"
+        },
+        {
+          "topic_id": 3,
+          "name": "3_solutions_marketing_services_digital",
+          "count": 189,
+          "top_words": "solutions, marketing, services, digital, business, cloud, security, clients, support, internet"
+        },
+        {
+          "topic_id": 4,
+          "name": "4_00_personnalisé changement_fonctionnalités contenu_fonctionnalité complète",
+          "count": 161,
+          "top_words": "00, personnalisé changement, fonctionnalités contenu, fonctionnalité complète, navigateur autorisez, recommandé autoriser, explicite stocker, culture recommandé, complète nécessite, fournir fonctionnalité"
+        }
+      ],
+      "government_topics": [
+        3,
+        6,
+        7,
+        10,
+        11,
+        13,
+        14,
+        15,
+        19,
+        20,
+        22,
+        30,
+        39,
+        46,
+        54,
+        62,
+        66,
+        82
+      ],
+      "government_count": 1374,
+      "government_pct": 14.6
+    },
+    {
+      "year": 2023,
+      "n_websites": 8420,
+      "n_topics": 92,
+      "n_outliers": 4172,
+      "outlier_pct": 49.5,
+      "top_topics": [
+        {
+          "topic_id": 0,
+          "name": "0_restaurant_50_00_sauce",
+          "count": 263,
+          "top_words": "restaurant, 50, 00, sauce, mozzarella, menu, 90, tomate, carte, pizza"
+        },
+        {
+          "topic_id": 1,
+          "name": "1_donnees_tab navigate_navigate menu_menu items",
+          "count": 247,
+          "top_words": "donnees, tab navigate, navigate menu, menu items, tab, items, navigate, press zoom, zoom, donnees personnelles"
+        },
+        {
+          "topic_id": 2,
+          "name": "2_000_m²_appartement_m2",
+          "count": 206,
+          "top_words": "000, m², appartement, m2, chambres, 000 000, surface, maison, vente, immo"
+        },
+        {
+          "topic_id": 3,
+          "name": "3_dr_yoga_massage_chirurgie",
+          "count": 163,
+          "top_words": "dr, yoga, massage, chirurgie, therapie, centre, laser, soins, rendez, reiki"
+        },
+        {
+          "topic_id": 4,
+          "name": "4_véhicules_véhicule_auto_garage",
+          "count": 160,
+          "top_words": "véhicules, véhicule, auto, garage, audi, mercedes, rover, jaguar, automobile, voitures"
+        }
+      ],
+      "government_topics": [
+        7,
+        12,
+        16,
+        20,
+        24,
+        29,
+        39,
+        47,
+        55,
+        56,
+        57,
+        61,
+        63,
+        70,
+        74,
+        80,
+        88,
+        90
+      ],
+      "government_count": 655,
+      "government_pct": 7.8
+    },
+    {
+      "year": 2024,
+      "n_websites": 7782,
+      "n_topics": 93,
+      "n_outliers": 3743,
+      "outlier_pct": 48.1,
+      "top_topics": [
+        {
+          "topic_id": 0,
+          "name": "0_000_m²_m2_000 000",
+          "count": 237,
+          "top_words": "000, m², m2, 000 000, appartement, chambres, données, surface, maison, vente"
+        },
+        {
+          "topic_id": 1,
+          "name": "1_dr_massage_pharmacie_rééducation",
+          "count": 200,
+          "top_words": "dr, massage, pharmacie, rééducation, soins, dentaire, kinésithérapie, santé, rendez, patient"
+        },
+        {
+          "topic_id": 2,
+          "name": "2_chauffage_énergie_eau_ventilation",
+          "count": 165,
+          "top_words": "chauffage, énergie, eau, ventilation, air, climatisation, installations, energy, chaleur, installation"
+        },
+        {
+          "topic_id": 3,
+          "name": "3_véhicules_véhicule_automatique_diesel",
+          "count": 147,
+          "top_words": "véhicules, véhicule, automatique, diesel, auto, essence, bmw, 000, occasion, garage"
+        },
+        {
+          "topic_id": 4,
+          "name": "4_àpd_eis_vum_servior",
+          "count": 132,
+          "top_words": "àpd, eis, vum, servior, 00, demander devis, artistes, och, 2024, veiner"
+        }
+      ],
+      "government_topics": [
+        5,
+        7,
+        10,
+        20,
+        28,
+        29,
+        32,
+        40,
+        50,
+        54,
+        65,
+        73,
+        85,
+        88,
+        90
+      ],
+      "government_count": 672,
+      "government_pct": 8.6
+    }
+  ],
+  "recurring_topics": [
+    {
+      "name": "0_2013_luxembourg_2012_contact",
+      "keywords": "00, 05, 12, 12h, 13, 18, 181, 193, 2012, 2013",
+      "years_present": 12,
+      "total_count": 9093,
+      "occurrences": [
+        {
+          "year": 2013,
+          "topic_id": 0,
+          "count": 2022
+        },
+        {
+          "year": 2014,
+          "topic_id": 0,
+          "count": 1838
+        },
+        {
+          "year": 2015,
+          "topic_id": 0,
+          "count": 240
+        },
+        {
+          "year": 2016,
+          "topic_id": 0,
+          "count": 353
+        },
+        {
+          "year": 2017,
+          "topic_id": 0,
+          "count": 234
+        },
+        {
+          "year": 2017,
+          "topic_id": 3,
+          "count": 180
+        },
+        {
+          "year": 2017,
+          "topic_id": 19,
+          "count": 55
+        },
+        {
+          "year": 2018,
+          "topic_id": 4,
+          "count": 187
+        },
+        {
+          "year": 2018,
+          "topic_id": 13,
+          "count": 81
+        },
+        {
+          "year": 2018,
+          "topic_id": 88,
+          "count": 10
+        },
+        {
+          "year": 2019,
+          "topic_id": 4,
+          "count": 220
+        },
+        {
+          "year": 2019,
+          "topic_id": 7,
+          "count": 201
+        },
+        {
+          "year": 2019,
+          "topic_id": 8,
+          "count": 165
+        },
+        {
+          "year": 2019,
+          "topic_id": 12,
+          "count": 112
+        },
+        {
+          "year": 2020,
+          "topic_id": 2,
+          "count": 188
+        },
+        {
+          "year": 2020,
+          "topic_id": 3,
+          "count": 188
+        },
+        {
+          "year": 2020,
+          "topic_id": 12,
+          "count": 95
+        },
+        {
+          "year": 2020,
+          "topic_id": 16,
+          "count": 81
+        },
+        {
+          "year": 2020,
+          "topic_id": 70,
+          "count": 19
+        },
+        {
+          "year": 2021,
+          "topic_id": 0,
+          "count": 474
+        },
+        {
+          "year": 2021,
+          "topic_id": 1,
+          "count": 323
+        },
+        {
+          "year": 2021,
+          "topic_id": 104,
+          "count": 12
+        },
+        {
+          "year": 2022,
+          "topic_id": 3,
+          "count": 189
+        },
+        {
+          "year": 2022,
+          "topic_id": 6,
+          "count": 140
+        },
+        {
+          "year": 2022,
+          "topic_id": 13,
+          "count": 106
+        },
+        {
+          "year": 2022,
+          "topic_id": 19,
+          "count": 72
+        },
+        {
+          "year": 2022,
+          "topic_id": 20,
+          "count": 57
+        },
+        {
+          "year": 2022,
+          "topic_id": 39,
+          "count": 40
+        },
+        {
+          "year": 2022,
+          "topic_id": 46,
+          "count": 31
+        },
+        {
+          "year": 2022,
+          "topic_id": 56,
+          "count": 25
+        },
+        {
+          "year": 2022,
+          "topic_id": 73,
+          "count": 17
+        },
+        {
+          "year": 2022,
+          "topic_id": 91,
+          "count": 13
+        },
+        {
+          "year": 2023,
+          "topic_id": 7,
+          "count": 109
+        },
+        {
+          "year": 2023,
+          "topic_id": 12,
+          "count": 88
+        },
+        {
+          "year": 2023,
+          "topic_id": 15,
+          "count": 84
+        },
+        {
+          "year": 2023,
+          "topic_id": 20,
+          "count": 63
+        },
+        {
+          "year": 2023,
+          "topic_id": 24,
+          "count": 52
+        },
+        {
+          "year": 2023,
+          "topic_id": 42,
+          "count": 31
+        },
+        {
+          "year": 2024,
+          "topic_id": 5,
+          "count": 132
+        },
+        {
+          "year": 2024,
+          "topic_id": 6,
+          "count": 127
+        },
+        {
+          "year": 2024,
+          "topic_id": 7,
+          "count": 126
+        },
+        {
+          "year": 2024,
+          "topic_id": 8,
+          "count": 109
+        },
+        {
+          "year": 2024,
+          "topic_id": 20,
+          "count": 61
+        },
+        {
+          "year": 2024,
+          "topic_id": 26,
+          "count": 50
+        },
+        {
+          "year": 2024,
+          "topic_id": 28,
+          "count": 42
+        },
+        {
+          "year": 2024,
+          "topic_id": 64,
+          "count": 19
+        },
+        {
+          "year": 2024,
+          "topic_id": 65,
+          "count": 19
+        },
+        {
+          "year": 2024,
+          "topic_id": 81,
+          "count": 13
+        }
+      ]
+    },
+    {
+      "name": "1_flash_hotel_flash player_player",
+      "keywords": "000, 1er, adobe, adobe flash, beauty, betroffene, betroffene person, cabinet, casino, chev",
+      "years_present": 11,
+      "total_count": 213,
+      "occurrences": [
+        {
+          "year": 2013,
+          "topic_id": 1,
+          "count": 29
+        },
+        {
+          "year": 2014,
+          "topic_id": 1,
+          "count": 18
+        },
+        {
+          "year": 2016,
+          "topic_id": 39,
+          "count": 23
+        },
+        {
+          "year": 2017,
+          "topic_id": 58,
+          "count": 19
+        },
+        {
+          "year": 2018,
+          "topic_id": 61,
+          "count": 18
+        },
+        {
+          "year": 2019,
+          "topic_id": 90,
+          "count": 10
+        },
+        {
+          "year": 2020,
+          "topic_id": 96,
+          "count": 13
+        },
+        {
+          "year": 2021,
+          "topic_id": 73,
+          "count": 18
+        },
+        {
+          "year": 2022,
+          "topic_id": 74,
+          "count": 17
+        },
+        {
+          "year": 2023,
+          "topic_id": 72,
+          "count": 14
+        },
+        {
+          "year": 2024,
+          "topic_id": 34,
+          "count": 34
+        }
+      ]
+    },
+    {
+      "name": "4_maison_max_000_appartement",
+      "keywords": "00 m², 000, 000 000, 150, 150 250, 1900, 250, 33, 352, 352 33",
+      "years_present": 10,
+      "total_count": 3801,
+      "occurrences": [
+        {
+          "year": 2015,
+          "topic_id": 4,
+          "count": 32
+        },
+        {
+          "year": 2016,
+          "topic_id": 6,
+          "count": 73
+        },
+        {
+          "year": 2016,
+          "topic_id": 25,
+          "count": 34
+        },
+        {
+          "year": 2017,
+          "topic_id": 12,
+          "count": 72
+        },
+        {
+          "year": 2017,
+          "topic_id": 15,
+          "count": 62
+        },
+        {
+          "year": 2017,
+          "topic_id": 24,
+          "count": 44
+        },
+        {
+          "year": 2018,
+          "topic_id": 16,
+          "count": 65
+        },
+        {
+          "year": 2018,
+          "topic_id": 19,
+          "count": 61
+        },
+        {
+          "year": 2018,
+          "topic_id": 20,
+          "count": 60
+        },
+        {
+          "year": 2018,
+          "topic_id": 51,
+          "count": 21
+        },
+        {
+          "year": 2018,
+          "topic_id": 60,
+          "count": 19
+        },
+        {
+          "year": 2018,
+          "topic_id": 63,
+          "count": 18
+        },
+        {
+          "year": 2019,
+          "topic_id": 6,
+          "count": 211
+        },
+        {
+          "year": 2019,
+          "topic_id": 15,
+          "count": 102
+        },
+        {
+          "year": 2019,
+          "topic_id": 18,
+          "count": 78
+        },
+        {
+          "year": 2019,
+          "topic_id": 19,
+          "count": 74
+        },
+        {
+          "year": 2020,
+          "topic_id": 17,
+          "count": 79
+        },
+        {
+          "year": 2020,
+          "topic_id": 18,
+          "count": 76
+        },
+        {
+          "year": 2020,
+          "topic_id": 23,
+          "count": 58
+        },
+        {
+          "year": 2020,
+          "topic_id": 27,
+          "count": 48
+        },
+        {
+          "year": 2020,
+          "topic_id": 46,
+          "count": 32
+        },
+        {
+          "year": 2020,
+          "topic_id": 57,
+          "count": 24
+        },
+        {
+          "year": 2020,
+          "topic_id": 58,
+          "count": 23
+        },
+        {
+          "year": 2020,
+          "topic_id": 79,
+          "count": 17
+        },
+        {
+          "year": 2021,
+          "topic_id": 8,
+          "count": 111
+        },
+        {
+          "year": 2021,
+          "topic_id": 13,
+          "count": 82
+        },
+        {
+          "year": 2021,
+          "topic_id": 19,
+          "count": 64
+        },
+        {
+          "year": 2021,
+          "topic_id": 24,
+          "count": 57
+        },
+        {
+          "year": 2021,
+          "topic_id": 25,
+          "count": 53
+        },
+        {
+          "year": 2021,
+          "topic_id": 27,
+          "count": 50
+        },
+        {
+          "year": 2021,
+          "topic_id": 37,
+          "count": 38
+        },
+        {
+          "year": 2021,
+          "topic_id": 38,
+          "count": 37
+        },
+        {
+          "year": 2021,
+          "topic_id": 52,
+          "count": 26
+        },
+        {
+          "year": 2021,
+          "topic_id": 71,
+          "count": 18
+        },
+        {
+          "year": 2021,
+          "topic_id": 90,
+          "count": 14
+        },
+        {
+          "year": 2021,
+          "topic_id": 99,
+          "count": 12
+        },
+        {
+          "year": 2022,
+          "topic_id": 10,
+          "count": 113
+        },
+        {
+          "year": 2022,
+          "topic_id": 15,
+          "count": 99
+        },
+        {
+          "year": 2022,
+          "topic_id": 17,
+          "count": 83
+        },
+        {
+          "year": 2022,
+          "topic_id": 22,
+          "count": 55
+        },
+        {
+          "year": 2022,
+          "topic_id": 23,
+          "count": 52
+        },
+        {
+          "year": 2022,
+          "topic_id": 24,
+          "count": 52
+        },
+        {
+          "year": 2022,
+          "topic_id": 26,
+          "count": 49
+        },
+        {
+          "year": 2022,
+          "topic_id": 27,
+          "count": 49
+        },
+        {
+          "year": 2022,
+          "topic_id": 30,
+          "count": 46
+        },
+        {
+          "year": 2022,
+          "topic_id": 31,
+          "count": 45
+        },
+        {
+          "year": 2022,
+          "topic_id": 38,
+          "count": 41
+        },
+        {
+          "year": 2022,
+          "topic_id": 40,
+          "count": 39
+        },
+        {
+          "year": 2022,
+          "topic_id": 68,
+          "count": 18
+        },
+        {
+          "year": 2022,
+          "topic_id": 81,
+          "count": 15
+        },
+        {
+          "year": 2022,
+          "topic_id": 96,
+          "count": 11
+        },
+        {
+          "year": 2023,
+          "topic_id": 2,
+          "count": 206
+        },
+        {
+          "year": 2023,
+          "topic_id": 6,
+          "count": 116
+        },
+        {
+          "year": 2023,
+          "topic_id": 19,
+          "count": 63
+        },
+        {
+          "year": 2023,
+          "topic_id": 25,
+          "count": 46
+        },
+        {
+          "year": 2023,
+          "topic_id": 28,
+          "count": 43
+        },
+        {
+          "year": 2023,
+          "topic_id": 35,
+          "count": 38
+        },
+        {
+          "year": 2023,
+          "topic_id": 49,
+          "count": 27
+        },
+        {
+          "year": 2023,
+          "topic_id": 70,
+          "count": 15
+        },
+        {
+          "year": 2023,
+          "topic_id": 85,
+          "count": 11
+        },
+        {
+          "year": 2024,
+          "topic_id": 0,
+          "count": 237
+        },
+        {
+          "year": 2024,
+          "topic_id": 17,
+          "count": 64
+        },
+        {
+          "year": 2024,
+          "topic_id": 18,
+          "count": 62
+        },
+        {
+          "year": 2024,
+          "topic_id": 29,
+          "count": 41
+        },
+        {
+          "year": 2024,
+          "topic_id": 31,
+          "count": 37
+        },
+        {
+          "year": 2024,
+          "topic_id": 41,
+          "count": 31
+        },
+        {
+          "year": 2024,
+          "topic_id": 44,
+          "count": 27
+        },
+        {
+          "year": 2024,
+          "topic_id": 53,
+          "count": 25
+        }
+      ]
+    },
+    {
+      "name": "9_restaurant_menu_carte_ecluse",
+      "keywords": "00, 00 14, 00 23, 09h00, 11, 11 30, 12, 12 00, 14, 14 30",
+      "years_present": 10,
+      "total_count": 3457,
+      "occurrences": [
+        {
+          "year": 2015,
+          "topic_id": 9,
+          "count": 26
+        },
+        {
+          "year": 2016,
+          "topic_id": 11,
+          "count": 49
+        },
+        {
+          "year": 2016,
+          "topic_id": 13,
+          "count": 48
+        },
+        {
+          "year": 2016,
+          "topic_id": 22,
+          "count": 36
+        },
+        {
+          "year": 2016,
+          "topic_id": 23,
+          "count": 36
+        },
+        {
+          "year": 2016,
+          "topic_id": 26,
+          "count": 33
+        },
+        {
+          "year": 2016,
+          "topic_id": 66,
+          "count": 11
+        },
+        {
+          "year": 2017,
+          "topic_id": 2,
+          "count": 184
+        },
+        {
+          "year": 2017,
+          "topic_id": 17,
+          "count": 58
+        },
+        {
+          "year": 2017,
+          "topic_id": 44,
+          "count": 24
+        },
+        {
+          "year": 2018,
+          "topic_id": 0,
+          "count": 369
+        },
+        {
+          "year": 2018,
+          "topic_id": 22,
+          "count": 56
+        },
+        {
+          "year": 2019,
+          "topic_id": 0,
+          "count": 574
+        },
+        {
+          "year": 2019,
+          "topic_id": 62,
+          "count": 19
+        },
+        {
+          "year": 2019,
+          "topic_id": 77,
+          "count": 12
+        },
+        {
+          "year": 2019,
+          "topic_id": 81,
+          "count": 12
+        },
+        {
+          "year": 2020,
+          "topic_id": 0,
+          "count": 303
+        },
+        {
+          "year": 2020,
+          "topic_id": 21,
+          "count": 60
+        },
+        {
+          "year": 2020,
+          "topic_id": 40,
+          "count": 38
+        },
+        {
+          "year": 2020,
+          "topic_id": 85,
+          "count": 16
+        },
+        {
+          "year": 2020,
+          "topic_id": 91,
+          "count": 14
+        },
+        {
+          "year": 2020,
+          "topic_id": 99,
+          "count": 12
+        },
+        {
+          "year": 2021,
+          "topic_id": 5,
+          "count": 136
+        },
+        {
+          "year": 2021,
+          "topic_id": 18,
+          "count": 67
+        },
+        {
+          "year": 2021,
+          "topic_id": 20,
+          "count": 64
+        },
+        {
+          "year": 2021,
+          "topic_id": 39,
+          "count": 37
+        },
+        {
+          "year": 2021,
+          "topic_id": 40,
+          "count": 35
+        },
+        {
+          "year": 2021,
+          "topic_id": 85,
+          "count": 15
+        },
+        {
+          "year": 2022,
+          "topic_id": 16,
+          "count": 87
+        },
+        {
+          "year": 2022,
+          "topic_id": 18,
+          "count": 73
+        },
+        {
+          "year": 2022,
+          "topic_id": 25,
+          "count": 51
+        },
+        {
+          "year": 2022,
+          "topic_id": 53,
+          "count": 26
+        },
+        {
+          "year": 2022,
+          "topic_id": 57,
+          "count": 23
+        },
+        {
+          "year": 2022,
+          "topic_id": 70,
+          "count": 18
+        },
+        {
+          "year": 2022,
+          "topic_id": 76,
+          "count": 17
+        },
+        {
+          "year": 2023,
+          "topic_id": 0,
+          "count": 263
+        },
+        {
+          "year": 2023,
+          "topic_id": 5,
+          "count": 123
+        },
+        {
+          "year": 2023,
+          "topic_id": 22,
+          "count": 56
+        },
+        {
+          "year": 2023,
+          "topic_id": 40,
+          "count": 31
+        },
+        {
+          "year": 2023,
+          "topic_id": 46,
+          "count": 29
+        },
+        {
+          "year": 2023,
+          "topic_id": 63,
+          "count": 18
+        },
+        {
+          "year": 2024,
+          "topic_id": 14,
+          "count": 71
+        },
+        {
+          "year": 2024,
+          "topic_id": 21,
+          "count": 59
+        },
+        {
+          "year": 2024,
+          "topic_id": 39,
+          "count": 31
+        },
+        {
+          "year": 2024,
+          "topic_id": 42,
+          "count": 30
+        },
+        {
+          "year": 2024,
+          "topic_id": 49,
+          "count": 26
+        },
+        {
+          "year": 2024,
+          "topic_id": 51,
+          "count": 25
+        },
+        {
+          "year": 2024,
+          "topic_id": 58,
+          "count": 22
+        },
+        {
+          "year": 2024,
+          "topic_id": 61,
+          "count": 21
+        },
+        {
+          "year": 2024,
+          "topic_id": 83,
+          "count": 13
+        }
+      ]
+    },
+    {
+      "name": "1_2015_seniors_match_saison",
+      "keywords": "05, 16, 20 00, 2012, 2013, 2014, 2015, 2016, 2016 2017, 2017",
+      "years_present": 10,
+      "total_count": 1541,
+      "occurrences": [
+        {
+          "year": 2015,
+          "topic_id": 1,
+          "count": 90
+        },
+        {
+          "year": 2016,
+          "topic_id": 4,
+          "count": 121
+        },
+        {
+          "year": 2017,
+          "topic_id": 6,
+          "count": 135
+        },
+        {
+          "year": 2018,
+          "topic_id": 11,
+          "count": 123
+        },
+        {
+          "year": 2018,
+          "topic_id": 46,
+          "count": 25
+        },
+        {
+          "year": 2019,
+          "topic_id": 22,
+          "count": 68
+        },
+        {
+          "year": 2020,
+          "topic_id": 20,
+          "count": 69
+        },
+        {
+          "year": 2020,
+          "topic_id": 31,
+          "count": 44
+        },
+        {
+          "year": 2020,
+          "topic_id": 51,
+          "count": 28
+        },
+        {
+          "year": 2021,
+          "topic_id": 14,
+          "count": 76
+        },
+        {
+          "year": 2021,
+          "topic_id": 43,
+          "count": 31
+        },
+        {
+          "year": 2021,
+          "topic_id": 51,
+          "count": 26
+        },
+        {
+          "year": 2021,
+          "topic_id": 72,
+          "count": 18
+        },
+        {
+          "year": 2022,
+          "topic_id": 5,
+          "count": 158
+        },
+        {
+          "year": 2022,
+          "topic_id": 32,
+          "count": 44
+        },
+        {
+          "year": 2022,
+          "topic_id": 49,
+          "count": 30
+        },
+        {
+          "year": 2022,
+          "topic_id": 83,
+          "count": 14
+        },
+        {
+          "year": 2022,
+          "topic_id": 86,
+          "count": 14
+        },
+        {
+          "year": 2023,
+          "topic_id": 14,
+          "count": 85
+        },
+        {
+          "year": 2023,
+          "topic_id": 17,
+          "count": 78
+        },
+        {
+          "year": 2023,
+          "topic_id": 29,
+          "count": 40
+        },
+        {
+          "year": 2023,
+          "topic_id": 50,
+          "count": 27
+        },
+        {
+          "year": 2023,
+          "topic_id": 78,
+          "count": 13
+        },
+        {
+          "year": 2024,
+          "topic_id": 19,
+          "count": 62
+        },
+        {
+          "year": 2024,
+          "topic_id": 43,
+          "count": 29
+        },
+        {
+          "year": 2024,
+          "topic_id": 50,
+          "count": 25
+        },
+        {
+          "year": 2024,
+          "topic_id": 59,
+          "count": 22
+        },
+        {
+          "year": 2024,
+          "topic_id": 67,
+          "count": 18
+        },
+        {
+          "year": 2024,
+          "topic_id": 77,
+          "count": 14
+        },
+        {
+          "year": 2024,
+          "topic_id": 79,
+          "count": 14
+        }
+      ]
+    },
+    {
+      "name": "3_commune_communale_communal_administration",
+      "keywords": "00, 07 2019, 2018, 2020 00, 2022, 2023, activités, administration, administration communale, adresse",
+      "years_present": 10,
+      "total_count": 1179,
+      "occurrences": [
+        {
+          "year": 2015,
+          "topic_id": 3,
+          "count": 51
+        },
+        {
+          "year": 2016,
+          "topic_id": 3,
+          "count": 124
+        },
+        {
+          "year": 2017,
+          "topic_id": 8,
+          "count": 123
+        },
+        {
+          "year": 2018,
+          "topic_id": 9,
+          "count": 129
+        },
+        {
+          "year": 2018,
+          "topic_id": 33,
+          "count": 35
+        },
+        {
+          "year": 2019,
+          "topic_id": 16,
+          "count": 93
+        },
+        {
+          "year": 2019,
+          "topic_id": 36,
+          "count": 37
+        },
+        {
+          "year": 2020,
+          "topic_id": 24,
+          "count": 55
+        },
+        {
+          "year": 2020,
+          "topic_id": 39,
+          "count": 38
+        },
+        {
+          "year": 2020,
+          "topic_id": 49,
+          "count": 31
+        },
+        {
+          "year": 2021,
+          "topic_id": 28,
+          "count": 49
+        },
+        {
+          "year": 2021,
+          "topic_id": 35,
+          "count": 39
+        },
+        {
+          "year": 2022,
+          "topic_id": 14,
+          "count": 104
+        },
+        {
+          "year": 2022,
+          "topic_id": 42,
+          "count": 39
+        },
+        {
+          "year": 2023,
+          "topic_id": 16,
+          "count": 81
+        },
+        {
+          "year": 2023,
+          "topic_id": 18,
+          "count": 68
+        },
+        {
+          "year": 2024,
+          "topic_id": 10,
+          "count": 83
+        }
+      ]
+    },
+    {
+      "name": "10_camping_luxemburg_august_verhuur",
+      "keywords": "00, 2018, 352 83, aktivitäten, amet, ardennen, ardennes, august, bistro, bistrot",
+      "years_present": 10,
+      "total_count": 356,
+      "occurrences": [
+        {
+          "year": 2015,
+          "topic_id": 10,
+          "count": 26
+        },
+        {
+          "year": 2016,
+          "topic_id": 20,
+          "count": 41
+        },
+        {
+          "year": 2017,
+          "topic_id": 25,
+          "count": 44
+        },
+        {
+          "year": 2018,
+          "topic_id": 39,
+          "count": 32
+        },
+        {
+          "year": 2019,
+          "topic_id": 26,
+          "count": 49
+        },
+        {
+          "year": 2020,
+          "topic_id": 36,
+          "count": 40
+        },
+        {
+          "year": 2021,
+          "topic_id": 45,
+          "count": 31
+        },
+        {
+          "year": 2022,
+          "topic_id": 58,
+          "count": 23
+        },
+        {
+          "year": 2022,
+          "topic_id": 92,
+          "count": 12
+        },
+        {
+          "year": 2023,
+          "topic_id": 52,
+          "count": 25
+        },
+        {
+          "year": 2024,
+          "topic_id": 35,
+          "count": 33
+        }
+      ]
+    },
+    {
+      "name": "1_chauffage_gaz_bruleur_ultimate",
+      "keywords": "00, 00h, 352, air, alarme, anfragen, appareils, aspirateur, bauer, borne",
+      "years_present": 9,
+      "total_count": 1336,
+      "occurrences": [
+        {
+          "year": 2016,
+          "topic_id": 1,
+          "count": 171
+        },
+        {
+          "year": 2017,
+          "topic_id": 4,
+          "count": 176
+        },
+        {
+          "year": 2018,
+          "topic_id": 3,
+          "count": 204
+        },
+        {
+          "year": 2019,
+          "topic_id": 20,
+          "count": 73
+        },
+        {
+          "year": 2020,
+          "topic_id": 25,
+          "count": 54
+        },
+        {
+          "year": 2020,
+          "topic_id": 82,
+          "count": 16
+        },
+        {
+          "year": 2021,
+          "topic_id": 16,
+          "count": 69
+        },
+        {
+          "year": 2021,
+          "topic_id": 32,
+          "count": 43
+        },
+        {
+          "year": 2021,
+          "topic_id": 61,
+          "count": 22
+        },
+        {
+          "year": 2022,
+          "topic_id": 1,
+          "count": 204
+        },
+        {
+          "year": 2022,
+          "topic_id": 47,
+          "count": 31
+        },
+        {
+          "year": 2023,
+          "topic_id": 10,
+          "count": 94
+        },
+        {
+          "year": 2024,
+          "topic_id": 2,
+          "count": 165
+        },
+        {
+          "year": 2024,
+          "topic_id": 80,
+          "count": 14
+        }
+      ]
+    },
+    {
+      "name": "15_coiffure_soins_shirt_visage",
+      "keywords": "00, 00 18, 09, 09 00, 09 30, 18, 18 00, 30, 9h00, beauty",
+      "years_present": 9,
+      "total_count": 1214,
+      "occurrences": [
+        {
+          "year": 2016,
+          "topic_id": 15,
+          "count": 45
+        },
+        {
+          "year": 2017,
+          "topic_id": 33,
+          "count": 33
+        },
+        {
+          "year": 2017,
+          "topic_id": 41,
+          "count": 28
+        },
+        {
+          "year": 2018,
+          "topic_id": 26,
+          "count": 43
+        },
+        {
+          "year": 2018,
+          "topic_id": 28,
+          "count": 41
+        },
+        {
+          "year": 2019,
+          "topic_id": 25,
+          "count": 57
+        },
+        {
+          "year": 2019,
+          "topic_id": 29,
+          "count": 45
+        },
+        {
+          "year": 2020,
+          "topic_id": 11,
+          "count": 97
+        },
+        {
+          "year": 2020,
+          "topic_id": 43,
+          "count": 35
+        },
+        {
+          "year": 2020,
+          "topic_id": 48,
+          "count": 31
+        },
+        {
+          "year": 2020,
+          "topic_id": 54,
+          "count": 26
+        },
+        {
+          "year": 2021,
+          "topic_id": 26,
+          "count": 52
+        },
+        {
+          "year": 2021,
+          "topic_id": 42,
+          "count": 32
+        },
+        {
+          "year": 2021,
+          "topic_id": 94,
+          "count": 13
+        },
+        {
+          "year": 2022,
+          "topic_id": 0,
+          "count": 228
+        },
+        {
+          "year": 2023,
+          "topic_id": 3,
+          "count": 163
+        },
+        {
+          "year": 2023,
+          "topic_id": 26,
+          "count": 45
+        },
+        {
+          "year": 2024,
+          "topic_id": 1,
+          "count": 200
+        }
+      ]
+    },
+    {
+      "name": "8_crèche_enfant_enfants_og",
+      "keywords": "07 00, activités, ans, creche, crèche, crèches, données, enfant, enfants, foyer",
+      "years_present": 9,
+      "total_count": 889,
+      "occurrences": [
+        {
+          "year": 2016,
+          "topic_id": 8,
+          "count": 59
+        },
+        {
+          "year": 2017,
+          "topic_id": 7,
+          "count": 127
+        },
+        {
+          "year": 2018,
+          "topic_id": 12,
+          "count": 112
+        },
+        {
+          "year": 2019,
+          "topic_id": 10,
+          "count": 130
+        },
+        {
+          "year": 2020,
+          "topic_id": 8,
+          "count": 111
+        },
+        {
+          "year": 2021,
+          "topic_id": 7,
+          "count": 113
+        },
+        {
+          "year": 2022,
+          "topic_id": 35,
+          "count": 43
+        },
+        {
+          "year": 2022,
+          "topic_id": 84,
+          "count": 14
+        },
+        {
+          "year": 2023,
+          "topic_id": 8,
+          "count": 106
+        },
+        {
+          "year": 2024,
+          "topic_id": 12,
+          "count": 74
+        }
+      ]
+    },
+    {
+      "name": "29_hosting_server_servers_frontpage",
+      "keywords": "11 fax, 26 74, 42, 42 44, 44, 44 11, account, apache, appartement, automation",
+      "years_present": 9,
+      "total_count": 429,
+      "occurrences": [
+        {
+          "year": 2016,
+          "topic_id": 29,
+          "count": 30
+        },
+        {
+          "year": 2017,
+          "topic_id": 45,
+          "count": 24
+        },
+        {
+          "year": 2018,
+          "topic_id": 27,
+          "count": 43
+        },
+        {
+          "year": 2019,
+          "topic_id": 31,
+          "count": 42
+        },
+        {
+          "year": 2019,
+          "topic_id": 52,
+          "count": 23
+        },
+        {
+          "year": 2020,
+          "topic_id": 67,
+          "count": 19
+        },
+        {
+          "year": 2020,
+          "topic_id": 74,
+          "count": 18
+        },
+        {
+          "year": 2020,
+          "topic_id": 78,
+          "count": 17
+        },
+        {
+          "year": 2021,
+          "topic_id": 50,
+          "count": 27
+        },
+        {
+          "year": 2021,
+          "topic_id": 54,
+          "count": 25
+        },
+        {
+          "year": 2021,
+          "topic_id": 88,
+          "count": 15
+        },
+        {
+          "year": 2022,
+          "topic_id": 52,
+          "count": 26
+        },
+        {
+          "year": 2022,
+          "topic_id": 63,
+          "count": 21
+        },
+        {
+          "year": 2022,
+          "topic_id": 71,
+          "count": 18
+        },
+        {
+          "year": 2023,
+          "topic_id": 34,
+          "count": 38
+        },
+        {
+          "year": 2024,
+          "topic_id": 38,
+          "count": 31
+        },
+        {
+          "year": 2024,
+          "topic_id": 87,
+          "count": 12
+        }
+      ]
+    },
+    {
+      "name": "47_dog_purple dog_purple_chiens",
+      "keywords": "2016, 2017, animal, animaux, array, asile, cabinet, care, chat, chats",
+      "years_present": 9,
+      "total_count": 329,
+      "occurrences": [
+        {
+          "year": 2016,
+          "topic_id": 47,
+          "count": 19
+        },
+        {
+          "year": 2017,
+          "topic_id": 34,
+          "count": 32
+        },
+        {
+          "year": 2018,
+          "topic_id": 34,
+          "count": 34
+        },
+        {
+          "year": 2019,
+          "topic_id": 42,
+          "count": 33
+        },
+        {
+          "year": 2020,
+          "topic_id": 35,
+          "count": 40
+        },
+        {
+          "year": 2021,
+          "topic_id": 30,
+          "count": 47
+        },
+        {
+          "year": 2022,
+          "topic_id": 29,
+          "count": 47
+        },
+        {
+          "year": 2023,
+          "topic_id": 37,
+          "count": 37
+        },
+        {
+          "year": 2024,
+          "topic_id": 30,
+          "count": 40
+        }
+      ]
+    },
+    {
+      "name": "35_jardin_nature_garten_natur",
+      "keywords": "08, abattage, aménagement, aménagements, animal, arbres, binsfeld, bois, boxes, clean",
+      "years_present": 9,
+      "total_count": 285,
+      "occurrences": [
+        {
+          "year": 2016,
+          "topic_id": 35,
+          "count": 25
+        },
+        {
+          "year": 2017,
+          "topic_id": 35,
+          "count": 31
+        },
+        {
+          "year": 2018,
+          "topic_id": 29,
+          "count": 38
+        },
+        {
+          "year": 2019,
+          "topic_id": 37,
+          "count": 37
+        },
+        {
+          "year": 2020,
+          "topic_id": 65,
+          "count": 19
+        },
+        {
+          "year": 2020,
+          "topic_id": 108,
+          "count": 10
+        },
+        {
+          "year": 2021,
+          "topic_id": 29,
+          "count": 48
+        },
+        {
+          "year": 2021,
+          "topic_id": 100,
+          "count": 12
+        },
+        {
+          "year": 2022,
+          "topic_id": 82,
+          "count": 14
+        },
+        {
+          "year": 2023,
+          "topic_id": 54,
+          "count": 24
+        },
+        {
+          "year": 2024,
+          "topic_id": 46,
+          "count": 27
+        }
+      ]
+    },
+    {
+      "name": "22_unis_etats unis_etats_canada",
+      "keywords": "acc, accessoire, ald, amundi, anzeigen, baker, café, canada, cancel, careers",
+      "years_present": 9,
+      "total_count": 186,
+      "occurrences": [
+        {
+          "year": 2015,
+          "topic_id": 22,
+          "count": 16
+        },
+        {
+          "year": 2016,
+          "topic_id": 33,
+          "count": 27
+        },
+        {
+          "year": 2017,
+          "topic_id": 67,
+          "count": 15
+        },
+        {
+          "year": 2018,
+          "topic_id": 42,
+          "count": 30
+        },
+        {
+          "year": 2019,
+          "topic_id": 49,
+          "count": 25
+        },
+        {
+          "year": 2020,
+          "topic_id": 87,
+          "count": 15
+        },
+        {
+          "year": 2021,
+          "topic_id": 70,
+          "count": 18
+        },
+        {
+          "year": 2022,
+          "topic_id": 54,
+          "count": 26
+        },
+        {
+          "year": 2023,
+          "topic_id": 74,
+          "count": 14
+        }
+      ]
+    },
+    {
+      "name": "10_renault_audi_véhicules_pneus",
+      "keywords": "000, 900, audi, auto, automatique, automobile, bmw, carburant, carrosserie, diesel",
+      "years_present": 8,
+      "total_count": 1495,
+      "occurrences": [
+        {
+          "year": 2017,
+          "topic_id": 10,
+          "count": 106
+        },
+        {
+          "year": 2018,
+          "topic_id": 2,
+          "count": 209
+        },
+        {
+          "year": 2019,
+          "topic_id": 3,
+          "count": 278
+        },
+        {
+          "year": 2020,
+          "topic_id": 4,
+          "count": 183
+        },
+        {
+          "year": 2021,
+          "topic_id": 3,
+          "count": 218
+        },
+        {
+          "year": 2022,
+          "topic_id": 2,
+          "count": 194
+        },
+        {
+          "year": 2023,
+          "topic_id": 4,
+          "count": 160
+        },
+        {
+          "year": 2024,
+          "topic_id": 3,
+          "count": 147
+        }
+      ]
+    },
+    {
+      "name": "10_amp_amp amp_taille_eset",
+      "keywords": "07 23, 1x, 23, add, add compare, ajouter, ajouter panier, amp, amp amp, amyma",
+      "years_present": 8,
+      "total_count": 493,
+      "occurrences": [
+        {
+          "year": 2016,
+          "topic_id": 10,
+          "count": 51
+        },
+        {
+          "year": 2017,
+          "topic_id": 11,
+          "count": 89
+        },
+        {
+          "year": 2018,
+          "topic_id": 25,
+          "count": 45
+        },
+        {
+          "year": 2019,
+          "topic_id": 33,
+          "count": 40
+        },
+        {
+          "year": 2020,
+          "topic_id": 14,
+          "count": 87
+        },
+        {
+          "year": 2022,
+          "topic_id": 21,
+          "count": 56
+        },
+        {
+          "year": 2023,
+          "topic_id": 21,
+          "count": 61
+        },
+        {
+          "year": 2024,
+          "topic_id": 16,
+          "count": 64
+        }
+      ]
+    },
+    {
+      "name": "44_rank_vin_caves_brut",
+      "keywords": "2018, 2019, alcool, beer, blanc, booking, brut, caves, colis, cookie",
+      "years_present": 8,
+      "total_count": 322,
+      "occurrences": [
+        {
+          "year": 2016,
+          "topic_id": 44,
+          "count": 20
+        },
+        {
+          "year": 2018,
+          "topic_id": 32,
+          "count": 36
+        },
+        {
+          "year": 2019,
+          "topic_id": 24,
+          "count": 60
+        },
+        {
+          "year": 2020,
+          "topic_id": 38,
+          "count": 39
+        },
+        {
+          "year": 2021,
+          "topic_id": 22,
+          "count": 62
+        },
+        {
+          "year": 2022,
+          "topic_id": 41,
+          "count": 39
+        },
+        {
+          "year": 2022,
+          "topic_id": 99,
+          "count": 10
+        },
+        {
+          "year": 2023,
+          "topic_id": 41,
+          "count": 31
+        },
+        {
+          "year": 2024,
+          "topic_id": 52,
+          "count": 25
+        }
+      ]
+    },
+    {
+      "name": "64_browser_version_niederanven_update",
+      "keywords": "09 2016, 11 2016, 2016, 2017, 2018, 352 81, 81, 82, 9h, american",
+      "years_present": 8,
+      "total_count": 154,
+      "occurrences": [
+        {
+          "year": 2016,
+          "topic_id": 64,
+          "count": 12
+        },
+        {
+          "year": 2018,
+          "topic_id": 58,
+          "count": 19
+        },
+        {
+          "year": 2019,
+          "topic_id": 41,
+          "count": 33
+        },
+        {
+          "year": 2020,
+          "topic_id": 66,
+          "count": 19
+        },
+        {
+          "year": 2021,
+          "topic_id": 78,
+          "count": 17
+        },
+        {
+          "year": 2022,
+          "topic_id": 69,
+          "count": 18
+        },
+        {
+          "year": 2023,
+          "topic_id": 56,
+          "count": 21
+        },
+        {
+          "year": 2024,
+          "topic_id": 75,
+          "count": 15
+        }
+      ]
+    },
+    {
+      "name": "31_training_yoga_fitness_personal",
+      "keywords": "00 00, 00 permalink, bienfaits, cardio, class, classes, coach, coaching, collectifs, corps",
+      "years_present": 7,
+      "total_count": 217,
+      "occurrences": [
+        {
+          "year": 2016,
+          "topic_id": 31,
+          "count": 27
+        },
+        {
+          "year": 2017,
+          "topic_id": 23,
+          "count": 46
+        },
+        {
+          "year": 2018,
+          "topic_id": 47,
+          "count": 25
+        },
+        {
+          "year": 2019,
+          "topic_id": 58,
+          "count": 22
+        },
+        {
+          "year": 2020,
+          "topic_id": 32,
+          "count": 43
+        },
+        {
+          "year": 2021,
+          "topic_id": 46,
+          "count": 31
+        },
+        {
+          "year": 2023,
+          "topic_id": 77,
+          "count": 13
+        },
+        {
+          "year": 2023,
+          "topic_id": 91,
+          "count": 10
+        }
+      ]
+    },
+    {
+      "name": "34_maisons_construction_constructions_passive",
+      "keywords": "352, 352 72, 352 80, 60 fax, 80, aménagement, architecte, architectes, architecture, architektur",
+      "years_present": 6,
+      "total_count": 453,
+      "occurrences": [
+        {
+          "year": 2016,
+          "topic_id": 34,
+          "count": 26
+        },
+        {
+          "year": 2017,
+          "topic_id": 9,
+          "count": 115
+        },
+        {
+          "year": 2018,
+          "topic_id": 69,
+          "count": 15
+        },
+        {
+          "year": 2020,
+          "topic_id": 9,
+          "count": 106
+        },
+        {
+          "year": 2020,
+          "topic_id": 33,
+          "count": 41
+        },
+        {
+          "year": 2021,
+          "topic_id": 11,
+          "count": 93
+        },
+        {
+          "year": 2021,
+          "topic_id": 62,
+          "count": 22
+        },
+        {
+          "year": 2022,
+          "topic_id": 44,
+          "count": 35
+        }
+      ]
+    }
+  ]
+}

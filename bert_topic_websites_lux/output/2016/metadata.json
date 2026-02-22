@@ -1,8 +1,8 @@
 {
-  "year": 2013,
-  "n_websites": 2051,
-  "n_topics": 1,
-  "n_outliers": 0,
+  "year": 2016,
+  "n_websites": 5627,
+  "n_topics": 72,
+  "n_outliers": 2831,
   "embedding_model": "paraphrase-multilingual-MiniLM-L12-v2",
   "min_topic_size": 10
 }
