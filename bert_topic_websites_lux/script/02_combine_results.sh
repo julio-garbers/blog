@@ -1,26 +1,20 @@
 #!/bin/bash -l
-#SBATCH --job-name=bert_topic_lux
-#SBATCH --output=/project/home/p200812/blog/bert_topic_websites_lux/script/slurm/bert_topic_%a.out
+#SBATCH --job-name=combine_bert_topic_lux
+#SBATCH --output=/project/home/p200812/blog/bert_topic_websites_lux/script/slurm/02_combine_results.out
 #SBATCH --partition=cpu
 #SBATCH --nodes=1
 #SBATCH --cpus-per-task=32
-#SBATCH --time=04:00:00
+#SBATCH --time=01:00:00
 #SBATCH --account=p200812
 #SBATCH --qos=default
-#SBATCH --array=0-11
 
 # =============================================================================
 # Job Information
 # =============================================================================
 
-# Calculate year from array index (0 -> 2013, 1 -> 2014, ..., 11 -> 2024)
-export YEAR=$((2013 + SLURM_ARRAY_TASK_ID))
-
 echo "================================================================================"
 echo "Job started at: $(date)"
 echo "Node: $(hostname)"
-echo "Array index: ${SLURM_ARRAY_TASK_ID}"
-echo "Year: ${YEAR}"
 echo "================================================================================"
 
 # =============================================================================
@@ -34,14 +28,14 @@ module load Python/3.11.10-GCCcore-13.3.0
 source /project/home/p200812/blog/.venv/bin/activate
 
 # =============================================================================
-# Run BERTopic Analysis
+# Run Results Combination
 # =============================================================================
 
 echo ""
-echo "[RUN] Starting BERTopic analysis for year ${YEAR}..."
+echo "[RUN] Combining BERTopic results across all years..."
 echo ""
 
-uv run /project/home/p200812/blog/bert_topic_websites_lux/script/01_bert_topic.py
+uv run /project/home/p200812/blog/bert_topic_websites_lux/script/02_combine_results.py
 
 EXIT_CODE=$?
 

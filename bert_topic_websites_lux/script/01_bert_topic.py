@@ -25,6 +25,8 @@ import pickle
 import warnings
 from pathlib import Path
 
+import matplotlib
+matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 import numpy as np
 import polars as pl
@@ -32,6 +34,7 @@ from bertopic import BERTopic
 from hdbscan import HDBSCAN
 from sentence_transformers import SentenceTransformer
 from sklearn.feature_extraction.text import CountVectorizer
+from sklearn.metrics.pairwise import cosine_similarity
 from stopwordsiso import stopwords
 from umap import UMAP
 
@@ -103,7 +106,7 @@ MODEL_DIR = Path("/project/home/p200812/blog/bert_topic_websites_lux/models")
 # BERTopic Parameters
 MIN_TOPIC_SIZE = 10
 TOP_N_WORDS = 10
-EMBEDDING_MODEL = "all-MiniLM-L6-v2"
+EMBEDDING_MODEL = "paraphrase-multilingual-MiniLM-L12-v2"
 
 # Text processing
 MAX_TEXT_LENGTH = 15000
@@ -115,15 +118,14 @@ MAX_TEXT_LENGTH = 15000
 
 
 def load_year_data(year: int) -> pl.DataFrame:
-    """Load aggregated website data for a specific year."""
     input_file = DATA_DIR / f"websites_{year}.parquet"
 
     if not input_file.exists():
         raise FileNotFoundError(f"Data file not found: {input_file}")
 
-    print(f"\n[LOAD] Loading data for {year}...")
+    print(f"\n[LOAD] Loading data for {year}...", flush=True)
     df = pl.read_parquet(input_file)
-    print(f"   Loaded: {len(df):,} websites")
+    print(f"   Loaded: {len(df):,} websites", flush=True)
 
     # Truncate very long texts
     df = df.with_columns(
@@ -132,7 +134,7 @@ def load_year_data(year: int) -> pl.DataFrame:
 
     # Filter out very short texts
     df = df.filter(pl.col("text").str.len_chars() >= 50)
-    print(f"   After filtering: {len(df):,} websites")
+    print(f"   After filtering: {len(df):,} websites", flush=True)
 
     return df
 
@@ -145,24 +147,15 @@ def load_year_data(year: int) -> pl.DataFrame:
 def run_bertopic(
     texts: list[str],
 ) -> tuple[BERTopic, list[int], pl.DataFrame, np.ndarray]:
-    """
-    Run BERTopic on text data.
-
-    Returns:
-        topic_model: Trained BERTopic model
-        topics: Topic assignments for each document
-        topic_info: DataFrame with topic information
-        embeddings: Document embeddings
-    """
-    print("\n" + "=" * 70)
-    print("[BERTOPIC] Running BERTopic Analysis")
-    print("=" * 70)
+    print("\n" + "=" * 70, flush=True)
+    print("[BERTOPIC] Running BERTopic Analysis", flush=True)
+    print("=" * 70, flush=True)
 
     # Generate embeddings
-    print("\n   Generating embeddings...")
+    print("\n   Generating embeddings...", flush=True)
     embedding_model = SentenceTransformer(EMBEDDING_MODEL)
     embeddings = embedding_model.encode(texts, show_progress_bar=True)
-    print(f"   [OK] Embeddings shape: {embeddings.shape}")
+    print(f"   [OK] Embeddings shape: {embeddings.shape}", flush=True)
 
     # Configure UMAP for dimensionality reduction
     umap_model = UMAP(
@@ -201,7 +194,7 @@ def run_bertopic(
         calculate_probabilities=False,
     )
 
-    print("\n   Training BERTopic model...")
+    print("\n   Training BERTopic model...", flush=True)
     topics, _ = topic_model.fit_transform(texts, embeddings)
 
     # Get topic info
@@ -213,8 +206,8 @@ def run_bertopic(
     n_outliers = sum(1 for t in topics if t == -1)
     outlier_pct = n_outliers / len(topics) * 100
 
-    print(f"\n   [OK] Discovered {n_topics} topics")
-    print(f"   [OK] Outliers: {n_outliers:,} ({outlier_pct:.1f}%)")
+    print(f"\n   [OK] Discovered {n_topics} topics", flush=True)
+    print(f"   [OK] Outliers: {n_outliers:,} ({outlier_pct:.1f}%)", flush=True)
 
     return topic_model, topics, topic_info, embeddings
 
@@ -225,14 +218,13 @@ def run_bertopic(
 
 
 def save_model(topic_model: BERTopic, year: int) -> Path:
-    """Save BERTopic model using pickle (safetensors has numpy int64 bug)."""
     MODEL_DIR.mkdir(parents=True, exist_ok=True)
     model_path = MODEL_DIR / f"bertopic_{year}.pkl"
 
     with open(model_path, "wb") as f:
         pickle.dump(topic_model, f)
 
-    print(f"\n   [OK] Model saved: {model_path}")
+    print(f"\n   [OK] Model saved: {model_path}", flush=True)
     return model_path
 
 
@@ -244,11 +236,10 @@ def save_results(
     embeddings: np.ndarray,
     year: int,
 ) -> None:
-    """Save all results for a year."""
     year_output_dir = OUTPUT_DIR / str(year)
     year_output_dir.mkdir(parents=True, exist_ok=True)
 
-    print(f"\n[SAVE] Saving results to {year_output_dir}")
+    print(f"\n[SAVE] Saving results to {year_output_dir}", flush=True)
 
     # 1. Website-topic assignments
     df_results = df.with_columns(pl.Series("topic", topics))
@@ -257,7 +248,7 @@ def save_results(
         compression="zstd",
         compression_level=10,
     )
-    print("   [OK] Website topics: website_topics.parquet")
+    print("   [OK] Website topics: website_topics.parquet", flush=True)
 
     # 2. Topic summary
     topic_summary = []
@@ -299,11 +290,11 @@ def save_results(
 
     topic_summary_df = pl.DataFrame(topic_summary)
     topic_summary_df.write_csv(year_output_dir / "topic_summary.csv")
-    print("   [OK] Topic summary: topic_summary.csv")
+    print("   [OK] Topic summary: topic_summary.csv", flush=True)
 
     # 3. Embeddings (for later analysis)
     np.save(year_output_dir / "embeddings.npy", embeddings)
-    print("   [OK] Embeddings: embeddings.npy")
+    print("   [OK] Embeddings: embeddings.npy", flush=True)
 
     # 4. Metadata
     metadata = {
@@ -316,7 +307,7 @@ def save_results(
     }
     with open(year_output_dir / "metadata.json", "w") as f:
         json.dump(metadata, f, indent=2)
-    print("   [OK] Metadata: metadata.json")
+    print("   [OK] Metadata: metadata.json", flush=True)
 
 
 def create_visualizations(
@@ -325,11 +316,10 @@ def create_visualizations(
     embeddings: np.ndarray,
     year: int,
 ) -> None:
-    """Create and save static visualizations."""
     year_output_dir = OUTPUT_DIR / str(year)
     year_output_dir.mkdir(parents=True, exist_ok=True)
 
-    print("\n[VIZ] Creating visualizations...")
+    print("\n[VIZ] Creating visualizations...", flush=True)
 
     # Get topic info
     topic_info = topic_model.get_topic_info()
@@ -357,9 +347,9 @@ def create_visualizations(
             year_output_dir / "topic_distribution.png", dpi=300, bbox_inches="tight"
         )
         plt.close()
-        print("   [OK] topic_distribution.png")
+        print("   [OK] topic_distribution.png", flush=True)
     except Exception as e:
-        print(f"   [WARN] Skipped topic_distribution: {e}")
+        print(f"   [WARN] Skipped topic_distribution: {e}", flush=True)
 
     # 2. Top words per topic (grid of horizontal bar charts)
     try:
@@ -395,13 +385,12 @@ def create_visualizations(
         plt.tight_layout()
         plt.savefig(year_output_dir / "topic_words.png", dpi=300, bbox_inches="tight")
         plt.close()
-        print("   [OK] topic_words.png")
+        print("   [OK] topic_words.png", flush=True)
     except Exception as e:
-        print(f"   [WARN] Skipped topic_words: {e}")
+        print(f"   [WARN] Skipped topic_words: {e}", flush=True)
 
-    # 3. UMAP 2D scatter (better than PCA for topic visualization)
+    # 3. UMAP 2D scatter
     try:
-        # Use UMAP for 2D projection (better cluster separation)
         umap_2d = UMAP(
             n_neighbors=15,
             n_components=2,
@@ -433,9 +422,7 @@ def create_visualizations(
         non_outlier_topics = [t for t in unique_topics if t != -1]
         colors = plt.cm.tab20(np.linspace(0, 1, len(non_outlier_topics)))
 
-        for idx, topic_id in enumerate(
-            non_outlier_topics[:20]
-        ):  # Limit to 20 topics for readability
+        for idx, topic_id in enumerate(non_outlier_topics[:20]):
             mask = topic_array == topic_id
             ax.scatter(
                 embeddings_2d[mask, 0],
@@ -463,13 +450,12 @@ def create_visualizations(
         plt.tight_layout()
         plt.savefig(year_output_dir / "topic_umap.png", dpi=300, bbox_inches="tight")
         plt.close()
-        print("   [OK] topic_umap.png")
+        print("   [OK] topic_umap.png", flush=True)
     except Exception as e:
-        print(f"   [WARN] Skipped topic_umap: {e}")
+        print(f"   [WARN] Skipped topic_umap: {e}", flush=True)
 
     # 4. Topic similarity heatmap
     try:
-        # Get topic embeddings (average of document embeddings per topic)
         topic_ids = [t for t in sorted(set(topics)) if t != -1][:15]
         topic_embeddings = []
 
@@ -480,10 +466,6 @@ def create_visualizations(
 
         if len(topic_embeddings) > 1:
             topic_embeddings = np.array(topic_embeddings)
-
-            # Compute cosine similarity
-            from sklearn.metrics.pairwise import cosine_similarity
-
             similarity_matrix = cosine_similarity(topic_embeddings)
 
             fig, ax = plt.subplots(figsize=(10, 8))
@@ -502,9 +484,9 @@ def create_visualizations(
                 year_output_dir / "topic_similarity.png", dpi=300, bbox_inches="tight"
             )
             plt.close()
-            print("   [OK] topic_similarity.png")
+            print("   [OK] topic_similarity.png", flush=True)
     except Exception as e:
-        print(f"   [WARN] Skipped topic_similarity: {e}")
+        print(f"   [WARN] Skipped topic_similarity: {e}", flush=True)
 
 
 # =============================================================================
@@ -513,20 +495,21 @@ def create_visualizations(
 
 
 def main():
-    print("=" * 70)
-    print(f"Luxembourg Website Topic Analysis - Year {YEAR}")
-    print("=" * 70)
-    print("\nConfiguration:")
-    print(f"   Year: {YEAR}")
-    print(f"   Min topic size: {MIN_TOPIC_SIZE}")
-    print(f"   Max text length: {MAX_TEXT_LENGTH}")
+    print("=" * 70, flush=True)
+    print(f"Luxembourg Website Topic Analysis - Year {YEAR}", flush=True)
+    print("=" * 70, flush=True)
+    print("\nConfiguration:", flush=True)
+    print(f"   Year: {YEAR}", flush=True)
+    print(f"   Min topic size: {MIN_TOPIC_SIZE}", flush=True)
+    print(f"   Max text length: {MAX_TEXT_LENGTH}", flush=True)
+    print(f"   Embedding model: {EMBEDDING_MODEL}", flush=True)
 
     # Load data
     df = load_year_data(YEAR)
     texts = df["text"].to_list()
 
     if len(texts) < 50:
-        print(f"\n[WARN] Only {len(texts)} websites. Results may not be meaningful.")
+        print(f"\n[WARN] Only {len(texts)} websites. Results may not be meaningful.", flush=True)
 
     # Run BERTopic
     topic_model, topics, topic_info, embeddings = run_bertopic(texts)
@@ -541,21 +524,21 @@ def main():
     create_visualizations(topic_model, topics, embeddings, YEAR)
 
     # Print top topics
-    print("\n" + "=" * 70)
-    print(f"TOP TOPICS FOR {YEAR}")
-    print("=" * 70)
+    print("\n" + "=" * 70, flush=True)
+    print(f"TOP TOPICS FOR {YEAR}", flush=True)
+    print("=" * 70, flush=True)
 
     topic_info_sorted = topic_info.filter(pl.col("Topic") != -1).sort(
         "Count", descending=True
     )
 
     for row in topic_info_sorted.head(10).iter_rows(named=True):
-        print(f"\n   Topic {row['Topic']} (n={row['Count']})")
-        print(f"   {row['Name']}")
+        print(f"\n   Topic {row['Topic']} (n={row['Count']})", flush=True)
+        print(f"   {row['Name']}", flush=True)
 
-    print("\n" + "=" * 70)
-    print(f"DONE! Results saved to: {OUTPUT_DIR / str(YEAR)}")
-    print("=" * 70)
+    print("\n" + "=" * 70, flush=True)
+    print(f"DONE! Results saved to: {OUTPUT_DIR / str(YEAR)}", flush=True)
+    print("=" * 70, flush=True)
 
 
 # =============================================================================

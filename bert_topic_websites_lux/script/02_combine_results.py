@@ -11,7 +11,7 @@ This script:
 4. Generates stats.json for the blog post visualization
 
 Author: Julio Garbers with contributions from Claude
-Date: January 2025
+Date: January 2026
 """
 
 import json
@@ -57,8 +57,7 @@ GOVERNMENT_KEYWORDS = [
 
 
 def load_yearly_results() -> dict[int, dict]:
-    """Load topic summaries from all years."""
-    print("[LOAD] Loading yearly results...")
+    print("[LOAD] Loading yearly results...", flush=True)
 
     yearly_data = {}
     years = sorted([int(d.name) for d in OUTPUT_DIR.iterdir() if d.is_dir() and d.name.isdigit()])
@@ -69,7 +68,7 @@ def load_yearly_results() -> dict[int, dict]:
         # Load topic summary
         summary_file = year_dir / "topic_summary.csv"
         if not summary_file.exists():
-            print(f"   [WARN] Missing: {summary_file}")
+            print(f"   [WARN] Missing: {summary_file}", flush=True)
             continue
 
         topic_summary = pl.read_csv(summary_file)
@@ -96,7 +95,7 @@ def load_yearly_results() -> dict[int, dict]:
         }
 
         n_topics = len(topic_summary.filter(pl.col("topic_id") != -1))
-        print(f"   {year}: {n_topics} topics, {metadata.get('n_websites', '?')} websites")
+        print(f"   {year}: {n_topics} topics, {metadata.get('n_websites', '?')} websites", flush=True)
 
     return yearly_data
 
@@ -107,10 +106,6 @@ def load_yearly_results() -> dict[int, dict]:
 
 
 def identify_government_topics(topic_summary: pl.DataFrame) -> list[int]:
-    """
-    Identify topics that likely represent government websites.
-    Returns list of topic IDs.
-    """
     government_topics = []
 
     for row in topic_summary.iter_rows(named=True):
@@ -129,7 +124,6 @@ def identify_government_topics(topic_summary: pl.DataFrame) -> list[int]:
 
 
 def compute_topic_distribution(yearly_data: dict[int, dict]) -> list[dict]:
-    """Compute topic distribution over years."""
     yearly_stats = []
 
     for year, data in sorted(yearly_data.items()):
@@ -181,10 +175,6 @@ def compute_topic_distribution(yearly_data: dict[int, dict]) -> list[dict]:
 
 
 def find_common_topics(yearly_data: dict[int, dict]) -> list[dict]:
-    """
-    Find topics that appear across multiple years (based on keyword similarity).
-    This is a simple approach - could be enhanced with embedding similarity.
-    """
     # Collect all topic keywords by year
     all_topics = []
 
@@ -202,7 +192,6 @@ def find_common_topics(yearly_data: dict[int, dict]) -> list[dict]:
             })
 
     # Group topics by keyword overlap
-    # This is a simplified approach - topics with >50% keyword overlap are considered similar
     topic_clusters = []
 
     for topic in all_topics:
@@ -253,10 +242,6 @@ def find_common_topics(yearly_data: dict[int, dict]) -> list[dict]:
 
 
 def extract_government_websites(yearly_data: dict[int, dict]) -> pl.DataFrame:
-    """
-    Extract all websites classified under government topics.
-    Useful for follow-up analysis.
-    """
     gov_websites = []
 
     for year, data in yearly_data.items():
@@ -284,22 +269,22 @@ def extract_government_websites(yearly_data: dict[int, dict]) -> pl.DataFrame:
 
 
 def main():
-    print("=" * 70)
-    print("Luxembourg Website Topic Analysis - Combine Results")
-    print("=" * 70)
+    print("=" * 70, flush=True)
+    print("Luxembourg Website Topic Analysis - Combine Results", flush=True)
+    print("=" * 70, flush=True)
 
     # Load all yearly results
     yearly_data = load_yearly_results()
 
     if not yearly_data:
-        print("\n[ERROR] No yearly results found!")
+        print("\n[ERROR] No yearly results found!", flush=True)
         return
 
     # Compute statistics
-    print("\n[ANALYZE] Computing statistics...")
+    print("\n[ANALYZE] Computing statistics...", flush=True)
     yearly_stats = compute_topic_distribution(yearly_data)
 
-    print("\n[ANALYZE] Finding recurring topics...")
+    print("\n[ANALYZE] Finding recurring topics...", flush=True)
     recurring_topics = find_common_topics(yearly_data)
 
     # Summary statistics
@@ -324,49 +309,49 @@ def main():
     }
 
     # Save stats.json
-    print(f"\n[SAVE] Saving stats to {FINAL_OUTPUT}...")
+    print(f"\n[SAVE] Saving stats to {FINAL_OUTPUT}...", flush=True)
     with open(FINAL_OUTPUT, "w", encoding="utf-8") as f:
         json.dump(stats, f, indent=2, ensure_ascii=False)
-    print(f"   [OK] Saved: {FINAL_OUTPUT}")
+    print(f"   [OK] Saved: {FINAL_OUTPUT}", flush=True)
 
     # Extract and save government websites for follow-up analysis
-    print("\n[EXTRACT] Extracting government websites...")
+    print("\n[EXTRACT] Extracting government websites...", flush=True)
     gov_websites = extract_government_websites(yearly_data)
 
     if len(gov_websites) > 0:
         gov_file = OUTPUT_DIR / "government_websites.parquet"
         gov_websites.write_parquet(gov_file, compression="zstd", compression_level=10)
-        print(f"   [OK] Found {len(gov_websites):,} government website-years")
-        print(f"   [OK] Saved: {gov_file}")
+        print(f"   [OK] Found {len(gov_websites):,} government website-years", flush=True)
+        print(f"   [OK] Saved: {gov_file}", flush=True)
     else:
-        print("   [INFO] No government websites identified")
+        print("   [INFO] No government websites identified", flush=True)
 
     # Print summary
-    print("\n" + "=" * 70)
-    print("SUMMARY")
-    print("=" * 70)
-    print(f"\nYears: {summary['first_year']} - {summary['last_year']}")
-    print(f"Total website-years: {summary['total_website_years']:,}")
-    print(f"Average topics per year: {summary['avg_topics_per_year']}")
+    print("\n" + "=" * 70, flush=True)
+    print("SUMMARY", flush=True)
+    print("=" * 70, flush=True)
+    print(f"\nYears: {summary['first_year']} - {summary['last_year']}", flush=True)
+    print(f"Total website-years: {summary['total_website_years']:,}", flush=True)
+    print(f"Average topics per year: {summary['avg_topics_per_year']}", flush=True)
 
-    print("\n[TOP RECURRING TOPICS]")
+    print("\n[TOP RECURRING TOPICS]", flush=True)
     for i, topic in enumerate(recurring_topics[:10], 1):
-        print(f"\n   {i}. {topic['name']}")
-        print(f"      Years present: {topic['years_present']}")
-        print(f"      Keywords: {topic['keywords'][:80]}...")
+        print(f"\n   {i}. {topic['name']}", flush=True)
+        print(f"      Years present: {topic['years_present']}", flush=True)
+        print(f"      Keywords: {topic['keywords'][:80]}...", flush=True)
 
-    print("\n[GOVERNMENT WEBSITES BY YEAR]")
+    print("\n[GOVERNMENT WEBSITES BY YEAR]", flush=True)
     for stat in yearly_stats:
         if stat["government_pct"] > 0:
-            print(f"   {stat['year']}: {stat['government_count']:,} ({stat['government_pct']}%)")
+            print(f"   {stat['year']}: {stat['government_count']:,} ({stat['government_pct']}%)", flush=True)
 
-    print("\n" + "=" * 70)
-    print("DONE!")
-    print("=" * 70)
-    print(f"\nNext steps:")
-    print(f"   1. Review topics in output/*/topic_summary.csv")
-    print(f"   2. Use government_websites.parquet for language analysis")
-    print(f"   3. Build visualization with stats.json")
+    print("\n" + "=" * 70, flush=True)
+    print("DONE!", flush=True)
+    print("=" * 70, flush=True)
+    print("\nNext steps:", flush=True)
+    print("   1. Review topics in output/*/topic_summary.csv", flush=True)
+    print("   2. Use government_websites.parquet for language analysis", flush=True)
+    print("   3. Build visualization with stats.json", flush=True)
 
 
 # =============================================================================

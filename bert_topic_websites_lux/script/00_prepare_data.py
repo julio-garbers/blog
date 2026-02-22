@@ -50,29 +50,27 @@ MIN_PAGES_PER_WEBSITE = 1
 
 
 def load_language_sample() -> pl.DataFrame:
-    """Load the website-year sample from language analysis."""
-    print("\n[LOAD] Loading language analysis sample...")
-    print(f"   File: {LANGUAGE_SAMPLE_FILE}")
+    print("\n[LOAD] Loading language analysis sample...", flush=True)
+    print(f"   File: {LANGUAGE_SAMPLE_FILE}", flush=True)
 
     df = pl.read_parquet(LANGUAGE_SAMPLE_FILE)
-    print(f"   Total website-years in sample: {len(df):,}")
+    print(f"   Total website-years in sample: {len(df):,}", flush=True)
 
     # Get unique website-year combinations
     sample = df.select(["website_url", "year"]).unique()
-    print(f"   Unique website-years: {len(sample):,}")
+    print(f"   Unique website-years: {len(sample):,}", flush=True)
 
     return sample
 
 
 def load_raw_data() -> pl.LazyFrame:
-    """Load raw website data with text content."""
     parquet_files = list(RAW_DATA_DIR.glob("*.parquet"))
 
     if not parquet_files:
         raise FileNotFoundError(f"No parquet files found in {RAW_DATA_DIR}")
 
-    print("\n[LOAD] Loading raw data...")
-    print(f"   Found {len(parquet_files)} parquet files")
+    print("\n[LOAD] Loading raw data...", flush=True)
+    print(f"   Found {len(parquet_files)} parquet files", flush=True)
 
     # Read each file selecting only needed columns, then concatenate
     # This handles schema differences across files (some have extra columns)
@@ -95,17 +93,8 @@ def aggregate_by_website_year(
     sample: pl.DataFrame,
     raw_lf: pl.LazyFrame,
 ) -> pl.DataFrame:
-    """
-    Aggregate text content by website and year.
-
-    For each (website_url, year) combination in the sample:
-    - Join with raw data to get text content
-    - Concatenate all page texts with newlines
-    - Count number of pages
-    - Calculate total text length
-    """
-    print("\n[PROCESS] Aggregating text by website-year...")
-    print(f"   Filtering to {len(sample):,} website-years from language sample")
+    print("\n[PROCESS] Aggregating text by website-year...", flush=True)
+    print(f"   Filtering to {len(sample):,} website-years from language sample", flush=True)
 
     # Filter raw data to only include websites in our sample
     # and aggregate text by website-year
@@ -137,19 +126,18 @@ def aggregate_by_website_year(
         .collect(engine="streaming")
     )
 
-    print(f"   Total website-years with text: {len(df):,}")
-    print(f"   Unique websites: {df['website_url'].n_unique():,}")
+    print(f"   Total website-years with text: {len(df):,}", flush=True)
+    print(f"   Unique websites: {df['website_url'].n_unique():,}", flush=True)
 
     # Report coverage
     coverage = len(df) / len(sample) * 100
-    print(f"   Coverage of language sample: {coverage:.1f}%")
+    print(f"   Coverage of language sample: {coverage:.1f}%", flush=True)
 
     return df
 
 
 def save_yearly_files(df: pl.DataFrame, output_dir: Path) -> dict[int, int]:
-    """Save one parquet file per year and return counts."""
-    print(f"\n[SAVE] Saving yearly files to {output_dir}")
+    print(f"\n[SAVE] Saving yearly files to {output_dir}", flush=True)
 
     years = sorted(df["year"].unique().to_list())
     year_counts = {}
@@ -162,7 +150,7 @@ def save_yearly_files(df: pl.DataFrame, output_dir: Path) -> dict[int, int]:
         output_file = output_dir / f"websites_{year}.parquet"
         year_df.write_parquet(output_file, compression="zstd", compression_level=10)
 
-        print(f"   {year}: {n_websites:,} websites -> {output_file.name}")
+        print(f"   {year}: {n_websites:,} websites -> {output_file.name}", flush=True)
 
     return year_counts
 
@@ -173,24 +161,23 @@ def save_yearly_files(df: pl.DataFrame, output_dir: Path) -> dict[int, int]:
 
 
 def print_summary(df: pl.DataFrame, year_counts: dict[int, int]) -> None:
-    """Print summary statistics."""
-    print("\n" + "=" * 70)
-    print("SUMMARY STATISTICS")
-    print("=" * 70)
+    print("\n" + "=" * 70, flush=True)
+    print("SUMMARY STATISTICS", flush=True)
+    print("=" * 70, flush=True)
 
-    print(f"\nTotal website-years: {len(df):,}")
-    print(f"Unique websites: {df['website_url'].n_unique():,}")
-    print(f"Years covered: {min(year_counts.keys())} - {max(year_counts.keys())}")
+    print(f"\nTotal website-years: {len(df):,}", flush=True)
+    print(f"Unique websites: {df['website_url'].n_unique():,}", flush=True)
+    print(f"Years covered: {min(year_counts.keys())} - {max(year_counts.keys())}", flush=True)
 
-    print("\nWebsites per year:")
+    print("\nWebsites per year:", flush=True)
     for year, count in sorted(year_counts.items()):
-        print(f"   {year}: {count:,}")
+        print(f"   {year}: {count:,}", flush=True)
 
-    print("\nText statistics:")
-    print(f"   Mean pages per website: {df['n_pages'].mean():.1f}")
-    print(f"   Median pages per website: {df['n_pages'].median():.0f}")
-    print(f"   Mean text length: {df['total_text_length'].mean():,.0f} chars")
-    print(f"   Median text length: {df['total_text_length'].median():,.0f} chars")
+    print("\nText statistics:", flush=True)
+    print(f"   Mean pages per website: {df['n_pages'].mean():.1f}", flush=True)
+    print(f"   Median pages per website: {df['n_pages'].median():.0f}", flush=True)
+    print(f"   Mean text length: {df['total_text_length'].mean():,.0f} chars", flush=True)
+    print(f"   Median text length: {df['total_text_length'].median():,.0f} chars", flush=True)
 
 
 # =============================================================================
@@ -199,24 +186,24 @@ def print_summary(df: pl.DataFrame, year_counts: dict[int, int]) -> None:
 
 
 def main():
-    print("=" * 70)
-    print("Luxembourg Website Topic Analysis - Data Preparation")
-    print("=" * 70)
+    print("=" * 70, flush=True)
+    print("Luxembourg Website Topic Analysis - Data Preparation", flush=True)
+    print("=" * 70, flush=True)
 
     # Load sample from language analysis
-    print("\n[STEP 1] Loading language analysis sample...")
+    print("\n[STEP 1] Loading language analysis sample...", flush=True)
     sample = load_language_sample()
 
     # Load raw data
-    print("\n[STEP 2] Loading raw data with text content...")
+    print("\n[STEP 2] Loading raw data with text content...", flush=True)
     raw_lf = load_raw_data()
 
     # Aggregate by website-year
-    print("\n[STEP 3] Aggregating text by website-year...")
+    print("\n[STEP 3] Aggregating text by website-year...", flush=True)
     df = aggregate_by_website_year(sample, raw_lf)
 
     # Save yearly files
-    print("\n[STEP 4] Saving yearly files...")
+    print("\n[STEP 4] Saving yearly files...", flush=True)
     year_counts = save_yearly_files(df, OUTPUT_DIR)
 
     # Print summary
@@ -232,12 +219,12 @@ def main():
     metadata_file = OUTPUT_DIR.parent / "metadata.json"
     with open(metadata_file, "w") as f:
         json.dump(metadata, f, indent=2)
-    print(f"\n[OK] Metadata saved: {metadata_file}")
+    print(f"\n[OK] Metadata saved: {metadata_file}", flush=True)
 
-    print("\n" + "=" * 70)
-    print("DONE! Ready for BERTopic analysis.")
-    print("Run: sbatch script/01_bert_topic.sh")
-    print("=" * 70)
+    print("\n" + "=" * 70, flush=True)
+    print("DONE! Ready for BERTopic analysis.", flush=True)
+    print("Run: sbatch script/01_bert_topic.sh", flush=True)
+    print("=" * 70, flush=True)
 
 
 # =============================================================================
