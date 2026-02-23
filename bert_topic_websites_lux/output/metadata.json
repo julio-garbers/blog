@@ -1,9 +1,9 @@
 {
   "total_website_years": 81585,
-  "n_topics": 1651,
-  "n_outliers": 28048,
-  "outlier_pct": 34.4,
-  "min_topic_size": 10,
+  "n_topics": 191,
+  "n_outliers": 34287,
+  "outlier_pct": 42.0,
+  "min_topic_size": 50,
   "embedding_model": "BAAI/bge-m3",
   "embedding_dim": 1024,
   "years": [
@@ -23,75 +23,75 @@
   "yearly": {
     "2013": {
       "n_websites": 2051,
-      "n_outliers": 674,
-      "outlier_pct": 32.9,
-      "n_classified": 1377
+      "n_outliers": 917,
+      "outlier_pct": 44.7,
+      "n_classified": 1134
     },
     "2014": {
       "n_websites": 1856,
-      "n_outliers": 551,
-      "outlier_pct": 29.7,
-      "n_classified": 1305
+      "n_outliers": 853,
+      "outlier_pct": 46.0,
+      "n_classified": 1003
     },
     "2015": {
       "n_websites": 1774,
-      "n_outliers": 523,
-      "outlier_pct": 29.5,
-      "n_classified": 1251
+      "n_outliers": 820,
+      "outlier_pct": 46.2,
+      "n_classified": 954
     },
     "2016": {
       "n_websites": 5627,
-      "n_outliers": 1896,
-      "outlier_pct": 33.7,
-      "n_classified": 3731
+      "n_outliers": 2475,
+      "outlier_pct": 44.0,
+      "n_classified": 3152
     },
     "2017": {
       "n_websites": 7177,
-      "n_outliers": 2472,
-      "outlier_pct": 34.4,
-      "n_classified": 4705
+      "n_outliers": 3175,
+      "outlier_pct": 44.2,
+      "n_classified": 4002
     },
     "2018": {
       "n_websites": 8203,
-      "n_outliers": 2845,
-      "outlier_pct": 34.7,
-      "n_classified": 5358
+      "n_outliers": 3592,
+      "outlier_pct": 43.8,
+      "n_classified": 4611
     },
     "2019": {
       "n_websites": 9456,
-      "n_outliers": 3283,
-      "outlier_pct": 34.7,
-      "n_classified": 6173
+      "n_outliers": 3922,
+      "outlier_pct": 41.5,
+      "n_classified": 5534
     },
     "2020": {
       "n_websites": 9988,
-      "n_outliers": 3383,
-      "outlier_pct": 33.9,
-      "n_classified": 6605
+      "n_outliers": 4080,
+      "outlier_pct": 40.8,
+      "n_classified": 5908
     },
     "2021": {
       "n_websites": 9856,
-      "n_outliers": 3374,
-      "outlier_pct": 34.2,
-      "n_classified": 6482
+      "n_outliers": 4048,
+      "outlier_pct": 41.1,
+      "n_classified": 5808
     },
     "2022": {
       "n_websites": 9395,
-      "n_outliers": 3286,
-      "outlier_pct": 35.0,
-      "n_classified": 6109
+      "n_outliers": 3816,
+      "outlier_pct": 40.6,
+      "n_classified": 5579
     },
     "2023": {
       "n_websites": 8420,
-      "n_outliers": 2975,
-      "outlier_pct": 35.3,
-      "n_classified": 5445
+      "n_outliers": 3436,
+      "outlier_pct": 40.8,
+      "n_classified": 4984
     },
     "2024": {
       "n_websites": 7782,
-      "n_outliers": 2786,
-      "outlier_pct": 35.8,
-      "n_classified": 4996
+      "n_outliers": 3153,
+      "outlier_pct": 40.5,
+      "n_classified": 4629
     }
   }
 }
