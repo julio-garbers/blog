@@ -40,7 +40,17 @@ This project applies unsupervised topic modeling to discover what themes Luxembo
 │  3. HDBSCAN clustering                                          │
 │  4. c-TF-IDF on full text (up to 50,000 chars)                 │
 │  5. topics_over_time() for evolution tracking                   │
-│  6. Visualizations + stats.json for blog post                   │
+│  6. Visualizations + stats.json                                 │
+└─────────────────────────────────────────────────────────────────┘
+                              │
+                              ▼
+┌─────────────────────────────────────────────────────────────────┐
+│                      03_blog_stats.py                            │
+│              (Lightweight, CPU)                                   │
+│                                                                  │
+│  Reads pipeline output + sector_mapping.json                     │
+│  Aggregates topics into sectors, computes shares over time       │
+│  Output: blog_stats.json (copy to blog directory)                │
 └─────────────────────────────────────────────────────────────────┘
 ```
 
@@ -56,7 +66,10 @@ blog/
 │   │   ├── 01_embed.sh             # SLURM array job (GPU, 0-11)
 │   │   ├── 02_bert_topic.py        # Global BERTopic + topics_over_time
 │   │   ├── 02_bert_topic.sh        # SLURM job script (largemem)
+│   │   ├── 03_blog_stats.py        # Generate blog stats from output + mapping
+│   │   ├── 03_blog_stats.sh        # SLURM job script (CPU)
 │   │   └── slurm/                  # SLURM output logs
+│   ├── sector_mapping.json             # Manual topic → sector assignments
 │   ├── data/
 │   │   ├── metadata.json           # Year/website counts
 │   │   └── yearly/                 # Per-year parquet files (on HPC)
@@ -69,7 +82,8 @@ blog/
 │   │   ├── topic_info.csv          # Topic names, keywords, counts
 │   │   ├── topics_over_time.csv    # Built-in evolution tracking
 │   │   ├── metadata.json           # Run metadata
-│   │   ├── stats.json              # Blog visualization data
+│   │   ├── stats.json              # Pipeline summary stats
+│   │   ├── blog_stats.json         # Blog-ready data (from 03_blog_stats.py)
 │   │   ├── topic_distribution.png
 │   │   ├── topic_words.png
 │   │   └── topic_umap.png
@@ -104,6 +118,16 @@ Run BERTopic on all years at once with `topics_over_time()`:
 sbatch bert_topic_websites_lux/script/02_bert_topic.sh
 ```
 
+### 4. Generate blog statistics
+
+Aggregate topics into sectors and compute shares over time:
+
+```bash
+sbatch bert_topic_websites_lux/script/03_blog_stats.sh
+```
+
+Then copy `output/blog_stats.json` to the blog directory as `stats.json`.
+
 ## Data
 
 - **~81,000** website-years (2013-2024)
@@ -117,7 +141,7 @@ sbatch bert_topic_websites_lux/script/02_bert_topic.sh
 | Embedding model | `BAAI/bge-m3` (1024-dim, 8192-token context) |
 | Max embed length | 30,000 characters |
 | Max c-TF-IDF length | 50,000 characters |
-| Min topic size | 10 |
+| Min topic size | 50 |
 | UMAP dimensions | 5 |
 | UMAP neighbors | 15 |
 | Stopwords | EN + FR + DE + PT + NL + Luxembourgish |
