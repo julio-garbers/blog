@@ -109,7 +109,7 @@ OUTPUT_DIR = Path("/project/home/p200812/blog/bert_topic_websites_lux/output")
 MODEL_DIR = Path("/project/home/p200812/blog/bert_topic_websites_lux/models")
 
 # BERTopic Parameters
-MIN_TOPIC_SIZE = 10
+MIN_TOPIC_SIZE = 30
 TOP_N_WORDS = 10
 EMBEDDING_MODEL = "paraphrase-multilingual-MiniLM-L12-v2"
 
