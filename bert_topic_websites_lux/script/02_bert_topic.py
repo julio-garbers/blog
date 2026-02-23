@@ -325,9 +325,6 @@ def save_results(
             except Exception:
                 pass
 
-        # Website count for this topic
-        n_websites = sum(1 for t in topics if t == topic_id)
-
         topic_summary.append(
             {
                 "topic_id": topic_id,
