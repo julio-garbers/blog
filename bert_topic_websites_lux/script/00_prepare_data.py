@@ -126,7 +126,10 @@ def process_websites(
     raw_lf: pl.LazyFrame,
 ) -> pl.DataFrame:
     print("\n[PROCESS] Extracting and deduplicating pages...", flush=True)
-    print(f"   Filtering to {len(sample):,} website-years from language sample", flush=True)
+    print(
+        f"   Filtering to {len(sample):,} website-years from language sample",
+        flush=True,
+    )
 
     # Collect all pages matching the sample
     df = (
@@ -141,7 +144,10 @@ def process_websites(
     )
 
     print(f"   Total pages before dedup: {len(df):,}", flush=True)
-    print(f"   Unique website-years: {df.select(['website_url', 'year']).unique().height:,}", flush=True)
+    print(
+        f"   Unique website-years: {df.select(['website_url', 'year']).unique().height:,}",
+        flush=True,
+    )
 
     # Group pages by website-year, deduplicate, and aggregate
     print("   Deduplicating paragraphs within each website-year...", flush=True)
@@ -212,13 +218,16 @@ def print_summary(df: pl.DataFrame, year_stats: dict[int, dict]) -> None:
 
     print(f"\nTotal website-years: {len(df):,}", flush=True)
     print(f"Unique websites: {df['website_url'].n_unique():,}", flush=True)
-    print(f"Years covered: {min(year_stats.keys())} - {max(year_stats.keys())}", flush=True)
+    print(
+        f"Years covered: {min(year_stats.keys())} - {max(year_stats.keys())}",
+        flush=True,
+    )
 
     total_pages = sum(v["n_pages"] for v in year_stats.values())
     print(f"Total pages (before dedup): {total_pages:,}", flush=True)
 
     text_lengths = df["clean_text"].str.len_chars()
-    print(f"\nClean text statistics (after dedup):", flush=True)
+    print("\nClean text statistics (after dedup):", flush=True)
     print(f"   Mean text length: {text_lengths.mean():,.0f} chars", flush=True)
     print(f"   Median text length: {text_lengths.median():,.0f} chars", flush=True)
     print(f"   P25: {text_lengths.quantile(0.25):,.0f} chars", flush=True)

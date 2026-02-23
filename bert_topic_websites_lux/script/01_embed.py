@@ -35,7 +35,9 @@ YEAR = int(os.environ.get("YEAR"))
 
 # Input/Output Paths
 DATA_DIR = Path("/project/home/p200812/blog/bert_topic_websites_lux/data/yearly")
-OUTPUT_DIR = Path("/project/home/p200812/blog/bert_topic_websites_lux/output/embeddings")
+OUTPUT_DIR = Path(
+    "/project/home/p200812/blog/bert_topic_websites_lux/output/embeddings"
+)
 MODEL_DIR = Path("/project/home/p200812/blog/bert_topic_websites_lux/models")
 
 OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
@@ -67,11 +69,17 @@ def load_year_data(year: int) -> pl.DataFrame:
 
     # Text length stats
     text_lengths = df["clean_text"].str.len_chars()
-    print(f"   Text length - mean: {text_lengths.mean():,.0f}, median: {text_lengths.median():,.0f}", flush=True)
+    print(
+        f"   Text length - mean: {text_lengths.mean():,.0f}, median: {text_lengths.median():,.0f}",
+        flush=True,
+    )
     print(f"   Text length - max: {text_lengths.max():,.0f}", flush=True)
 
     n_truncated = (text_lengths > EMBED_MAX_LENGTH).sum()
-    print(f"   Will truncate {n_truncated:,} texts to {EMBED_MAX_LENGTH:,} chars", flush=True)
+    print(
+        f"   Will truncate {n_truncated:,} texts to {EMBED_MAX_LENGTH:,} chars",
+        flush=True,
+    )
 
     return df
 
@@ -88,7 +96,10 @@ def generate_embeddings(texts: list[str]) -> np.ndarray:
     model.max_seq_length = 8192
 
     print(f"   Model loaded. Max sequence length: {model.max_seq_length}", flush=True)
-    print(f"   Embedding dimension: {model.get_sentence_embedding_dimension()}", flush=True)
+    print(
+        f"   Embedding dimension: {model.get_sentence_embedding_dimension()}",
+        flush=True,
+    )
     print(f"   Encoding {len(texts):,} texts (batch_size={BATCH_SIZE})...", flush=True)
 
     start = time.time()
@@ -101,7 +112,10 @@ def generate_embeddings(texts: list[str]) -> np.ndarray:
     elapsed = time.time() - start
 
     print(f"   [OK] Embeddings shape: {embeddings.shape}", flush=True)
-    print(f"   [OK] Time: {elapsed:.1f}s ({len(texts) / elapsed:.1f} texts/sec)", flush=True)
+    print(
+        f"   [OK] Time: {elapsed:.1f}s ({len(texts) / elapsed:.1f} texts/sec)",
+        flush=True,
+    )
     print(f"   [OK] Size: {embeddings.nbytes / 1e6:.1f} MB", flush=True)
 
     return embeddings
@@ -116,7 +130,7 @@ def main():
     print("=" * 70, flush=True)
     print(f"Luxembourg Website Topic Analysis - Embeddings (Year {YEAR})", flush=True)
     print("=" * 70, flush=True)
-    print(f"\nConfiguration:", flush=True)
+    print("\nConfiguration:", flush=True)
     print(f"   Year: {YEAR}", flush=True)
     print(f"   Model: {EMBEDDING_MODEL}", flush=True)
     print(f"   Max text length: {EMBED_MAX_LENGTH:,} chars", flush=True)

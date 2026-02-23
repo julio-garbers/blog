@@ -13,56 +13,68 @@
     2023,
     2024
   ],
-  "total_pages": 246604,
   "total_website_years": 81585,
+  "total_pages_before_dedup": 246604,
   "year_stats": {
     "2013": {
+      "n_websites": 2051,
       "n_pages": 4544,
-      "n_websites": 2051
+      "avg_text_length": 6139
     },
     "2014": {
+      "n_websites": 1856,
       "n_pages": 3348,
-      "n_websites": 1856
+      "avg_text_length": 5901
     },
     "2015": {
+      "n_websites": 1774,
       "n_pages": 3072,
-      "n_websites": 1774
+      "avg_text_length": 5522
     },
     "2016": {
+      "n_websites": 5627,
       "n_pages": 7822,
-      "n_websites": 5627
+      "avg_text_length": 4330
     },
     "2017": {
+      "n_websites": 7177,
       "n_pages": 15630,
-      "n_websites": 7177
+      "avg_text_length": 5001
     },
     "2018": {
+      "n_websites": 8203,
       "n_pages": 24257,
-      "n_websites": 8203
+      "avg_text_length": 6249
     },
     "2019": {
+      "n_websites": 9456,
       "n_pages": 31357,
-      "n_websites": 9456
+      "avg_text_length": 6543
     },
     "2020": {
+      "n_websites": 9988,
       "n_pages": 33847,
-      "n_websites": 9988
+      "avg_text_length": 7409
     },
     "2021": {
+      "n_websites": 9856,
       "n_pages": 33252,
-      "n_websites": 9856
+      "avg_text_length": 7335
     },
     "2022": {
+      "n_websites": 9395,
       "n_pages": 31302,
-      "n_websites": 9395
+      "avg_text_length": 7363
     },
     "2023": {
+      "n_websites": 8420,
       "n_pages": 30937,
-      "n_websites": 8420
+      "avg_text_length": 8395
     },
     "2024": {
+      "n_websites": 7782,
       "n_pages": 27236,
-      "n_websites": 7782
+      "avg_text_length": 8242
     }
   }
 }

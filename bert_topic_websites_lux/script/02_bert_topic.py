@@ -26,6 +26,7 @@ import warnings
 from pathlib import Path
 
 import matplotlib
+
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 import numpy as np
@@ -44,9 +45,37 @@ warnings.filterwarnings("ignore")
 # =============================================================================
 
 LUXEMBOURGISH_STOPS = {
-    "an", "ass", "bei", "dat", "de", "den", "déi", "dir", "d'", "e", "een",
-    "en", "eng", "et", "fir", "hien", "hun", "ech", "mat", "mir", "no", "ob",
-    "op", "seng", "si", "sinn", "vun", "wann", "wat", "wéi", "ze",
+    "an",
+    "ass",
+    "bei",
+    "dat",
+    "de",
+    "den",
+    "déi",
+    "dir",
+    "d'",
+    "e",
+    "een",
+    "en",
+    "eng",
+    "et",
+    "fir",
+    "hien",
+    "hun",
+    "ech",
+    "mat",
+    "mir",
+    "no",
+    "ob",
+    "op",
+    "seng",
+    "si",
+    "sinn",
+    "vun",
+    "wann",
+    "wat",
+    "wéi",
+    "ze",
 }
 
 ALL_STOPWORDS = list(
@@ -131,13 +160,19 @@ def load_all_data() -> tuple[np.ndarray, list[str], list[str], pl.DataFrame]:
         all_timestamps.extend(timestamps)
         all_meta.append(aligned.select(["website_url", "year", "n_pages"]))
 
-        print(f"   {year}: {len(texts):,} websites, embeddings {embeddings.shape}", flush=True)
+        print(
+            f"   {year}: {len(texts):,} websites, embeddings {embeddings.shape}",
+            flush=True,
+        )
 
     embeddings_all = np.vstack(all_embeddings)
     metadata_df = pl.concat(all_meta)
 
     print(f"\n   Total: {len(all_texts):,} website-years", flush=True)
-    print(f"   Embeddings: {embeddings_all.shape} ({embeddings_all.nbytes / 1e6:.0f} MB)", flush=True)
+    print(
+        f"   Embeddings: {embeddings_all.shape} ({embeddings_all.nbytes / 1e6:.0f} MB)",
+        flush=True,
+    )
 
     return embeddings_all, all_texts, all_timestamps, metadata_df
 
@@ -251,9 +286,7 @@ def save_results(
     print(f"\n[SAVE] Saving results to {OUTPUT_DIR}", flush=True)
 
     # 1. Website topics (per website-year)
-    website_topics = metadata_df.with_columns(
-        pl.Series("topic", topics)
-    )
+    website_topics = metadata_df.with_columns(pl.Series("topic", topics))
     website_topics.write_parquet(
         OUTPUT_DIR / "website_topics.parquet",
         compression="zstd",
@@ -295,13 +328,15 @@ def save_results(
         # Website count for this topic
         n_websites = sum(1 for t in topics if t == topic_id)
 
-        topic_summary.append({
-            "topic_id": topic_id,
-            "count": count,
-            "name": row["Name"],
-            "top_words": top_words,
-            "representative_docs": rep_docs_str,
-        })
+        topic_summary.append(
+            {
+                "topic_id": topic_id,
+                "count": count,
+                "name": row["Name"],
+                "top_words": top_words,
+                "representative_docs": rep_docs_str,
+            }
+        )
 
     topic_summary_df = pl.DataFrame(topic_summary)
     topic_summary_df.write_csv(OUTPUT_DIR / "topic_info.csv")
@@ -354,9 +389,7 @@ def build_stats_json(
     """Build stats.json for the blog post visualization."""
     print("\n[STATS] Building stats.json for blog post...", flush=True)
 
-    website_topics = metadata_df.with_columns(
-        pl.Series("topic", topics)
-    )
+    website_topics = metadata_df.with_columns(pl.Series("topic", topics))
 
     # --- Yearly stats ---
     yearly_stats = []
@@ -383,25 +416,33 @@ def build_stats_json(
         for row in top.iter_rows(named=True):
             tid = row["topic"]
             try:
-                words = ", ".join([w for w, _ in topic_model.get_topic(tid)[:TOP_N_WORDS]])
+                words = ", ".join(
+                    [w for w, _ in topic_model.get_topic(tid)[:TOP_N_WORDS]]
+                )
             except Exception:
                 words = ""
-            top_topics.append({
-                "topic_id": tid,
-                "count": row["count"],
-                "top_words": words,
-            })
+            top_topics.append(
+                {
+                    "topic_id": tid,
+                    "count": row["count"],
+                    "top_words": words,
+                }
+            )
 
-        yearly_stats.append({
-            "year": year,
-            "n_websites": n_websites,
-            "n_pages": int(n_pages),
-            "n_topics_active": yr_df.filter(pl.col("topic") != -1)["topic"].n_unique(),
-            "n_outliers": n_outliers,
-            "outlier_pct": round(n_outliers / n_websites * 100, 1),
-            "n_classified": n_classified,
-            "top_topics": top_topics,
-        })
+        yearly_stats.append(
+            {
+                "year": year,
+                "n_websites": n_websites,
+                "n_pages": int(n_pages),
+                "n_topics_active": yr_df.filter(pl.col("topic") != -1)[
+                    "topic"
+                ].n_unique(),
+                "n_outliers": n_outliers,
+                "outlier_pct": round(n_outliers / n_websites * 100, 1),
+                "n_classified": n_classified,
+                "top_topics": top_topics,
+            }
+        )
 
     # --- Topic info for latest year (2024) treemap ---
     latest_year = max(int(y) for y in years)
@@ -421,11 +462,13 @@ def build_stats_json(
             words = [w for w, _ in topic_model.get_topic(tid)[:TOP_N_WORDS]]
         except Exception:
             words = []
-        topics_latest.append({
-            "topic_id": tid,
-            "count": row["count"],
-            "top_words": words,
-        })
+        topics_latest.append(
+            {
+                "topic_id": tid,
+                "count": row["count"],
+                "top_words": words,
+            }
+        )
 
     # --- Topics over time (for evolution chart) ---
     # Filter to topics with at least 10 websites in some year
@@ -444,7 +487,9 @@ def build_stats_json(
         )
 
         evolution = []
-        for row in tot.filter(pl.col("Topic").is_in(top_topic_ids)).iter_rows(named=True):
+        for row in tot.filter(pl.col("Topic").is_in(top_topic_ids)).iter_rows(
+            named=True
+        ):
             tid = row["Topic"]
             try:
                 words = ", ".join([w for w, _ in topic_model.get_topic(tid)[:5]])
@@ -457,12 +502,14 @@ def build_stats_json(
             else:
                 year_val = int(str(ts)[:4])
 
-            evolution.append({
-                "topic_id": tid,
-                "year": year_val,
-                "frequency": row["Frequency"],
-                "label": words,
-            })
+            evolution.append(
+                {
+                    "topic_id": tid,
+                    "year": year_val,
+                    "frequency": row["Frequency"],
+                    "label": words,
+                }
+            )
     else:
         evolution = []
 
@@ -512,7 +559,9 @@ def create_visualizations(
     # 1. Topic distribution bar chart
     try:
         fig, ax = plt.subplots(figsize=(12, 10))
-        topics_sorted = topic_info_filtered.sort_values("Count", ascending=True).tail(20)
+        topics_sorted = topic_info_filtered.sort_values("Count", ascending=True).tail(
+            20
+        )
 
         colors = plt.cm.viridis(np.linspace(0.2, 0.8, len(topics_sorted)))
         ax.barh(range(len(topics_sorted)), topics_sorted["Count"], color=colors)
@@ -533,7 +582,10 @@ def create_visualizations(
     try:
         n_points = len(embeddings)
         if n_points > MAX_VIZ_POINTS:
-            print(f"   Subsampling {MAX_VIZ_POINTS:,} of {n_points:,} for UMAP scatter...", flush=True)
+            print(
+                f"   Subsampling {MAX_VIZ_POINTS:,} of {n_points:,} for UMAP scatter...",
+                flush=True,
+            )
             rng = np.random.RandomState(42)
             idx = rng.choice(n_points, MAX_VIZ_POINTS, replace=False)
             viz_embeddings = embeddings[idx]
@@ -559,7 +611,10 @@ def create_visualizations(
             ax.scatter(
                 embeddings_2d[outlier_mask, 0],
                 embeddings_2d[outlier_mask, 1],
-                c="lightgray", alpha=0.15, s=8, label="Outliers",
+                c="lightgray",
+                alpha=0.15,
+                s=8,
+                label="Outliers",
             )
 
         # Top topics with colors
@@ -570,10 +625,15 @@ def create_visualizations(
             ax.scatter(
                 embeddings_2d[mask, 0],
                 embeddings_2d[mask, 1],
-                c=[colors[i % 20]], alpha=0.5, s=12, label=f"Topic {tid}",
+                c=[colors[i % 20]],
+                alpha=0.5,
+                s=12,
+                label=f"Topic {tid}",
             )
 
-        ax.set_title("Website Topics (UMAP) - Global Model", fontsize=14, fontweight="bold")
+        ax.set_title(
+            "Website Topics (UMAP) - Global Model", fontsize=14, fontweight="bold"
+        )
         ax.spines["top"].set_visible(False)
         ax.spines["right"].set_visible(False)
         ax.legend(bbox_to_anchor=(1.02, 1), loc="upper left", fontsize=7, frameon=False)
@@ -610,7 +670,9 @@ def create_visualizations(
         for idx in range(n_topics, len(axes)):
             axes[idx].set_visible(False)
 
-        plt.suptitle("Top Words per Topic (Global Model)", fontsize=14, fontweight="bold", y=1.02)
+        plt.suptitle(
+            "Top Words per Topic (Global Model)", fontsize=14, fontweight="bold", y=1.02
+        )
         plt.tight_layout()
         plt.savefig(OUTPUT_DIR / "topic_words.png", dpi=300, bbox_inches="tight")
         plt.close()
@@ -628,7 +690,7 @@ def main():
     print("=" * 70, flush=True)
     print("Luxembourg Website Topic Analysis - Global BERTopic", flush=True)
     print("=" * 70, flush=True)
-    print(f"\nConfiguration:", flush=True)
+    print("\nConfiguration:", flush=True)
     print(f"   Years: {YEARS[0]}-{YEARS[-1]}", flush=True)
     print(f"   Min topic size: {MIN_TOPIC_SIZE}", flush=True)
     print(f"   c-TF-IDF max text: {TFIDF_MAX_LENGTH:,} chars", flush=True)
@@ -641,14 +703,22 @@ def main():
 
     # Save results
     save_results(
-        topic_model, topics, topics_over_time,
-        metadata_df, texts, timestamps, embeddings,
+        topic_model,
+        topics,
+        topics_over_time,
+        metadata_df,
+        texts,
+        timestamps,
+        embeddings,
     )
 
     # Build blog stats.json
     build_stats_json(
-        topic_model, topics, topics_over_time,
-        metadata_df, timestamps,
+        topic_model,
+        topics,
+        topics_over_time,
+        metadata_df,
+        timestamps,
     )
 
     # Create visualizations
