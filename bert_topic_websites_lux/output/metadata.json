@@ -1,0 +1,97 @@
+{
+  "total_website_years": 81585,
+  "n_topics": 1651,
+  "n_outliers": 28048,
+  "outlier_pct": 34.4,
+  "min_topic_size": 10,
+  "embedding_model": "BAAI/bge-m3",
+  "embedding_dim": 1024,
+  "years": [
+    "2013",
+    "2014",
+    "2015",
+    "2016",
+    "2017",
+    "2018",
+    "2019",
+    "2020",
+    "2021",
+    "2022",
+    "2023",
+    "2024"
+  ],
+  "yearly": {
+    "2013": {
+      "n_websites": 2051,
+      "n_outliers": 674,
+      "outlier_pct": 32.9,
+      "n_classified": 1377
+    },
+    "2014": {
+      "n_websites": 1856,
+      "n_outliers": 551,
+      "outlier_pct": 29.7,
+      "n_classified": 1305
+    },
+    "2015": {
+      "n_websites": 1774,
+      "n_outliers": 523,
+      "outlier_pct": 29.5,
+      "n_classified": 1251
+    },
+    "2016": {
+      "n_websites": 5627,
+      "n_outliers": 1896,
+      "outlier_pct": 33.7,
+      "n_classified": 3731
+    },
+    "2017": {
+      "n_websites": 7177,
+      "n_outliers": 2472,
+      "outlier_pct": 34.4,
+      "n_classified": 4705
+    },
+    "2018": {
+      "n_websites": 8203,
+      "n_outliers": 2845,
+      "outlier_pct": 34.7,
+      "n_classified": 5358
+    },
+    "2019": {
+      "n_websites": 9456,
+      "n_outliers": 3283,
+      "outlier_pct": 34.7,
+      "n_classified": 6173
+    },
+    "2020": {
+      "n_websites": 9988,
+      "n_outliers": 3383,
+      "outlier_pct": 33.9,
+      "n_classified": 6605
+    },
+    "2021": {
+      "n_websites": 9856,
+      "n_outliers": 3374,
+      "outlier_pct": 34.2,
+      "n_classified": 6482
+    },
+    "2022": {
+      "n_websites": 9395,
+      "n_outliers": 3286,
+      "outlier_pct": 35.0,
+      "n_classified": 6109
+    },
+    "2023": {
+      "n_websites": 8420,
+      "n_outliers": 2975,
+      "outlier_pct": 35.3,
+      "n_classified": 5445
+    },
+    "2024": {
+      "n_websites": 7782,
+      "n_outliers": 2786,
+      "outlier_pct": 35.8,
+      "n_classified": 4996
+    }
+  }
+}
