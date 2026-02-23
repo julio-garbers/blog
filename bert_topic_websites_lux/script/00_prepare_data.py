@@ -1,13 +1,17 @@
 """
 Luxembourg Website Topic Analysis - Step 0: Prepare Data
 =========================================================
-Saves individual web pages per year for page-level BERTopic processing.
+Aggregates web pages per website-year with paragraph-level deduplication.
 
 This script:
 1. Loads the sample of websites from the language analysis
 2. Joins with raw data to get text content
-3. Keeps individual pages (one row per page, NOT aggregated per website)
-4. Saves yearly parquet files for array job processing
+3. Deduplicates repeated paragraphs within each website-year (nav, footer, etc.)
+4. Saves one parquet file per year with clean aggregated text
+
+The deduplication removes boilerplate that repeats across pages of the same
+website (navigation bars, footers, cookie banners) while preserving unique
+content from each page.
 
 Uses the same sample as the language analysis for consistency.
 
@@ -32,12 +36,15 @@ LANGUAGE_SAMPLE_FILE = Path(
 # Input: Raw website data with text content
 RAW_DATA_DIR = Path("/project/home/p201125/firm_websites/data/clean/luxembourg")
 
-# Output: Individual pages per year
+# Output: Aggregated website text per year
 OUTPUT_DIR = Path("/project/home/p200812/blog/bert_topic_websites_lux/data/yearly")
 OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
 
-# Minimum text length per page (characters)
-MIN_TEXT_LENGTH = 100
+# Minimum text length per page (characters) to include
+MIN_PAGE_LENGTH = 100
+
+# Minimum paragraph length (characters) to keep during dedup
+MIN_PARAGRAPH_LENGTH = 20
 
 
 # =============================================================================
@@ -79,42 +86,88 @@ def load_raw_data() -> pl.LazyFrame:
 
 
 # =============================================================================
+# Paragraph Deduplication
+# =============================================================================
+
+
+def deduplicate_pages(pages: list[str]) -> str:
+    """Merge multiple pages into one text, removing duplicate paragraphs.
+
+    Pages are processed longest-first so that the most content-rich page
+    contributes its paragraphs first. Subsequent pages only add paragraphs
+    not already seen (based on normalized whitespace comparison).
+
+    This removes repeated navigation, footers, cookie banners, etc.
+    """
+    pages_sorted = sorted(pages, key=len, reverse=True)
+    seen: set[str] = set()
+    unique_parts: list[str] = []
+
+    for page in pages_sorted:
+        for para in page.split("\n\n"):
+            para = para.strip()
+            if len(para) < MIN_PARAGRAPH_LENGTH:
+                continue
+            normalized = " ".join(para.split())
+            if normalized not in seen:
+                seen.add(normalized)
+                unique_parts.append(para)
+
+    return "\n\n".join(unique_parts) if unique_parts else pages_sorted[0]
+
+
+# =============================================================================
 # Data Processing
 # =============================================================================
 
 
-def extract_pages(
+def process_websites(
     sample: pl.DataFrame,
     raw_lf: pl.LazyFrame,
 ) -> pl.DataFrame:
-    print("\n[PROCESS] Extracting individual pages...", flush=True)
+    print("\n[PROCESS] Extracting and deduplicating pages...", flush=True)
     print(f"   Filtering to {len(sample):,} website-years from language sample", flush=True)
 
-    # Keep individual pages (one row per page) instead of aggregating
+    # Collect all pages matching the sample
     df = (
         raw_lf.filter(
-            # Filter to .lu domains
             pl.col("website_url").str.ends_with(".lu")
-            # Filter out null/empty text
             & pl.col("md_text").is_not_null()
-            & (pl.col("md_text").str.len_chars() >= MIN_TEXT_LENGTH)
+            & (pl.col("md_text").str.len_chars() >= MIN_PAGE_LENGTH)
         )
-        # Join with sample to keep only matching website-years
         .join(sample.lazy(), on=["website_url", "year"], how="inner")
         .select(["website_url", "year", "md_text"])
-        .rename({"md_text": "page_text"})
         .collect(engine="streaming")
     )
 
-    print(f"   Total pages: {len(df):,}", flush=True)
-    print(f"   Unique websites: {df['website_url'].n_unique():,}", flush=True)
+    print(f"   Total pages before dedup: {len(df):,}", flush=True)
+    print(f"   Unique website-years: {df.select(['website_url', 'year']).unique().height:,}", flush=True)
 
-    # Report coverage
-    websites_with_pages = df.select(["website_url", "year"]).unique()
-    coverage = len(websites_with_pages) / len(sample) * 100
-    print(f"   Coverage of language sample: {coverage:.1f}%", flush=True)
+    # Group pages by website-year, deduplicate, and aggregate
+    print("   Deduplicating paragraphs within each website-year...", flush=True)
+    grouped = df.group_by(["website_url", "year"]).agg(
+        pl.col("md_text").alias("pages"),
+        pl.len().alias("n_pages"),
+    )
 
-    return df
+    # Apply deduplication
+    clean_texts = []
+    for row in grouped.iter_rows(named=True):
+        clean_texts.append(deduplicate_pages(row["pages"]))
+
+    result = grouped.select(["website_url", "year", "n_pages"]).with_columns(
+        pl.Series("clean_text", clean_texts)
+    )
+
+    # Text length stats
+    original_total = df["md_text"].str.len_chars().sum()
+    deduped_total = result["clean_text"].str.len_chars().sum()
+    reduction = (1 - deduped_total / original_total) * 100 if original_total > 0 else 0
+
+    print(f"   Text reduction from dedup: {reduction:.1f}%", flush=True)
+    print(f"   Website-years with text: {len(result):,}", flush=True)
+
+    return result
 
 
 def save_yearly_files(df: pl.DataFrame, output_dir: Path) -> dict[int, dict]:
@@ -125,17 +178,22 @@ def save_yearly_files(df: pl.DataFrame, output_dir: Path) -> dict[int, dict]:
 
     for year in years:
         year_df = df.filter(pl.col("year") == year)
-        n_pages = len(year_df)
-        n_websites = year_df["website_url"].n_unique()
-        year_stats[year] = {"n_pages": n_pages, "n_websites": n_websites}
+        n_websites = len(year_df)
+        n_pages = year_df["n_pages"].sum()
+        avg_text_len = year_df["clean_text"].str.len_chars().mean()
 
-        output_file = output_dir / f"pages_{year}.parquet"
+        year_stats[year] = {
+            "n_websites": n_websites,
+            "n_pages": int(n_pages),
+            "avg_text_length": int(avg_text_len),
+        }
+
+        output_file = output_dir / f"websites_{year}.parquet"
         year_df.write_parquet(output_file, compression="zstd", compression_level=10)
 
-        avg_pages = n_pages / n_websites if n_websites > 0 else 0
         print(
-            f"   {year}: {n_pages:,} pages from {n_websites:,} websites "
-            f"(avg {avg_pages:.1f} pages/website) -> {output_file.name}",
+            f"   {year}: {n_websites:,} websites ({n_pages:,} pages, "
+            f"avg {avg_text_len:,.0f} chars) -> {output_file.name}",
             flush=True,
         )
 
@@ -152,23 +210,21 @@ def print_summary(df: pl.DataFrame, year_stats: dict[int, dict]) -> None:
     print("SUMMARY STATISTICS", flush=True)
     print("=" * 70, flush=True)
 
-    print(f"\nTotal pages: {len(df):,}", flush=True)
+    print(f"\nTotal website-years: {len(df):,}", flush=True)
     print(f"Unique websites: {df['website_url'].n_unique():,}", flush=True)
     print(f"Years covered: {min(year_stats.keys())} - {max(year_stats.keys())}", flush=True)
 
     total_pages = sum(v["n_pages"] for v in year_stats.values())
-    total_websites = sum(v["n_websites"] for v in year_stats.values())
-    print(f"Avg pages per website-year: {total_pages / total_websites:.1f}", flush=True)
+    print(f"Total pages (before dedup): {total_pages:,}", flush=True)
 
-    print("\nPages and websites per year:", flush=True)
-    for year, stats in sorted(year_stats.items()):
-        print(f"   {year}: {stats['n_pages']:,} pages, {stats['n_websites']:,} websites", flush=True)
-
-    print("\nPage text statistics:", flush=True)
-    text_lengths = df["page_text"].str.len_chars()
+    text_lengths = df["clean_text"].str.len_chars()
+    print(f"\nClean text statistics (after dedup):", flush=True)
     print(f"   Mean text length: {text_lengths.mean():,.0f} chars", flush=True)
     print(f"   Median text length: {text_lengths.median():,.0f} chars", flush=True)
-    print(f"   Max text length: {text_lengths.max():,.0f} chars", flush=True)
+    print(f"   P25: {text_lengths.quantile(0.25):,.0f} chars", flush=True)
+    print(f"   P75: {text_lengths.quantile(0.75):,.0f} chars", flush=True)
+    print(f"   P95: {text_lengths.quantile(0.95):,.0f} chars", flush=True)
+    print(f"   Max: {text_lengths.max():,.0f} chars", flush=True)
 
 
 # =============================================================================
@@ -178,7 +234,8 @@ def print_summary(df: pl.DataFrame, year_stats: dict[int, dict]) -> None:
 
 def main():
     print("=" * 70, flush=True)
-    print("Luxembourg Website Topic Analysis - Data Preparation (Page-Level)", flush=True)
+    print("Luxembourg Website Topic Analysis - Data Preparation", flush=True)
+    print("(Paragraph-Level Deduplication)", flush=True)
     print("=" * 70, flush=True)
 
     # Load sample from language analysis
@@ -189,9 +246,9 @@ def main():
     print("\n[STEP 2] Loading raw data with text content...", flush=True)
     raw_lf = load_raw_data()
 
-    # Extract individual pages
-    print("\n[STEP 3] Extracting individual pages...", flush=True)
-    df = extract_pages(sample, raw_lf)
+    # Process: extract, deduplicate, aggregate
+    print("\n[STEP 3] Processing websites with paragraph deduplication...", flush=True)
+    df = process_websites(sample, raw_lf)
 
     # Save yearly files
     print("\n[STEP 4] Saving yearly files...", flush=True)
@@ -200,11 +257,11 @@ def main():
     # Print summary
     print_summary(df, year_stats)
 
-    # Save metadata for the array job
+    # Save metadata
     metadata = {
         "years": sorted(year_stats.keys()),
-        "total_pages": len(df),
-        "total_website_years": df.select(["website_url", "year"]).unique().height,
+        "total_website_years": len(df),
+        "total_pages_before_dedup": sum(v["n_pages"] for v in year_stats.values()),
         "year_stats": {str(k): v for k, v in year_stats.items()},
     }
 
@@ -214,8 +271,8 @@ def main():
     print(f"\n[OK] Metadata saved: {metadata_file}", flush=True)
 
     print("\n" + "=" * 70, flush=True)
-    print("DONE! Ready for BERTopic analysis.", flush=True)
-    print("Run: sbatch script/01_bert_topic.sh", flush=True)
+    print("DONE! Ready for embedding.", flush=True)
+    print("Run: sbatch script/01_embed.sh", flush=True)
     print("=" * 70, flush=True)
 
 
