@@ -1,8 +1,14 @@
 {
   "year": 2013,
+  "n_pages": 4544,
   "n_websites": 2051,
-  "n_topics": 1,
-  "n_outliers": 0,
+  "n_topics": 98,
+  "n_outlier_pages": 1926,
+  "n_outlier_websites": 766,
+  "page_outlier_pct": 42.4,
+  "website_outlier_pct": 37.3,
+  "n_classified_websites": 1285,
+  "avg_topics_per_website": 1.1,
   "embedding_model": "paraphrase-multilingual-MiniLM-L12-v2",
   "min_topic_size": 10
 }

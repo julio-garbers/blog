@@ -1,8 +1,14 @@
 {
   "year": 2019,
+  "n_pages": 31357,
   "n_websites": 9456,
-  "n_topics": 92,
-  "n_outliers": 3939,
+  "n_topics": 569,
+  "n_outlier_pages": 13502,
+  "n_outlier_websites": 3000,
+  "page_outlier_pct": 43.1,
+  "website_outlier_pct": 31.7,
+  "n_classified_websites": 6456,
+  "avg_topics_per_website": 1.4,
   "embedding_model": "paraphrase-multilingual-MiniLM-L12-v2",
   "min_topic_size": 10
 }
