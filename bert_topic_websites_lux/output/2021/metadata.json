@@ -2,13 +2,13 @@
   "year": 2021,
   "n_pages": 33252,
   "n_websites": 9856,
-  "n_topics": 577,
-  "n_outlier_pages": 14667,
-  "n_outlier_websites": 3012,
-  "page_outlier_pct": 44.1,
-  "website_outlier_pct": 30.6,
-  "n_classified_websites": 6844,
-  "avg_topics_per_website": 1.4,
+  "n_topics": 125,
+  "n_outlier_pages": 17486,
+  "n_outlier_websites": 3772,
+  "page_outlier_pct": 52.6,
+  "website_outlier_pct": 38.3,
+  "n_classified_websites": 6084,
+  "avg_topics_per_website": 1.3,
   "embedding_model": "paraphrase-multilingual-MiniLM-L12-v2",
-  "min_topic_size": 10
+  "min_topic_size": 30
 }

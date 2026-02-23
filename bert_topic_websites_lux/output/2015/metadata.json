@@ -2,13 +2,13 @@
   "year": 2015,
   "n_pages": 3072,
   "n_websites": 1774,
-  "n_topics": 70,
-  "n_outlier_pages": 1077,
-  "n_outlier_websites": 585,
-  "page_outlier_pct": 35.1,
-  "website_outlier_pct": 33.0,
-  "n_classified_websites": 1189,
-  "avg_topics_per_website": 1.1,
+  "n_topics": 3,
+  "n_outlier_pages": 111,
+  "n_outlier_websites": 22,
+  "page_outlier_pct": 3.6,
+  "website_outlier_pct": 1.2,
+  "n_classified_websites": 1752,
+  "avg_topics_per_website": 1.0,
   "embedding_model": "paraphrase-multilingual-MiniLM-L12-v2",
-  "min_topic_size": 10
+  "min_topic_size": 30
 }

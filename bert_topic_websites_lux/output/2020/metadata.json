@@ -2,13 +2,13 @@
   "year": 2020,
   "n_pages": 33847,
   "n_websites": 9988,
-  "n_topics": 622,
-  "n_outlier_pages": 14712,
-  "n_outlier_websites": 3007,
-  "page_outlier_pct": 43.5,
-  "website_outlier_pct": 30.1,
-  "n_classified_websites": 6981,
+  "n_topics": 140,
+  "n_outlier_pages": 17829,
+  "n_outlier_websites": 3808,
+  "page_outlier_pct": 52.7,
+  "website_outlier_pct": 38.1,
+  "n_classified_websites": 6180,
   "avg_topics_per_website": 1.4,
   "embedding_model": "paraphrase-multilingual-MiniLM-L12-v2",
-  "min_topic_size": 10
+  "min_topic_size": 30
 }
