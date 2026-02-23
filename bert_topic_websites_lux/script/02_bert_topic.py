@@ -97,7 +97,7 @@ EMBED_DIR = Path("/project/home/p200812/blog/bert_topic_websites_lux/output/embe
 OUTPUT_DIR = Path("/project/home/p200812/blog/bert_topic_websites_lux/output")
 
 # BERTopic Parameters
-MIN_TOPIC_SIZE = 10
+MIN_TOPIC_SIZE = 50
 TOP_N_WORDS = 10
 
 # Max text length for c-TF-IDF (can be longer than embedding input)
@@ -277,7 +277,6 @@ def save_results(
     topics: list[int],
     topics_over_time: pl.DataFrame,
     metadata_df: pl.DataFrame,
-    texts: list[str],
     timestamps: list[str],
     embeddings: np.ndarray,
 ) -> None:
@@ -546,7 +545,6 @@ def create_visualizations(
     topic_model: BERTopic,
     topics: list[int],
     embeddings: np.ndarray,
-    timestamps: list[str],
 ) -> None:
     print("\n[VIZ] Creating visualizations...", flush=True)
 
@@ -555,7 +553,7 @@ def create_visualizations(
 
     # 1. Topic distribution bar chart
     try:
-        fig, ax = plt.subplots(figsize=(12, 10))
+        _fig, ax = plt.subplots(figsize=(12, 10))
         topics_sorted = topic_info_filtered.sort_values("Count", ascending=True).tail(
             20
         )
@@ -600,7 +598,7 @@ def create_visualizations(
         )
         embeddings_2d = umap_2d.fit_transform(viz_embeddings)
 
-        fig, ax = plt.subplots(figsize=(14, 10))
+        _fig, ax = plt.subplots(figsize=(14, 10))
 
         # Outliers in gray
         outlier_mask = viz_topics == -1
@@ -647,7 +645,7 @@ def create_visualizations(
         n_cols = 3
         n_rows = (n_topics + n_cols - 1) // n_cols
 
-        fig, axes = plt.subplots(n_rows, n_cols, figsize=(14, n_rows * 2.5))
+        _fig, axes = plt.subplots(n_rows, n_cols, figsize=(14, n_rows * 2.5))
         axes = axes.flatten() if n_topics > 1 else [axes]
 
         for idx, topic_id in enumerate(topic_info_filtered["Topic"].head(n_topics)):
@@ -704,7 +702,6 @@ def main():
         topics,
         topics_over_time,
         metadata_df,
-        texts,
         timestamps,
         embeddings,
     )
@@ -719,7 +716,7 @@ def main():
     )
 
     # Create visualizations
-    create_visualizations(topic_model, topics, embeddings, timestamps)
+    create_visualizations(topic_model, topics, embeddings)
 
     # Print top topics
     print("\n" + "=" * 70, flush=True)
