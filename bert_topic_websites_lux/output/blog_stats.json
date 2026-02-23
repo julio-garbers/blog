@@ -1,0 +1,1142 @@
+{
+  "summary": {
+    "first_year": 2016,
+    "last_year": 2024,
+    "total_website_years": 81585,
+    "n_topics": 191,
+    "outlier_pct": 42.0,
+    "n_classified_latest": 4629,
+    "n_mapped_latest": 3831
+  },
+  "yearly": [
+    {
+      "year": 2016,
+      "n_websites": 5627,
+      "n_classified": 3152,
+      "outlier_pct": 44.0
+    },
+    {
+      "year": 2017,
+      "n_websites": 7177,
+      "n_classified": 4002,
+      "outlier_pct": 44.2
+    },
+    {
+      "year": 2018,
+      "n_websites": 8203,
+      "n_classified": 4611,
+      "outlier_pct": 43.8
+    },
+    {
+      "year": 2019,
+      "n_websites": 9456,
+      "n_classified": 5534,
+      "outlier_pct": 41.5
+    },
+    {
+      "year": 2020,
+      "n_websites": 9988,
+      "n_classified": 5908,
+      "outlier_pct": 40.8
+    },
+    {
+      "year": 2021,
+      "n_websites": 9856,
+      "n_classified": 5808,
+      "outlier_pct": 41.1
+    },
+    {
+      "year": 2022,
+      "n_websites": 9395,
+      "n_classified": 5579,
+      "outlier_pct": 40.6
+    },
+    {
+      "year": 2023,
+      "n_websites": 8420,
+      "n_classified": 4984,
+      "outlier_pct": 40.8
+    },
+    {
+      "year": 2024,
+      "n_websites": 7782,
+      "n_classified": 4629,
+      "outlier_pct": 40.5
+    }
+  ],
+  "topics_2024": [
+    {
+      "id": 0,
+      "count": 514,
+      "sector": "Real Estate",
+      "label": "Property Listings",
+      "words": "appartement, chambres, m², surface, maison, immobilier"
+    },
+    {
+      "id": 1,
+      "count": 277,
+      "sector": "Finance & Law",
+      "label": "Investment Funds",
+      "words": "fund, investment, asset management, tax, equity"
+    },
+    {
+      "id": 2,
+      "count": 231,
+      "sector": "Data Protection",
+      "label": "DSGVO (German)",
+      "words": "Daten, Verarbeitung, personenbezogenen Daten, DSGVO, Cookies"
+    },
+    {
+      "id": 3,
+      "count": 125,
+      "sector": "Public Services",
+      "label": "Municipal Government",
+      "words": "commune, conseil communal, administration, déchets, bourgmestre"
+    },
+    {
+      "id": 4,
+      "count": 114,
+      "sector": "Childcare",
+      "label": "Crèches & Daycare",
+      "words": "crèche, enfants, foyer de jour, parents, Montessori"
+    },
+    {
+      "id": 5,
+      "count": 115,
+      "sector": "IT & Digital",
+      "label": "IT & Cloud",
+      "words": "cloud, security, solutions, informatique, management"
+    },
+    {
+      "id": 6,
+      "count": 101,
+      "sector": "IT & Digital",
+      "label": "Marketing & Design",
+      "words": "design, marketing, communication, référencement, SEO"
+    },
+    {
+      "id": 7,
+      "count": 100,
+      "sector": "Real Estate",
+      "label": "Architecture",
+      "words": "architectes, construction, maison unifamiliale, transformation"
+    },
+    {
+      "id": 8,
+      "count": 69,
+      "sector": "Construction",
+      "label": "Electrical & Smart Home",
+      "words": "installation, domotique, alarme, électriques, LED"
+    },
+    {
+      "id": 9,
+      "count": 85,
+      "sector": "Restaurants",
+      "label": "Asian Cuisine",
+      "words": "sushi, poulet, saumon, maki, thon, scampis"
+    },
+    {
+      "id": 10,
+      "count": 66,
+      "sector": "Restaurants",
+      "label": "Wine & Vineyards",
+      "words": "vins, Pinot, Riesling, domaine, crémant"
+    },
+    {
+      "id": 11,
+      "count": 48,
+      "sector": "Healthcare",
+      "label": "Beauty & Spa",
+      "words": "soins, beauté, visage, peau, massage"
+    },
+    {
+      "id": 13,
+      "count": 52,
+      "sector": "Services",
+      "label": "Gardening",
+      "words": "jardin, gazon, plantes, arbres, aménagement"
+    },
+    {
+      "id": 14,
+      "count": 20,
+      "sector": "Sports",
+      "label": "Football Clubs",
+      "words": "FC, seniors, match, coupe, saison"
+    },
+    {
+      "id": 15,
+      "count": 53,
+      "sector": "Construction",
+      "label": "HVAC & Heating",
+      "words": "chauffage, sanitaire, climatisation, chaudière, pompe à chaleur"
+    },
+    {
+      "id": 16,
+      "count": 45,
+      "sector": "Finance & Law",
+      "label": "Insurance",
+      "words": "assurance, Lalux, Foyer, habitation, auto"
+    },
+    {
+      "id": 17,
+      "count": 38,
+      "sector": "Public Services",
+      "label": "Schools & Lycées",
+      "words": "élèves, lycée, scolaire, classes, Schüler"
+    },
+    {
+      "id": 18,
+      "count": 28,
+      "sector": "Services",
+      "label": "Hairdressers",
+      "words": "coiffure, salon, cheveux, coloration"
+    },
+    {
+      "id": 19,
+      "count": 43,
+      "sector": "Culture & Tourism",
+      "label": "Theater & Music",
+      "words": "théâtre, musique, concert, Philharmonie"
+    },
+    {
+      "id": 20,
+      "count": 48,
+      "sector": "Services",
+      "label": "Cleaning",
+      "words": "nettoyage, vitres, ménage, lavage"
+    },
+    {
+      "id": 21,
+      "count": 45,
+      "sector": "Construction",
+      "label": "Roofing",
+      "words": "toiture, charpente, couverture, ferblanterie, isolation"
+    },
+    {
+      "id": 22,
+      "count": 43,
+      "sector": "Automotive",
+      "label": "Car Dealers",
+      "words": "BMW, Audi, Peugeot, véhicules, diesel"
+    },
+    {
+      "id": 23,
+      "count": 45,
+      "sector": "Community",
+      "label": "NGOs & Foundations",
+      "words": "fondation, projets, SOS, développement"
+    },
+    {
+      "id": 24,
+      "count": 49,
+      "sector": "Construction",
+      "label": "Windows & Doors",
+      "words": "Fenster, aluminium, portes, PVC, pergola"
+    },
+    {
+      "id": 25,
+      "count": 38,
+      "sector": "Services",
+      "label": "Printing & Signage",
+      "words": "lettrage, impression, panneaux, signalétique"
+    },
+    {
+      "id": 26,
+      "count": 36,
+      "sector": "Healthcare",
+      "label": "Health & Medicine",
+      "words": "cancer, health, médecins, santé, patients"
+    },
+    {
+      "id": 27,
+      "count": 31,
+      "sector": "Retail",
+      "label": "Fashion & Shoes",
+      "words": "Adidas, chaussures, femme, jeans, vêtements"
+    },
+    {
+      "id": 28,
+      "count": 29,
+      "sector": "Culture & Tourism",
+      "label": "Travel & Tourism",
+      "words": "voyages, travel, Reisen, bus, forfait"
+    },
+    {
+      "id": 29,
+      "count": 35,
+      "sector": "Restaurants",
+      "label": "Pizza & Italian",
+      "words": "mozzarella, tomate, jambon, champignons, parmesan"
+    },
+    {
+      "id": 30,
+      "count": 40,
+      "sector": "Retail",
+      "label": "Hardware & Equipment",
+      "words": "accessoires, poids, marque, machine"
+    },
+    {
+      "id": 31,
+      "count": 44,
+      "sector": "Finance & Law",
+      "label": "Law Firms",
+      "words": "law, droit, avocats, litigation, cour"
+    },
+    {
+      "id": 32,
+      "count": 43,
+      "sector": "Healthcare",
+      "label": "Coaching & Wellbeing",
+      "words": "coaching, sophrologie, yoga, stress, relaxation"
+    },
+    {
+      "id": 34,
+      "count": 29,
+      "sector": "Culture & Tourism",
+      "label": "Music Associations",
+      "words": "Musek, harmonie, municipale, concert"
+    },
+    {
+      "id": 35,
+      "count": 27,
+      "sector": "Culture & Tourism",
+      "label": "Art Galleries",
+      "words": "l'art, galerie, Mudam, artistes, exposition"
+    },
+    {
+      "id": 36,
+      "count": 34,
+      "sector": "Services",
+      "label": "Transport & Logistics",
+      "words": "transport, express, logistics, marchandises"
+    },
+    {
+      "id": 37,
+      "count": 34,
+      "sector": "Retail",
+      "label": "Opticians",
+      "words": "lentilles, lunettes, optique, verres, vision"
+    },
+    {
+      "id": 38,
+      "count": 31,
+      "sector": "Sports",
+      "label": "Fitness",
+      "words": "fitness, training, coach, Pilates, body"
+    },
+    {
+      "id": 40,
+      "count": 28,
+      "sector": "Community",
+      "label": "Churches",
+      "words": "Kirche, l'Église, communauté, messe"
+    },
+    {
+      "id": 41,
+      "count": 30,
+      "sector": "Automotive",
+      "label": "Driving Schools",
+      "words": "permis de conduire, examen, conduite"
+    },
+    {
+      "id": 42,
+      "count": 27,
+      "sector": "Construction",
+      "label": "Joinery",
+      "words": "menuiserie, portes, dressing, bois, meubles"
+    },
+    {
+      "id": 44,
+      "count": 24,
+      "sector": "Services",
+      "label": "Recruitment",
+      "words": "offres d'emploi, job, recruitment, RH"
+    },
+    {
+      "id": 45,
+      "count": 27,
+      "sector": "Automotive",
+      "label": "Car & Vintage Clubs",
+      "words": "club, Volvo, vintage, moto"
+    },
+    {
+      "id": 47,
+      "count": 20,
+      "sector": "Community",
+      "label": "Support Associations",
+      "words": "ASBL, psychologie, Ligue, prévention"
+    },
+    {
+      "id": 48,
+      "count": 25,
+      "sector": "Sports",
+      "label": "Martial Arts",
+      "words": "judo, arts martiaux, kids, entraînements"
+    },
+    {
+      "id": 49,
+      "count": 23,
+      "sector": "Community",
+      "label": "Scouts",
+      "words": "Scouten, FNEL, camp, Explorer"
+    },
+    {
+      "id": 50,
+      "count": 19,
+      "sector": "Culture & Tourism",
+      "label": "Camping",
+      "words": "camping, Campingplatz, Luxemburg, Ardennen"
+    },
+    {
+      "id": 51,
+      "count": 29,
+      "sector": "Real Estate",
+      "label": "Engineering",
+      "words": "ingénieur, projets, bureau d'études, coordination"
+    },
+    {
+      "id": 52,
+      "count": 26,
+      "sector": "Healthcare",
+      "label": "Dentistry",
+      "words": "dentaire, dents, chirurgie, cabinet"
+    },
+    {
+      "id": 53,
+      "count": 18,
+      "sector": "Retail",
+      "label": "Florists",
+      "words": "fleurs, plantes, bouquet, mariage, roses"
+    },
+    {
+      "id": 54,
+      "count": 17,
+      "sector": "Sports",
+      "label": "Equestrian",
+      "words": "CSI, Pferd, résultats, compétition"
+    },
+    {
+      "id": 55,
+      "count": 13,
+      "sector": "Community",
+      "label": "Fire Services",
+      "words": "Einsatz, Fahrzeuge, secours, incendie"
+    },
+    {
+      "id": 56,
+      "count": 24,
+      "sector": "Retail",
+      "label": "Online Shopping",
+      "words": "carte cadeau, produits, food, Auchan"
+    },
+    {
+      "id": 57,
+      "count": 26,
+      "sector": "Construction",
+      "label": "Renovation",
+      "words": "rénovation, travaux, aménagement, carrelage"
+    },
+    {
+      "id": 58,
+      "count": 19,
+      "sector": "Services",
+      "label": "Photography",
+      "words": "photo, photographe, portraits, shooting"
+    },
+    {
+      "id": 59,
+      "count": 15,
+      "sector": "Retail",
+      "label": "Machinery",
+      "words": "John Deere, machines, manutention, chariot"
+    },
+    {
+      "id": 60,
+      "count": 16,
+      "sector": "Sports",
+      "label": "Dance",
+      "words": "danse, salsa, jazz, tango, cours"
+    },
+    {
+      "id": 61,
+      "count": 13,
+      "sector": "Culture & Tourism",
+      "label": "Film & Cinema",
+      "words": "film, Tarantula, festival, Kinepolis"
+    },
+    {
+      "id": 62,
+      "count": 18,
+      "sector": "Services",
+      "label": "Language Courses",
+      "words": "courses, langues, Luxembourgish, English"
+    },
+    {
+      "id": 64,
+      "count": 19,
+      "sector": "Healthcare",
+      "label": "Physiotherapy",
+      "words": "rééducation, kinésithérapie, thérapie, drainage"
+    },
+    {
+      "id": 66,
+      "count": 19,
+      "sector": "Healthcare",
+      "label": "Home Care",
+      "words": "soins, aides, Hëllef Doheem, domicile"
+    },
+    {
+      "id": 67,
+      "count": 25,
+      "sector": "Retail",
+      "label": "E-commerce",
+      "words": "client, commande, vendeur, livraison, paiement"
+    },
+    {
+      "id": 68,
+      "count": 19,
+      "sector": "Restaurants",
+      "label": "Pizzerias",
+      "words": "pizzeria, pâtes, spécialités, emporter"
+    },
+    {
+      "id": 69,
+      "count": 52,
+      "sector": "Data Protection",
+      "label": "Privacy Policies (French)",
+      "words": "données personnelles, caractère personnel, traitement, collectées"
+    },
+    {
+      "id": 71,
+      "count": 11,
+      "sector": "Automotive",
+      "label": "Garages",
+      "words": "garage, carrosserie, réparation, voitures"
+    },
+    {
+      "id": 72,
+      "count": 13,
+      "sector": "Services",
+      "label": "Taxi",
+      "words": "taxi, chauffeur, réservation, tarifs"
+    },
+    {
+      "id": 73,
+      "count": 11,
+      "sector": "Restaurants",
+      "label": "Bakeries",
+      "words": "boulangerie, pain, pâtisserie, traiteur"
+    },
+    {
+      "id": 74,
+      "count": 19,
+      "sector": "Construction",
+      "label": "Energy Certificates",
+      "words": "Energiepass, énergétique, passeport, myenergy"
+    },
+    {
+      "id": 75,
+      "count": 14,
+      "sector": "Sports",
+      "label": "Tennis",
+      "words": "tennis, terrains, tournoi"
+    },
+    {
+      "id": 76,
+      "count": 10,
+      "sector": "Restaurants",
+      "label": "Brasseries",
+      "words": "brasserie, plat du jour, carte, cuisine"
+    },
+    {
+      "id": 77,
+      "count": 21,
+      "sector": "Restaurants",
+      "label": "Indian Cuisine",
+      "words": "chicken, lamb, curry, Indian, sauce"
+    },
+    {
+      "id": 78,
+      "count": 15,
+      "sector": "Retail",
+      "label": "Bicycle Shops",
+      "words": "vélos, bike, carbon, VTT"
+    },
+    {
+      "id": 79,
+      "count": 16,
+      "sector": "Automotive",
+      "label": "Tyre Services",
+      "words": "pneus, jantes, montage, Muller"
+    },
+    {
+      "id": 80,
+      "count": 14,
+      "sector": "Healthcare",
+      "label": "Medical Specialists",
+      "words": "médecine, docteur, chirurgie, clinique"
+    },
+    {
+      "id": 81,
+      "count": 17,
+      "sector": "Sports",
+      "label": "Swimming",
+      "words": "natation, club, stage, compétition"
+    },
+    {
+      "id": 82,
+      "count": 12,
+      "sector": "Public Services",
+      "label": "Chambers of Commerce",
+      "words": "chambre, artisanat, métiers, commerce"
+    },
+    {
+      "id": 83,
+      "count": 16,
+      "sector": "Construction",
+      "label": "Metalwork",
+      "words": "garde-corps, acier, inox, escaliers"
+    },
+    {
+      "id": 84,
+      "count": 20,
+      "sector": "Construction",
+      "label": "Facades",
+      "words": "Fassade, Farben, Sanierung, peinture"
+    },
+    {
+      "id": 85,
+      "count": 12,
+      "sector": "Public Services",
+      "label": "Training & Education",
+      "words": "formation, MBA, university, professionnelle"
+    },
+    {
+      "id": 86,
+      "count": 13,
+      "sector": "Retail",
+      "label": "Office Furniture",
+      "words": "bureau, mobilier, fauteuil, chaise"
+    },
+    {
+      "id": 89,
+      "count": 14,
+      "sector": "Community",
+      "label": "Ecology & Transition",
+      "words": "écologique, mouvement, transition, Stiftung"
+    },
+    {
+      "id": 90,
+      "count": 15,
+      "sector": "Retail",
+      "label": "Luxury Watches",
+      "words": "Rolex, vintage, Patek Philippe, collector"
+    },
+    {
+      "id": 91,
+      "count": 14,
+      "sector": "Construction",
+      "label": "Painting",
+      "words": "peinture, décoration, façade, revêtement"
+    },
+    {
+      "id": 92,
+      "count": 15,
+      "sector": "Services",
+      "label": "Temp Agencies",
+      "words": "intérim, Synergie, postuler, recherche"
+    },
+    {
+      "id": 93,
+      "count": 11,
+      "sector": "Sports",
+      "label": "Cycling & Trails",
+      "words": "randonnée, VTT, challenge, tour"
+    },
+    {
+      "id": 94,
+      "count": 17,
+      "sector": "Healthcare",
+      "label": "Veterinary",
+      "words": "animal, animaux, consultations, chien"
+    },
+    {
+      "id": 96,
+      "count": 15,
+      "sector": "Sports",
+      "label": "Aviation",
+      "words": "flight, pilot, training, licence"
+    },
+    {
+      "id": 98,
+      "count": 16,
+      "sector": "Healthcare",
+      "label": "Pharmacies",
+      "words": "pharmacie, garde, médicaments"
+    },
+    {
+      "id": 100,
+      "count": 13,
+      "sector": "Retail",
+      "label": "Fuel & Pellets",
+      "words": "Q8, mazout, pellets, Gulf"
+    },
+    {
+      "id": 101,
+      "count": 13,
+      "sector": "Community",
+      "label": "Farms",
+      "words": "Haff, ferme, Buttek, Geméis"
+    },
+    {
+      "id": 102,
+      "count": 13,
+      "sector": "Restaurants",
+      "label": "Cafés",
+      "words": "café, tea, espresso, coffee"
+    },
+    {
+      "id": 103,
+      "count": 12,
+      "sector": "Construction",
+      "label": "Flooring",
+      "words": "sol, parquet, revêtements, tapis"
+    },
+    {
+      "id": 105,
+      "count": 16,
+      "sector": "Services",
+      "label": "Event Planning",
+      "words": "event, team building, animations"
+    },
+    {
+      "id": 107,
+      "count": 7,
+      "sector": "Retail",
+      "label": "Bridal",
+      "words": "robe, boutique, mariage, mariée"
+    },
+    {
+      "id": 112,
+      "count": 10,
+      "sector": "Construction",
+      "label": "Tiling",
+      "words": "carrelages, pose, pierres, salle de bain"
+    }
+  ],
+  "sector_evolution": {
+    "years": [
+      2016,
+      2017,
+      2018,
+      2019,
+      2020,
+      2021,
+      2022,
+      2023,
+      2024
+    ],
+    "sectors": [
+      {
+        "name": "Real Estate",
+        "values": [
+          411,
+          508,
+          633,
+          722,
+          763,
+          762,
+          739,
+          700,
+          643
+        ],
+        "shares": [
+          13.0,
+          12.7,
+          13.7,
+          13.0,
+          12.9,
+          13.1,
+          13.2,
+          14.0,
+          13.9
+        ]
+      },
+      {
+        "name": "Finance & Law",
+        "values": [
+          251,
+          326,
+          386,
+          444,
+          432,
+          427,
+          413,
+          390,
+          366
+        ],
+        "shares": [
+          8.0,
+          8.1,
+          8.4,
+          8.0,
+          7.3,
+          7.4,
+          7.4,
+          7.8,
+          7.9
+        ]
+      },
+      {
+        "name": "Construction",
+        "values": [
+          220,
+          291,
+          349,
+          428,
+          453,
+          472,
+          462,
+          373,
+          360
+        ],
+        "shares": [
+          7.0,
+          7.3,
+          7.6,
+          7.7,
+          7.7,
+          8.1,
+          8.3,
+          7.5,
+          7.8
+        ]
+      },
+      {
+        "name": "Services",
+        "values": [
+          174,
+          252,
+          324,
+          416,
+          438,
+          441,
+          410,
+          307,
+          305
+        ],
+        "shares": [
+          5.5,
+          6.3,
+          7.0,
+          7.5,
+          7.4,
+          7.6,
+          7.3,
+          6.2,
+          6.6
+        ]
+      },
+      {
+        "name": "Restaurants",
+        "values": [
+          137,
+          202,
+          239,
+          337,
+          357,
+          352,
+          310,
+          281,
+          260
+        ],
+        "shares": [
+          4.3,
+          5.0,
+          5.2,
+          6.1,
+          6.0,
+          6.1,
+          5.6,
+          5.6,
+          5.6
+        ]
+      },
+      {
+        "name": "Retail",
+        "values": [
+          142,
+          200,
+          242,
+          308,
+          306,
+          308,
+          300,
+          270,
+          250
+        ],
+        "shares": [
+          4.5,
+          5.0,
+          5.2,
+          5.6,
+          5.2,
+          5.3,
+          5.4,
+          5.4,
+          5.4
+        ]
+      },
+      {
+        "name": "Healthcare",
+        "values": [
+          122,
+          187,
+          246,
+          287,
+          312,
+          320,
+          305,
+          253,
+          238
+        ],
+        "shares": [
+          3.9,
+          4.7,
+          5.3,
+          5.2,
+          5.3,
+          5.5,
+          5.5,
+          5.1,
+          5.1
+        ]
+      },
+      {
+        "name": "IT & Digital",
+        "values": [
+          167,
+          194,
+          223,
+          240,
+          248,
+          255,
+          257,
+          235,
+          216
+        ],
+        "shares": [
+          5.3,
+          4.8,
+          4.8,
+          4.3,
+          4.2,
+          4.4,
+          4.6,
+          4.7,
+          4.7
+        ]
+      },
+      {
+        "name": "Sports",
+        "values": [
+          176,
+          206,
+          220,
+          229,
+          232,
+          230,
+          220,
+          203,
+          166
+        ],
+        "shares": [
+          5.6,
+          5.1,
+          4.8,
+          4.1,
+          3.9,
+          4.0,
+          3.9,
+          4.1,
+          3.6
+        ]
+      },
+      {
+        "name": "Public Services",
+        "values": [
+          170,
+          192,
+          180,
+          185,
+          202,
+          197,
+          202,
+          200,
+          187
+        ],
+        "shares": [
+          5.4,
+          4.8,
+          3.9,
+          3.3,
+          3.4,
+          3.4,
+          3.6,
+          4.0,
+          4.0
+        ]
+      },
+      {
+        "name": "Culture & Tourism",
+        "values": [
+          145,
+          189,
+          186,
+          200,
+          210,
+          189,
+          193,
+          175,
+          160
+        ],
+        "shares": [
+          4.6,
+          4.7,
+          4.0,
+          3.6,
+          3.6,
+          3.3,
+          3.5,
+          3.5,
+          3.5
+        ]
+      },
+      {
+        "name": "Data Protection",
+        "values": [
+          10,
+          18,
+          74,
+          163,
+          187,
+          217,
+          250,
+          323,
+          283
+        ],
+        "shares": [
+          0.3,
+          0.4,
+          1.6,
+          2.9,
+          3.2,
+          3.7,
+          4.5,
+          6.5,
+          6.1
+        ]
+      },
+      {
+        "name": "Community",
+        "values": [
+          122,
+          154,
+          158,
+          177,
+          181,
+          179,
+          174,
+          172,
+          156
+        ],
+        "shares": [
+          3.9,
+          3.8,
+          3.4,
+          3.2,
+          3.1,
+          3.1,
+          3.1,
+          3.5,
+          3.4
+        ]
+      },
+      {
+        "name": "Automotive",
+        "values": [
+          97,
+          119,
+          128,
+          135,
+          157,
+          147,
+          146,
+          130,
+          127
+        ],
+        "shares": [
+          3.1,
+          3.0,
+          2.8,
+          2.4,
+          2.7,
+          2.5,
+          2.6,
+          2.6,
+          2.7
+        ]
+      },
+      {
+        "name": "Childcare",
+        "values": [
+          80,
+          119,
+          135,
+          151,
+          152,
+          152,
+          136,
+          122,
+          114
+        ],
+        "shares": [
+          2.5,
+          3.0,
+          2.9,
+          2.7,
+          2.6,
+          2.6,
+          2.4,
+          2.4,
+          2.5
+        ]
+      },
+      {
+        "name": "Other",
+        "values": [
+          728,
+          845,
+          888,
+          1112,
+          1278,
+          1160,
+          1062,
+          850,
+          798
+        ],
+        "shares": [
+          23.1,
+          21.1,
+          19.3,
+          20.1,
+          21.6,
+          20.0,
+          19.0,
+          17.1,
+          17.2
+        ]
+      }
+    ]
+  }
+}
