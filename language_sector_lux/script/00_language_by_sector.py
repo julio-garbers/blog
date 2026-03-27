@@ -116,7 +116,7 @@ def load_language_data() -> pl.DataFrame:
     print("[LOAD] Loading FastText data for fallback...", flush=True)
     parquet_files = list(FASTTEXT_DATA_DIR.glob("*.parquet"))
     df_fasttext = (
-        pl.scan_parquet(parquet_files)
+        pl.scan_parquet(parquet_files, extra_columns="ignore")
         .filter(pl.col("website_url").str.ends_with(".lu"))
         .filter(pl.col("confidence_fasttext") >= 0.5)
         .group_by(["website_url", "year"])
