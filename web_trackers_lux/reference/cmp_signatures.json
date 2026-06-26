@@ -1,0 +1,47 @@
+{
+  "_meta": {
+    "description": "Fingerprints for detecting Consent Management Platforms (cookie-consent banners) in raw HTML. 'strong' signals are product-specific markers (a named CMP product is present); a hit on any of them sets has_cmp=true. 'weak' signals are generic cookie-banner text/markup used only as a low-confidence fallback (has_cookie_text). All matching is done case-insensitively against the page HTML.",
+    "note": "CMP product names double as entity owners; the consent-platform domains also appear in reference/entity_map.json with category='consent'."
+  },
+  "strong": [
+    "cookiebot",
+    "consent.cookiebot",
+    "onetrust",
+    "optanon",
+    "cookielaw.org",
+    "otSDKStub",
+    "didomi",
+    "usercentrics",
+    "uc-banner",
+    "iubenda",
+    "axeptio",
+    "cookieyes",
+    "cookie-script.com",
+    "tarteaucitron",
+    "klaro",
+    "complianz",
+    "borlabs-cookie",
+    "cmplz",
+    "quantcast",
+    "__tcfapi",
+    "cookieconsent",
+    "cookie-consent",
+    "moove_gdpr",
+    "cc-window",
+    "gdpr-cookie"
+  ],
+  "weak": [
+    "cookie",
+    "datenschutz",
+    "données personnelles",
+    "accept all",
+    "accepter",
+    "akzeptieren",
+    "j'accepte",
+    "tout accepter",
+    "alle akzeptieren",
+    "this site uses cookies",
+    "ce site utilise des cookies",
+    "diese website verwendet cookies"
+  ]
+}
