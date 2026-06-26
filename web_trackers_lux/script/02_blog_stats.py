@@ -150,58 +150,77 @@ def compute_over_time(summary: pl.DataFrame) -> dict:
 def compute_sovereignty(summary: pl.DataFrame, classified: pl.DataFrame) -> dict:
     years = list(range(START_YEAR, END_YEAR + 1))
 
-    # Share of embedded third-party relationships by owner country, per year.
-    by_country = (
-        classified.group_by(["year", "country"])
-        .agg(pl.len().alias("n"))
-        .sort(["year", "country"])
+    # Domains we could not attribute to a known entity are reported as their own
+    # "Unidentified" band, so the owner-country mix is not silently inflated by
+    # the unknown long tail. Identified-only shares are computed separately for
+    # the figure (the cleaner "of the third parties we could name, X% are US").
+    cl = classified.with_columns(
+        pl.when(pl.col("entity") == "Unknown")
+        .then(pl.lit("Unidentified"))
+        .otherwise(pl.col("country"))
+        .alias("bucket")
     )
-    totals = dict(
-        classified.group_by("year")
-        .agg(pl.len().alias("total"))
-        .iter_rows()
-    )
+    by_bucket = cl.group_by(["year", "bucket"]).agg(pl.len().alias("n"))
+    lut = {(r["year"], r["bucket"]): r["n"] for r in by_bucket.iter_rows(named=True)}
+    totals = dict(cl.group_by("year").agg(pl.len().alias("t")).iter_rows())
 
-    country_share = {c: [] for c in COUNTRIES}
-    lut = {(r["year"], r["country"]): r["n"] for r in by_country.iter_rows(named=True)}
+    raw_buckets = COUNTRIES + ["Unidentified"]
+    country_share = {b: [] for b in raw_buckets}
+    country_share_identified = {c: [] for c in COUNTRIES}
     for y in years:
         total = totals.get(y, 0)
+        for b in raw_buckets:
+            n = lut.get((y, b), 0)
+            country_share[b].append(round(n / total * 100, 1) if total else None)
+        id_total = sum(lut.get((y, c), 0) for c in COUNTRIES)
         for c in COUNTRIES:
             n = lut.get((y, c), 0)
-            country_share[c].append(round(n / total * 100, 1) if total else None)
+            country_share_identified[c].append(
+                round(n / id_total * 100, 1) if id_total else None
+            )
 
-    # Google / Meta reach (share of sites embedding them), per year.
+    # Site-level reach (share of sites embedding each), per year. This avoids the
+    # coverage artifact in request shares: a site either loads Google or it does
+    # not. "embeds Google" spans analytics, fonts, maps, reCAPTCHA, tag manager.
     reach = (
         summary.group_by("year")
         .agg(
+            pl.len().alias("n_sites"),
             (pl.col("has_google").mean() * 100).alias("google_pct"),
             (pl.col("has_meta").mean() * 100).alias("meta_pct"),
             (pl.col("has_us_tracker").mean() * 100).alias("us_tracker_pct"),
         )
         .sort("year")
     )
-    reach_lut = {
-        r["year"]: r for r in reach.iter_rows(named=True)
-    }
-    google_pct = [
-        round(reach_lut[y]["google_pct"], 1) if y in reach_lut else None
-        for y in years
-    ]
-    meta_pct = [
-        round(reach_lut[y]["meta_pct"], 1) if y in reach_lut else None
-        for y in years
-    ]
-    us_tracker_pct = [
-        round(reach_lut[y]["us_tracker_pct"], 1) if y in reach_lut else None
+    reach_lut = {r["year"]: r for r in reach.iter_rows(named=True)}
+
+    def reach_series(key: str) -> list:
+        return [
+            round(reach_lut[y][key], 1) if y in reach_lut else None for y in years
+        ]
+
+    # Local reach: share of sites embedding at least one .lu third party.
+    lu_sites = (
+        cl.filter(pl.col("bucket") == "LU")
+        .group_by("year")
+        .agg(pl.col("website_url").n_unique().alias("n_lu_sites"))
+    )
+    lu_lut = {r["year"]: r["n_lu_sites"] for r in lu_sites.iter_rows(named=True)}
+    lu_pct = [
+        round(lu_lut.get(y, 0) / reach_lut[y]["n_sites"] * 100, 1)
+        if y in reach_lut and reach_lut[y]["n_sites"]
+        else None
         for y in years
     ]
 
     return {
         "years": years,
         "country_share": country_share,
-        "google_pct": google_pct,
-        "meta_pct": meta_pct,
-        "us_tracker_pct": us_tracker_pct,
+        "country_share_identified": country_share_identified,
+        "google_pct": reach_series("google_pct"),
+        "meta_pct": reach_series("meta_pct"),
+        "us_tracker_pct": reach_series("us_tracker_pct"),
+        "lu_pct": lu_pct,
     }
 
 
@@ -216,13 +235,22 @@ def compute_top_entities(
     n_sites = summary.filter(pl.col("year") == year).height
     last = classified.filter(pl.col("year") == year)
 
-    # Unique (site, entity) pairs so a site counts once per entity.
+    # Aggregate to the entity level: a site counts once for a company no matter
+    # how many of its domains (analytics + fonts + maps ...) it loads. tracker is
+    # true if any of the entity's embedded domains is a tracker.
     per_entity = (
         last.filter(pl.col("entity") != "Unknown")
-        .select(["website_url", "entity", "country", "category", "tracker"])
-        .unique(subset=["website_url", "entity"])
-        .group_by(["entity", "country", "category", "tracker"])
-        .agg(pl.col("website_url").n_unique().alias("n_sites"))
+        .group_by(["website_url", "entity"])
+        .agg(
+            pl.col("country").first().alias("country"),
+            pl.col("tracker").max().alias("tracker"),
+        )
+        .group_by("entity")
+        .agg(
+            pl.col("website_url").n_unique().alias("n_sites"),
+            pl.col("country").first().alias("country"),
+            pl.col("tracker").max().alias("tracker"),
+        )
         .sort("n_sites", descending=True)
         .head(top_n)
     )
@@ -231,7 +259,6 @@ def compute_top_entities(
         {
             "entity": r["entity"],
             "country": r["country"],
-            "category": r["category"],
             "tracker": bool(r["tracker"]),
             "pct_sites": round(r["n_sites"] / n_sites * 100, 1) if n_sites else 0,
         }
@@ -309,13 +336,18 @@ def main() -> None:
         "first_year": START_YEAR,
         "last_year": END_YEAR,
         "n_sites_latest": len(last),
+        "median_third_parties_latest": round(last["n_third_parties"].median(), 1),
         "median_trackers_latest": round(last["n_trackers"].median(), 1),
         "cmp_pct_latest": round(last["has_cmp"].mean() * 100, 1),
+        "cookie_text_pct_latest": round(last["has_cookie_text"].mean() * 100, 1),
+        "any_tracker_pct_latest": round(last["has_any_tracker"].mean() * 100, 1),
         "google_pct_latest": round(last["has_google"].mean() * 100, 1),
         "meta_pct_latest": round(last["has_meta"].mean() * 100, 1),
         "us_tracker_pct_latest": round(last["has_us_tracker"].mean() * 100, 1),
-        "us_share_latest": sovereignty["country_share"]["US"][-1],
-        "lu_share_latest": sovereignty["country_share"]["LU"][-1],
+        "lu_pct_latest": sovereignty["lu_pct"][-1],
+        "us_share_identified_latest": sovereignty["country_share_identified"]["US"][-1],
+        "lu_share_identified_latest": sovereignty["country_share_identified"]["LU"][-1],
+        "unidentified_share_latest": sovereignty["country_share"]["Unidentified"][-1],
         "n_sectors": len(by_sector),
     }
 
