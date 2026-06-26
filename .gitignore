@@ -4,7 +4,6 @@
 *.npy
 
 # Folders
-slurm
 .venv
 models
 
