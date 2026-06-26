@@ -1,0 +1,38 @@
+================================================================================
+Job started at: Fri Jun 26 20:13:18 CEST 2026
+Node: mel0533
+Array index: 10
+Year: 2023
+================================================================================
+
+[RUN] Extracting third-party requests for year 2023...
+
+======================================================================
+Web Trackers - Third-Party Extraction for 2023
+======================================================================
+[CONFIG] 25 strong + 12 weak CMP signatures loaded
+[2023] Found 132 raw gz files
+[2023]   processed 25/132 files, 1,703 sites so far
+[2023]   processed 50/132 files, 3,234 sites so far
+[2023]   processed 75/132 files, 4,921 sites so far
+[2023]   processed 100/132 files, 6,711 sites so far
+[2023]   processed 125/132 files, 8,512 sites so far
+[2023]   processed 132/132 files, 8,912 sites so far
+[2023] Total pages scanned: 48,010
+[2023] Unique .lu sites: 8,912
+[2023] Sites after universe join: 8,715 (dropped 197 not in language sample)
+
+[SAVE] Wrote 8,715 website-years -> /project/home/p200812/blog/web_trackers_lux/data/yearly/thirdparty_2023.parquet
+
+[SUMMARY]
+  Median third parties / site: 4.0
+  Mean third parties / site:   4.38
+  Sites with a CMP banner:     1,745 (20.0%)
+  Sites served over HTTPS:     7,147 (82.0%)
+
+DONE.
+
+================================================================================
+Job completed at: Fri Jun 26 20:17:45 CEST 2026
+Exit code: 0
+================================================================================

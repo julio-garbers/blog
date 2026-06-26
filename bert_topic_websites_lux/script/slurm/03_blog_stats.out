@@ -1,0 +1,38 @@
+================================================================================
+Job started at: Mon Feb 23 16:50:54 CET 2026
+Node: mel0517
+================================================================================
+
+[RUN] Generating blog statistics...
+
+Loading data...
+Sector mapping: 94 topics across 15 sectors
+Topics over time: 191 topics
+
+Blog stats written to /mnt/tier2/project/p200812/blog/bert_topic_websites_lux/output/blog_stats.json
+  Years: 2016–2024
+  Topics mapped: 94 (3831 websites in 2024)
+  Sectors in evolution: 16
+
+Sector shares in 2024:
+  Real Estate             643  ( 13.9%)
+  Finance & Law           366  (  7.9%)
+  Construction            360  (  7.8%)
+  Services                305  (  6.6%)
+  Restaurants             260  (  5.6%)
+  Retail                  250  (  5.4%)
+  Healthcare              238  (  5.1%)
+  IT & Digital            216  (  4.7%)
+  Sports                  166  (  3.6%)
+  Public Services         187  (  4.0%)
+  Culture & Tourism       160  (  3.5%)
+  Data Protection         283  (  6.1%)
+  Community               156  (  3.4%)
+  Automotive              127  (  2.7%)
+  Childcare               114  (  2.5%)
+  Other                   798  ( 17.2%)
+
+================================================================================
+Job completed at: Mon Feb 23 16:50:59 CET 2026
+Exit code: 0
+================================================================================

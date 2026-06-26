@@ -1,0 +1,568 @@
+{
+  "summary": {
+    "first_year": 2013,
+    "last_year": 2024,
+    "n_sites_latest": 8061,
+    "median_trackers_latest": 0.0,
+    "cmp_pct_latest": 22.2,
+    "google_pct_latest": 71.8,
+    "meta_pct_latest": 13.4,
+    "us_tracker_pct_latest": 45.2,
+    "us_share_latest": 51.7,
+    "lu_share_latest": 3.8,
+    "n_sectors": 15
+  },
+  "over_time": {
+    "years": [
+      2013,
+      2014,
+      2015,
+      2016,
+      2017,
+      2018,
+      2019,
+      2020,
+      2021,
+      2022,
+      2023,
+      2024
+    ],
+    "n_sites": [
+      2120,
+      1920,
+      1841,
+      5806,
+      7381,
+      8401,
+      9662,
+      10144,
+      10021,
+      9654,
+      8715,
+      8061
+    ],
+    "median_third_parties": [
+      1.0,
+      1.0,
+      1.0,
+      2.0,
+      2.0,
+      3.0,
+      3.0,
+      4.0,
+      4.0,
+      4.0,
+      4.0,
+      4.0
+    ],
+    "median_trackers": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      1.0,
+      1.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "mean_trackers": [
+      0.28,
+      0.43,
+      0.55,
+      0.58,
+      0.65,
+      0.68,
+      0.82,
+      0.82,
+      0.79,
+      0.77,
+      0.81,
+      0.77
+    ],
+    "cmp_pct": [
+      0.2,
+      0.4,
+      0.4,
+      1.1,
+      1.7,
+      5.2,
+      14.0,
+      17.7,
+      17.5,
+      18.6,
+      20.0,
+      22.2
+    ],
+    "cookie_text_pct": [
+      13.9,
+      17.5,
+      21.0,
+      18.7,
+      22.8,
+      34.8,
+      48.0,
+      57.0,
+      61.3,
+      63.1,
+      63.7,
+      65.6
+    ],
+    "any_tracker_pct": [
+      21.3,
+      30.2,
+      37.2,
+      40.7,
+      45.4,
+      46.5,
+      50.6,
+      51.5,
+      48.3,
+      46.6,
+      46.6,
+      45.7
+    ],
+    "https_pct": [
+      0.0,
+      1.2,
+      3.2,
+      3.4,
+      9.5,
+      24.2,
+      38.3,
+      56.4,
+      71.8,
+      78.8,
+      82.0,
+      86.1
+    ]
+  },
+  "sovereignty": {
+    "years": [
+      2013,
+      2014,
+      2015,
+      2016,
+      2017,
+      2018,
+      2019,
+      2020,
+      2021,
+      2022,
+      2023,
+      2024
+    ],
+    "country_share": {
+      "US": [
+        49.0,
+        54.0,
+        57.3,
+        59.0,
+        63.8,
+        63.4,
+        69.1,
+        62.9,
+        62.9,
+        59.8,
+        55.3,
+        51.7
+      ],
+      "EU": [
+        0.6,
+        0.5,
+        0.6,
+        0.4,
+        0.5,
+        0.7,
+        0.8,
+        1.0,
+        1.3,
+        1.8,
+        2.2,
+        2.3
+      ],
+      "LU": [
+        9.4,
+        7.5,
+        5.7,
+        4.6,
+        3.6,
+        3.2,
+        3.0,
+        2.4,
+        2.1,
+        2.0,
+        2.6,
+        3.8
+      ],
+      "Other": [
+        41.0,
+        38.0,
+        36.3,
+        36.0,
+        32.2,
+        32.7,
+        27.1,
+        33.6,
+        33.7,
+        36.4,
+        39.9,
+        42.2
+      ]
+    },
+    "google_pct": [
+      29.6,
+      39.6,
+      48.4,
+      57.9,
+      65.9,
+      69.3,
+      76.8,
+      81.0,
+      78.1,
+      77.4,
+      73.1,
+      71.8
+    ],
+    "meta_pct": [
+      10.9,
+      13.4,
+      14.8,
+      14.7,
+      15.6,
+      15.4,
+      18.3,
+      15.8,
+      14.4,
+      13.2,
+      14.3,
+      13.4
+    ],
+    "us_tracker_pct": [
+      21.0,
+      29.9,
+      36.8,
+      40.5,
+      45.3,
+      46.3,
+      50.5,
+      51.4,
+      48.1,
+      46.3,
+      46.3,
+      45.2
+    ]
+  },
+  "top_entities": [
+    {
+      "entity": "Google",
+      "country": "US",
+      "category": "cdn",
+      "tracker": false,
+      "pct_sites": 28.9
+    },
+    {
+      "entity": "Google",
+      "country": "US",
+      "category": "other",
+      "tracker": false,
+      "pct_sites": 24.1
+    },
+    {
+      "entity": "Meta",
+      "country": "US",
+      "category": "social",
+      "tracker": true,
+      "pct_sites": 13.1
+    },
+    {
+      "entity": "Google",
+      "country": "US",
+      "category": "analytics",
+      "tracker": true,
+      "pct_sites": 9.5
+    },
+    {
+      "entity": "Cloudflare",
+      "country": "US",
+      "category": "cdn",
+      "tracker": false,
+      "pct_sites": 8.9
+    },
+    {
+      "entity": "Wix",
+      "country": "Other",
+      "category": "cdn",
+      "tracker": false,
+      "pct_sites": 8.0
+    },
+    {
+      "entity": "Automattic (WordPress)",
+      "country": "US",
+      "category": "other",
+      "tracker": false,
+      "pct_sites": 8.0
+    },
+    {
+      "entity": "Luxembourg (local)",
+      "country": "LU",
+      "category": "other",
+      "tracker": false,
+      "pct_sites": 7.7
+    },
+    {
+      "entity": "Automattic (WordPress)",
+      "country": "US",
+      "category": "cdn",
+      "tracker": false,
+      "pct_sites": 7.5
+    },
+    {
+      "entity": "Google",
+      "country": "US",
+      "category": "tag-manager",
+      "tracker": true,
+      "pct_sites": 6.0
+    },
+    {
+      "entity": "jsDelivr",
+      "country": "EU",
+      "category": "cdn",
+      "tracker": false,
+      "pct_sites": 4.7
+    },
+    {
+      "entity": "BootstrapCDN",
+      "country": "US",
+      "category": "cdn",
+      "tracker": false,
+      "pct_sites": 4.7
+    },
+    {
+      "entity": "jQuery",
+      "country": "US",
+      "category": "cdn",
+      "tracker": false,
+      "pct_sites": 4.2
+    },
+    {
+      "entity": "Font Awesome",
+      "country": "US",
+      "category": "fonts",
+      "tracker": false,
+      "pct_sites": 4.2
+    },
+    {
+      "entity": "Adobe",
+      "country": "US",
+      "category": "fonts",
+      "tracker": false,
+      "pct_sites": 2.8
+    }
+  ],
+  "by_sector": [
+    {
+      "sector": "Real Estate",
+      "n_sites": 643,
+      "median_trackers": 0.0,
+      "mean_trackers": 0.68,
+      "cmp_pct": 32.0,
+      "google_pct": 80.1,
+      "meta_pct": 12.9,
+      "us_tracker_pct": 44.2,
+      "any_tracker_pct": 44.6
+    },
+    {
+      "sector": "Finance & Law",
+      "n_sites": 366,
+      "median_trackers": 0.0,
+      "mean_trackers": 0.67,
+      "cmp_pct": 29.2,
+      "google_pct": 71.6,
+      "meta_pct": 4.1,
+      "us_tracker_pct": 44.3,
+      "any_tracker_pct": 46.2
+    },
+    {
+      "sector": "Construction",
+      "n_sites": 360,
+      "median_trackers": 1.0,
+      "mean_trackers": 0.81,
+      "cmp_pct": 27.8,
+      "google_pct": 76.7,
+      "meta_pct": 15.0,
+      "us_tracker_pct": 53.3,
+      "any_tracker_pct": 53.6
+    },
+    {
+      "sector": "Services",
+      "n_sites": 305,
+      "median_trackers": 0.0,
+      "mean_trackers": 0.85,
+      "cmp_pct": 20.3,
+      "google_pct": 72.1,
+      "meta_pct": 16.1,
+      "us_tracker_pct": 47.9,
+      "any_tracker_pct": 48.2
+    },
+    {
+      "sector": "Data Protection",
+      "n_sites": 283,
+      "median_trackers": 0.0,
+      "mean_trackers": 0.59,
+      "cmp_pct": 36.4,
+      "google_pct": 65.0,
+      "meta_pct": 11.7,
+      "us_tracker_pct": 40.3,
+      "any_tracker_pct": 40.3
+    },
+    {
+      "sector": "Restaurants",
+      "n_sites": 260,
+      "median_trackers": 0.0,
+      "mean_trackers": 0.55,
+      "cmp_pct": 15.0,
+      "google_pct": 75.8,
+      "meta_pct": 12.7,
+      "us_tracker_pct": 38.5,
+      "any_tracker_pct": 38.8
+    },
+    {
+      "sector": "Retail",
+      "n_sites": 250,
+      "median_trackers": 1.0,
+      "mean_trackers": 1.1,
+      "cmp_pct": 27.2,
+      "google_pct": 78.4,
+      "meta_pct": 21.2,
+      "us_tracker_pct": 58.4,
+      "any_tracker_pct": 58.4
+    },
+    {
+      "sector": "Healthcare",
+      "n_sites": 238,
+      "median_trackers": 0.0,
+      "mean_trackers": 0.78,
+      "cmp_pct": 22.3,
+      "google_pct": 77.7,
+      "meta_pct": 13.0,
+      "us_tracker_pct": 47.5,
+      "any_tracker_pct": 48.3
+    },
+    {
+      "sector": "IT & Digital",
+      "n_sites": 216,
+      "median_trackers": 1.0,
+      "mean_trackers": 1.15,
+      "cmp_pct": 24.5,
+      "google_pct": 75.5,
+      "meta_pct": 19.4,
+      "us_tracker_pct": 52.3,
+      "any_tracker_pct": 52.8
+    },
+    {
+      "sector": "Public Services",
+      "n_sites": 187,
+      "median_trackers": 0.0,
+      "mean_trackers": 0.73,
+      "cmp_pct": 50.3,
+      "google_pct": 64.7,
+      "meta_pct": 15.0,
+      "us_tracker_pct": 43.3,
+      "any_tracker_pct": 43.3
+    },
+    {
+      "sector": "Sports",
+      "n_sites": 166,
+      "median_trackers": 0.0,
+      "mean_trackers": 1.08,
+      "cmp_pct": 9.6,
+      "google_pct": 72.9,
+      "meta_pct": 22.9,
+      "us_tracker_pct": 49.4,
+      "any_tracker_pct": 49.4
+    },
+    {
+      "sector": "Culture & Tourism",
+      "n_sites": 160,
+      "median_trackers": 1.0,
+      "mean_trackers": 0.82,
+      "cmp_pct": 20.0,
+      "google_pct": 78.1,
+      "meta_pct": 15.0,
+      "us_tracker_pct": 50.6,
+      "any_tracker_pct": 50.6
+    },
+    {
+      "sector": "Community",
+      "n_sites": 156,
+      "median_trackers": 0.0,
+      "mean_trackers": 0.69,
+      "cmp_pct": 20.5,
+      "google_pct": 71.2,
+      "meta_pct": 14.7,
+      "us_tracker_pct": 38.5,
+      "any_tracker_pct": 39.7
+    },
+    {
+      "sector": "Automotive",
+      "n_sites": 127,
+      "median_trackers": 0.0,
+      "mean_trackers": 0.69,
+      "cmp_pct": 11.8,
+      "google_pct": 73.2,
+      "meta_pct": 14.2,
+      "us_tracker_pct": 37.8,
+      "any_tracker_pct": 37.8
+    },
+    {
+      "sector": "Childcare",
+      "n_sites": 114,
+      "median_trackers": 1.0,
+      "mean_trackers": 0.96,
+      "cmp_pct": 20.2,
+      "google_pct": 89.5,
+      "meta_pct": 16.7,
+      "us_tracker_pct": 64.9,
+      "any_tracker_pct": 65.8
+    }
+  ],
+  "essential_vs_market": {
+    "essential": {
+      "label": "Essential Services",
+      "n_sites": 539,
+      "median_trackers": 1.0,
+      "mean_trackers": 0.8,
+      "cmp_pct": 31.5,
+      "google_pct": 75.7,
+      "meta_pct": 14.5,
+      "us_tracker_pct": 49.7,
+      "any_tracker_pct": 50.3
+    },
+    "market": {
+      "label": "Market-Driven Sectors",
+      "n_sites": 1519,
+      "median_trackers": 0.0,
+      "mean_trackers": 0.73,
+      "cmp_pct": 27.6,
+      "google_pct": 77.0,
+      "meta_pct": 12.1,
+      "us_tracker_pct": 45.6,
+      "any_tracker_pct": 46.3
+    },
+    "essential_sectors": [
+      "Public Services",
+      "Healthcare",
+      "Childcare"
+    ],
+    "market_sectors": [
+      "Real Estate",
+      "Restaurants",
+      "Retail",
+      "Finance & Law"
+    ]
+  }
+}

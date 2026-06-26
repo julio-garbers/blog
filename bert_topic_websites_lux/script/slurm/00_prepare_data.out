@@ -1,0 +1,78 @@
+================================================================================
+Job started at: Mon Feb 23 09:55:30 CET 2026
+Node: mel0040
+================================================================================
+
+[RUN] Starting data preparation...
+
+======================================================================
+Luxembourg Website Topic Analysis - Data Preparation
+(Paragraph-Level Deduplication)
+======================================================================
+
+[STEP 1] Loading language analysis sample...
+
+[LOAD] Loading language analysis sample...
+   File: /project/home/p200812/blog/website_languages_lux/data/lux_sample_with_languages.parquet
+   Total website-years in sample: 83,728
+   Unique website-years: 83,728
+
+[STEP 2] Loading raw data with text content...
+
+[LOAD] Loading raw data...
+   Found 24 parquet files
+
+[STEP 3] Processing websites with paragraph deduplication...
+
+[PROCESS] Extracting and deduplicating pages...
+   Filtering to 83,728 website-years from language sample
+   Total pages before dedup: 246,604
+   Unique website-years: 81,585
+   Deduplicating paragraphs within each website-year...
+   Text reduction from dedup: 37.7%
+   Website-years with text: 81,585
+
+[STEP 4] Saving yearly files...
+
+[SAVE] Saving yearly files to /project/home/p200812/blog/bert_topic_websites_lux/data/yearly
+   2013: 2,051 websites (4,544 pages, avg 6,139 chars) -> websites_2013.parquet
+   2014: 1,856 websites (3,348 pages, avg 5,902 chars) -> websites_2014.parquet
+   2015: 1,774 websites (3,072 pages, avg 5,523 chars) -> websites_2015.parquet
+   2016: 5,627 websites (7,822 pages, avg 4,331 chars) -> websites_2016.parquet
+   2017: 7,177 websites (15,630 pages, avg 5,002 chars) -> websites_2017.parquet
+   2018: 8,203 websites (24,257 pages, avg 6,250 chars) -> websites_2018.parquet
+   2019: 9,456 websites (31,357 pages, avg 6,544 chars) -> websites_2019.parquet
+   2020: 9,988 websites (33,847 pages, avg 7,409 chars) -> websites_2020.parquet
+   2021: 9,856 websites (33,252 pages, avg 7,336 chars) -> websites_2021.parquet
+   2022: 9,395 websites (31,302 pages, avg 7,363 chars) -> websites_2022.parquet
+   2023: 8,420 websites (30,937 pages, avg 8,395 chars) -> websites_2023.parquet
+   2024: 7,782 websites (27,236 pages, avg 8,243 chars) -> websites_2024.parquet
+
+======================================================================
+SUMMARY STATISTICS
+======================================================================
+
+Total website-years: 81,585
+Unique websites: 13,677
+Years covered: 2013 - 2024
+Total pages (before dedup): 246,604
+
+Clean text statistics (after dedup):
+   Mean text length: 6,828 chars
+   Median text length: 3,380 chars
+   P25: 1,465 chars
+   P75: 7,714 chars
+   P95: 21,974 chars
+   Max: 1,603,283 chars
+
+[OK] Metadata saved: /project/home/p200812/blog/bert_topic_websites_lux/data/metadata.json
+
+======================================================================
+DONE! Ready for embedding.
+Run: sbatch script/01_embed.sh
+======================================================================
+
+================================================================================
+Job completed at: Mon Feb 23 09:56:29 CET 2026
+Exit code: 0
+================================================================================

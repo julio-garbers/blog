@@ -1,0 +1,38 @@
+================================================================================
+Job started at: Fri Jun 26 20:13:18 CEST 2026
+Node: mel0344
+Array index: 5
+Year: 2018
+================================================================================
+
+[RUN] Extracting third-party requests for year 2018...
+
+======================================================================
+Web Trackers - Third-Party Extraction for 2018
+======================================================================
+[CONFIG] 25 strong + 12 weak CMP signatures loaded
+[2018] Found 133 raw gz files
+[2018]   processed 25/133 files, 1,713 sites so far
+[2018]   processed 50/133 files, 3,334 sites so far
+[2018]   processed 75/133 files, 4,948 sites so far
+[2018]   processed 100/133 files, 6,758 sites so far
+[2018]   processed 125/133 files, 8,521 sites so far
+[2018]   processed 133/133 files, 8,946 sites so far
+[2018] Total pages scanned: 39,270
+[2018] Unique .lu sites: 8,946
+[2018] Sites after universe join: 8,401 (dropped 545 not in language sample)
+
+[SAVE] Wrote 8,401 website-years -> /project/home/p200812/blog/web_trackers_lux/data/yearly/thirdparty_2018.parquet
+
+[SUMMARY]
+  Median third parties / site: 3.0
+  Mean third parties / site:   3.14
+  Sites with a CMP banner:     434 (5.2%)
+  Sites served over HTTPS:     2,034 (24.2%)
+
+DONE.
+
+================================================================================
+Job completed at: Fri Jun 26 20:14:52 CEST 2026
+Exit code: 0
+================================================================================

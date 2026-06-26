@@ -1,0 +1,31 @@
+================================================================================
+Job started at: Fri Jun 26 20:23:53 CEST 2026
+Node: mel0229
+================================================================================
+
+[RUN] Classifying third-party requests...
+
+======================================================================
+Web Trackers - Classify Third Parties
+======================================================================
+[LOAD] Entity map: 116 domains
+[LOAD] 12 yearly third-party files
+[LOAD] Total website-years: 83,726
+[CLASSIFY] Third-party requests (long): 307,494
+[CLASSIFY] Identified entity for 205,408/307,494 requests (66.8%)
+
+[SAVE] /project/home/p200812/blog/web_trackers_lux/data/classified_requests.parquet
+[SAVE] /project/home/p200812/blog/web_trackers_lux/data/site_summary.parquet
+
+[SUMMARY] 2024: 8,061 sites
+  Median trackers/site: 0.0
+  Sites embedding Google: 71.8%
+  Sites embedding Meta:   13.4%
+  Sites with a US tracker: 45.2%
+
+DONE.
+
+================================================================================
+Job completed at: Fri Jun 26 20:24:10 CEST 2026
+Exit code: 0
+================================================================================

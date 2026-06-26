@@ -1,0 +1,132 @@
+================================================================================
+Job started at: Mon Feb 23 11:14:58 CET 2026
+Node: mel4013
+CPUs: 32
+Memory: 3.9Ti
+================================================================================
+
+[RUN] Starting global BERTopic analysis...
+
+======================================================================
+Luxembourg Website Topic Analysis - Global BERTopic
+======================================================================
+
+Configuration:
+   Years: 2013-2024
+   Min topic size: 50
+   c-TF-IDF max text: 50,000 chars
+
+[LOAD] Loading all years...
+   2013: 2,051 websites, embeddings (2051, 1024)
+   2014: 1,856 websites, embeddings (1856, 1024)
+   2015: 1,774 websites, embeddings (1774, 1024)
+   2016: 5,627 websites, embeddings (5627, 1024)
+   2017: 7,177 websites, embeddings (7177, 1024)
+   2018: 8,203 websites, embeddings (8203, 1024)
+   2019: 9,456 websites, embeddings (9456, 1024)
+   2020: 9,988 websites, embeddings (9988, 1024)
+   2021: 9,856 websites, embeddings (9856, 1024)
+   2022: 9,395 websites, embeddings (9395, 1024)
+   2023: 8,420 websites, embeddings (8420, 1024)
+   2024: 7,782 websites, embeddings (7782, 1024)
+
+   Total: 81,585 website-years
+   Embeddings: (81585, 1024) (334 MB)
+
+======================================================================
+[BERTOPIC] Running Global BERTopic Analysis
+======================================================================
+   Documents: 81,585
+   Embedding dim: 1024
+   Min topic size: 50
+
+   Fitting BERTopic (UMAP + HDBSCAN + c-TF-IDF)...
+2026-02-23 11:17:23,153 - BERTopic - Dimensionality - Fitting the dimensionality reduction algorithm
+2026-02-23 11:19:37,836 - BERTopic - Dimensionality - Completed ✓
+2026-02-23 11:19:37,988 - BERTopic - Cluster - Start clustering the reduced embeddings
+2026-02-23 11:20:09,246 - BERTopic - Cluster - Completed ✓
+2026-02-23 11:20:09,335 - BERTopic - Representation - Fine-tuning topics using representation models.
+2026-02-23 11:22:29,616 - BERTopic - Representation - Completed ✓
+   [OK] BERTopic fit in 331.6s
+
+   Discovered 191 topics
+   Outliers: 34,287 (42.0%)
+
+   Computing topics_over_time()...
+0it [00:00, ?it/s]1it [00:01,  1.64s/it]2it [00:03,  1.77s/it]3it [00:05,  1.76s/it]4it [00:08,  2.36s/it]5it [00:13,  3.43s/it]6it [00:21,  4.81s/it]7it [00:30,  6.17s/it]8it [00:40,  7.32s/it]9it [00:50,  8.16s/it]10it [01:00,  8.77s/it]11it [01:10,  9.11s/it]12it [01:19,  9.05s/it]12it [01:19,  6.59s/it]
+   [OK] topics_over_time in 79.7s
+   Topics over time rows: 2,194
+
+[SAVE] Saving results to /project/home/p200812/blog/bert_topic_websites_lux/output
+   [OK] website_topics.parquet (81,585 rows)
+   [OK] topic_info.csv (192 topics)
+   [OK] topics_over_time.csv (2,194 rows)
+   [OK] metadata.json
+
+[STATS] Building stats.json for blog post...
+   [OK] stats.json saved: /project/home/p200812/blog/bert_topic_websites_lux/output/stats.json
+
+[VIZ] Creating visualizations...
+   [OK] topic_distribution.png
+   Subsampling 20,000 of 81,585 for UMAP scatter...
+   [OK] topic_umap.png
+   [OK] topic_words.png
+
+======================================================================
+TOP 15 TOPICS (by website-year count)
+======================================================================
+
+   Topic 0 (5,088 website-years)
+   000, appartement, 000 000, chambres, m2, surface, maison, donnes
+
+   Topic 1 (2,892 website-years)
+   fund, investment, funds, management, financial, asset, tax, global
+
+   Topic 2 (1,372 website-years)
+   daten, verarbeitung, google, personenbezogenen, personenbezogenen daten, person, dsgvo, data
+
+   Topic 3 (1,255 website-years)
+   commune, communal, communale, conseil communal, dchets, administration, population, conseil
+
+   Topic 4 (1,199 website-years)
+   crche, enfants, lenfant, enfant, parents, activits, foyer, crches
+
+   Topic 5 (1,173 website-years)
+   cloud, business, security, solutions, data, informatique, management, support
+
+   Topic 6 (1,039 website-years)
+   design, marketing, communication, digital, cration, rfrencement, seo, stratgie
+
+   Topic 7 (867 website-years)
+   architecture, architectes, architecte, construction, maison, unifamiliale, maison unifamiliale, darchitecture
+
+   Topic 8 (829 website-years)
+   installation, domotique, installations, alarme, dalarme, electricit, lectriques, lectrique
+
+   Topic 9 (767 website-years)
+   sushi, poulet, saumon, pices, thon, scampis, roll, avocat
+
+   Topic 10 (688 website-years)
+   vins, pinot, domaine, vin, riesling, blanc, wine, chteau
+
+   Topic 11 (658 website-years)
+   soins, beaut, visage, soin, peau, institut, corps, massage
+
+   Topic 12 (587 website-years)
+   352, fax, fax 352, rue, 26, 352 26, email, tl
+
+   Topic 13 (571 website-years)
+   jardin, gazon, plantes, jardins, verts, jardinage, amnagement, entretien
+
+   Topic 14 (568 website-years)
+   fc, seniors, match, senior, esch, saison, coupe, dames
+
+======================================================================
+DONE!
+Results: /project/home/p200812/blog/bert_topic_websites_lux/output
+======================================================================
+
+================================================================================
+Job completed at: Mon Feb 23 11:25:13 CET 2026
+Exit code: 0
+================================================================================

@@ -1,0 +1,34 @@
+================================================================================
+Job started at: Fri Jun 26 20:13:17 CEST 2026
+Node: mel0229
+Array index: 0
+Year: 2013
+================================================================================
+
+[RUN] Extracting third-party requests for year 2013...
+
+======================================================================
+Web Trackers - Third-Party Extraction for 2013
+======================================================================
+[CONFIG] 25 strong + 12 weak CMP signatures loaded
+[2013] Found 35 raw gz files
+[2013]   processed 25/35 files, 1,621 sites so far
+[2013]   processed 35/35 files, 2,253 sites so far
+[2013] Total pages scanned: 8,023
+[2013] Unique .lu sites: 2,253
+[2013] Sites after universe join: 2,120 (dropped 133 not in language sample)
+
+[SAVE] Wrote 2,120 website-years -> /project/home/p200812/blog/web_trackers_lux/data/yearly/thirdparty_2013.parquet
+
+[SUMMARY]
+  Median third parties / site: 1.0
+  Mean third parties / site:   1.30
+  Sites with a CMP banner:     4 (0.2%)
+  Sites served over HTTPS:     0 (0.0%)
+
+DONE.
+
+================================================================================
+Job completed at: Fri Jun 26 20:13:44 CEST 2026
+Exit code: 0
+================================================================================
