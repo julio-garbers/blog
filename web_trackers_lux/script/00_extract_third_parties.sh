@@ -4,7 +4,7 @@
 #SBATCH --partition=cpu
 #SBATCH --nodes=1
 #SBATCH --cpus-per-task=8
-#SBATCH --time=08:00:00
+#SBATCH --time=00:30:00
 #SBATCH --account=p200812
 #SBATCH --qos=default
 #SBATCH --array=0-11

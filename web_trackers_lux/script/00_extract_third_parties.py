@@ -72,9 +72,22 @@ _EXTRACT = tldextract.TLDExtract(suffix_list_urls=())
 # URL / domain helpers
 # =============================================================================
 
-# Capture src="..." / href="..." attribute values, plus absolute and
-# protocol-relative URLs that appear inside inline scripts.
-_ATTR_URL_RE = re.compile(r"""(?:src|href)\s*=\s*["']([^"']+)["']""", re.IGNORECASE)
+# Capture resource URLs only. Any src="..." covers <script>/<img>/<iframe>/
+# <source>/<audio>/<video>. href="..." is restricted to <link> tags
+# (stylesheets, preconnect, icons); <a>/<area> navigation links are deliberately
+# excluded so outbound links (e.g. "follow us on Facebook") are not miscounted
+# as embedded third parties. We also pick up absolute / protocol-relative URLs
+# that appear inside inline scripts.
+_SRC_URL_RE = re.compile(r"""src\s*=\s*["']([^"']+)["']""", re.IGNORECASE)
+_LINK_HREF_RE = re.compile(
+    r"""<link\b[^>]*?\shref\s*=\s*["']([^"']+)["']""", re.IGNORECASE
+)
+
+# Inline <script> bodies, scanned for absolute / protocol-relative URLs. We run
+# the bare-URL regex only inside script blocks (not the whole page) so that a
+# host appearing in some <a href="https://...">  navigation link is not picked
+# up as an embedded third party.
+_SCRIPT_BLOCK_RE = re.compile(r"<script\b[^>]*>(.*?)</script>", re.IGNORECASE | re.DOTALL)
 _BARE_URL_RE = re.compile(r"""(?:https?:)?//[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}""")
 
 # Hosts/schemes that never represent a real third party
@@ -123,8 +136,10 @@ def extract_third_parties(html: str, page_url: str) -> tuple[list[str], bool]:
     page_scheme = parsed.scheme or "http"
     first_party = registrable_domain(parsed.netloc.split(":")[0])
 
-    candidates = _ATTR_URL_RE.findall(html)
-    candidates.extend(_BARE_URL_RE.findall(html))
+    candidates = _SRC_URL_RE.findall(html)
+    candidates.extend(_LINK_HREF_RE.findall(html))
+    for script_body in _SCRIPT_BLOCK_RE.findall(html):
+        candidates.extend(_BARE_URL_RE.findall(script_body))
 
     found: set[str] = set()
     for raw in candidates:
