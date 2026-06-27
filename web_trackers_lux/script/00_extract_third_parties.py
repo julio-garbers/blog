@@ -16,7 +16,10 @@ mirroring the embedding step of the topic-modelling pipeline.
 For one website-year, a "third party" is any resource host whose registrable
 domain (eTLD+1) differs from the site's own registrable domain. We scan the
 src/href attributes of <script>, <img>, <iframe>, <link>, <source> and any
-absolute/protocol-relative URLs in inline scripts.
+absolute/protocol-relative URLs in *executable* inline scripts. JSON-LD and
+other non-JavaScript <script> blocks are skipped (they carry schema.org and
+social-profile "sameAs" URLs as data, not as loaded resources), and a small set
+of spec/profile namespace domains (schema.org, gmpg.org, ...) is never counted.
 
 Input:  Raw HTML gz parquets (url, year, html)
         Same website-year universe as the language analysis (inner join).
@@ -77,7 +80,7 @@ _EXTRACT = tldextract.TLDExtract(suffix_list_urls=())
 # (stylesheets, preconnect, icons); <a>/<area> navigation links are deliberately
 # excluded so outbound links (e.g. "follow us on Facebook") are not miscounted
 # as embedded third parties. We also pick up absolute / protocol-relative URLs
-# that appear inside inline scripts.
+# that appear inside *executable* inline scripts (see below).
 _SRC_URL_RE = re.compile(r"""src\s*=\s*["']([^"']+)["']""", re.IGNORECASE)
 _LINK_HREF_RE = re.compile(
     r"""<link\b[^>]*?\shref\s*=\s*["']([^"']+)["']""", re.IGNORECASE
@@ -86,12 +89,55 @@ _LINK_HREF_RE = re.compile(
 # Inline <script> bodies, scanned for absolute / protocol-relative URLs. We run
 # the bare-URL regex only inside script blocks (not the whole page) so that a
 # host appearing in some <a href="https://...">  navigation link is not picked
-# up as an embedded third party.
-_SCRIPT_BLOCK_RE = re.compile(r"<script\b[^>]*>(.*?)</script>", re.IGNORECASE | re.DOTALL)
+# up as an embedded third party. We also capture the opening-tag attributes so
+# that NON-executable script blocks can be skipped: above all JSON-LD
+# (<script type="application/ld+json">), which embeds schema.org and the site's
+# own social-profile "sameAs" URLs (facebook.com, instagram.com, ...) as
+# structured *data*, not as loaded resources. Scanning only real JavaScript still
+# catches inline-injected resources (Google Analytics, the Meta pixel, GTM) while
+# dropping that structured-data noise.
+_SCRIPT_BLOCK_RE = re.compile(
+    r"<script\b([^>]*)>(.*?)</script>", re.IGNORECASE | re.DOTALL
+)
+# Anchored to a tag boundary so "data-type=" is not misread as the script type.
+_SCRIPT_TYPE_RE = re.compile(r"""(?:^|\s)type\s*=\s*["']?([^"'\s>]+)""", re.IGNORECASE)
+# Script "type" values that hold executable JS. An empty/absent type is classic
+# JavaScript; anything else (ld+json, json, templates, text/html, ...) is data.
+_JS_SCRIPT_TYPES = {
+    "",
+    "text/javascript",
+    "application/javascript",
+    "module",
+    "text/ecmascript",
+    "application/ecmascript",
+    "text/jscript",
+}
 _BARE_URL_RE = re.compile(r"""(?:https?:)?//[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}""")
 
 # Hosts/schemes that never represent a real third party
 _SKIP_PREFIXES = ("data:", "javascript:", "mailto:", "tel:", "#", "blob:", "about:")
+
+# Registrable domains that show up in markup but are never actually fetched:
+# schema / spec / profile namespaces (JSON-LD @context, the WordPress XFN
+# <link rel="profile"> -> gmpg.org, xmlns declarations). These are metadata, so
+# counting them as embedded third parties inflates the per-site domain count and
+# the unidentified long tail.
+_NON_RESOURCE_DOMAINS = {
+    "schema.org",
+    "gmpg.org",
+    "w3.org",
+    "purl.org",
+    "ogp.me",
+    "xmlns.com",
+}
+
+
+def _is_javascript_block(attrs: str) -> bool:
+    """True if a <script>'s opening-tag attributes denote executable JavaScript."""
+    m = _SCRIPT_TYPE_RE.search(attrs)
+    if m is None:
+        return True  # no explicit type -> classic JavaScript
+    return m.group(1).lower() in _JS_SCRIPT_TYPES
 
 
 def registrable_domain(host: str) -> str | None:
@@ -138,8 +184,9 @@ def extract_third_parties(html: str, page_url: str) -> tuple[list[str], bool]:
 
     candidates = _SRC_URL_RE.findall(html)
     candidates.extend(_LINK_HREF_RE.findall(html))
-    for script_body in _SCRIPT_BLOCK_RE.findall(html):
-        candidates.extend(_BARE_URL_RE.findall(script_body))
+    for attrs, script_body in _SCRIPT_BLOCK_RE.findall(html):
+        if _is_javascript_block(attrs):
+            candidates.extend(_BARE_URL_RE.findall(script_body))
 
     found: set[str] = set()
     for raw in candidates:
@@ -147,7 +194,7 @@ def extract_third_parties(html: str, page_url: str) -> tuple[list[str], bool]:
         if host is None:
             continue
         reg = registrable_domain(host)
-        if reg is None or reg == first_party:
+        if reg is None or reg == first_party or reg in _NON_RESOURCE_DOMAINS:
             continue
         found.add(reg)
         if len(found) >= MAX_THIRD_PARTIES:

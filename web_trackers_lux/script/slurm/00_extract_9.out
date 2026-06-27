@@ -1,5 +1,5 @@
 ================================================================================
-Job started at: Sat Jun 27 11:17:37 CEST 2026
+Job started at: Sat Jun 27 12:33:46 CEST 2026
 Node: mel0414
 Array index: 9
 Year: 2022
@@ -10,7 +10,7 @@ Year: 2022
 ======================================================================
 Web Trackers - Third-Party Extraction for 2022
 ======================================================================
-[CONFIG] 31 strong + 12 weak CMP signatures loaded
+[CONFIG] 39 strong + 12 weak CMP signatures loaded
 [2022] Found 144 raw gz files
 [2022]   processed 25/144 files, 1,623 sites so far
 [2022]   processed 50/144 files, 3,478 sites so far
@@ -25,14 +25,14 @@ Web Trackers - Third-Party Extraction for 2022
 [SAVE] Wrote 9,654 website-years -> /project/home/p200812/blog/web_trackers_lux/data/yearly/thirdparty_2022.parquet
 
 [SUMMARY]
-  Median third parties / site: 4.0
-  Mean third parties / site:   4.50
-  Sites with a CMP banner:     2,347 (24.3%)
+  Median third parties / site: 3.0
+  Mean third parties / site:   3.77
+  Sites with a CMP banner:     2,458 (25.5%)
   Sites served over HTTPS:     7,604 (78.8%)
 
 DONE.
 
 ================================================================================
-Job completed at: Sat Jun 27 11:21:34 CEST 2026
+Job completed at: Sat Jun 27 12:37:36 CEST 2026
 Exit code: 0
 ================================================================================

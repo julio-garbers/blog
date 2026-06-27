@@ -17,7 +17,11 @@ For every website-year we parse the raw HTML and record:
 
 - **Third-party requests** — every external host the page loads resources from
   (`<script>`, `<img>`, `<iframe>`, `<link>`, `<source>` and absolute URLs in
-  inline scripts), reduced to registrable domains different from the site's own.
+  *executable* inline scripts), reduced to registrable domains different from the
+  site's own. JSON-LD / structured-data `<script>` blocks and spec/profile
+  namespaces (schema.org, gmpg.org, …) are excluded — they are metadata, not
+  loaded resources, and would otherwise inflate the per-site domain count and the
+  unidentified long tail.
 - **Cookie-consent banners** — whether a Consent Management Platform (Cookiebot,
   OneTrust, Didomi, Usercentrics, …) or generic cookie-banner markup is present.
 - **HTTPS** — whether the site is served over a secure connection.
@@ -123,7 +127,7 @@ Then copy `output/stats.json` to the blog post directory as `stats.json`.
 
 - Same **~80k website-years** (2013–2024) as the rest of the series
 - Raw HTML source: `/project/home/p201125/firm_websites/data/raw/luxembourg/`
-- Curated entity map covers the ~90 dominant third-party domains; the long tail
+- Curated entity map covers ~112 dominant third-party domains; the long tail
   is reported as `country = "Other"`. The identified-entity coverage rate is
   printed by `01_classify.py` as a transparency check.
 

@@ -1,7 +1,7 @@
 {
   "_meta": {
     "description": "Fingerprints for detecting Consent Management Platforms (cookie-consent banners) in raw HTML. 'strong' signals are product-specific markers (a named CMP product is present); a hit on any of them sets has_cmp=true. 'weak' signals are generic cookie-banner text/markup used only as a low-confidence fallback (has_cookie_text). All matching is done case-insensitively against the page HTML.",
-    "note": "CMP product names double as entity owners; the consent-platform domains also appear in reference/entity_map.json with category='consent'. The last six strong signatures (cookie-law-info, cky-consent, cookie-notice-front, cookiecontrol, real-cookie-banner, wpconsent) are CMS-plugin slugs/handles added after auditing has_cmp=False pages, where common WordPress consent plugins (WebToffee, dFactory Cookie Notice, CookieYes, Civic) were being missed. Markers are plugin-specific slugs to avoid matching cookie-policy page links."
+    "note": "CMP product names double as entity owners; the consent-platform domains also appear in reference/entity_map.json with category='consent'. Strong signatures cookie-law-info, cky-consent, cookie-notice-front, cookiecontrol, real-cookie-banner, wpconsent are CMS-plugin slugs/handles added after auditing has_cmp=False pages, where common WordPress consent plugins (WebToffee, dFactory Cookie Notice, CookieYes, Civic) were being missed. A second audit of has_cmp=False raw HTML surfaced eight more (eu-cookie-compliance, cookienotice, cookie-notice-js, ub_cookie_notice, tm-cookie-banner, plg_system_eprivacy, js-cookies-bar, cookie-bar-css), covering the Drupal EU Cookie Compliance module, Branda / generic cookieNotice banners, the dFactory Cookie Notice script handle, YOOtheme's tm-cookie-banner, the Joomla ePrivacy plugin, and the Cookie Bar plugin. Markers are plugin-specific slugs/handles (not bare 'cookie-notice') to avoid matching cookie-policy page links."
   },
   "strong": [
     "cookiebot",
@@ -34,7 +34,15 @@
     "cookie-notice-front",
     "cookiecontrol",
     "real-cookie-banner",
-    "wpconsent"
+    "wpconsent",
+    "eu-cookie-compliance",
+    "cookienotice",
+    "cookie-notice-js",
+    "ub_cookie_notice",
+    "tm-cookie-banner",
+    "plg_system_eprivacy",
+    "js-cookies-bar",
+    "cookie-bar-css"
   ],
   "weak": [
     "cookie",

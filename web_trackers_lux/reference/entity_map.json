@@ -13,7 +13,6 @@
   "google.com": {"entity": "Google", "country": "US", "category": "other", "tracker": false},
   "googleapis.com": {"entity": "Google", "country": "US", "category": "cdn", "tracker": false},
   "gstatic.com": {"entity": "Google", "country": "US", "category": "cdn", "tracker": false},
-  "google-analytics.l.google.com": {"entity": "Google", "country": "US", "category": "analytics", "tracker": true},
   "youtube.com": {"entity": "Google", "country": "US", "category": "video", "tracker": true},
   "youtube-nocookie.com": {"entity": "Google", "country": "US", "category": "video", "tracker": false},
   "ytimg.com": {"entity": "Google", "country": "US", "category": "cdn", "tracker": false},
@@ -43,7 +42,6 @@
 
   "cloudflare.com": {"entity": "Cloudflare", "country": "US", "category": "cdn", "tracker": false},
   "cloudflareinsights.com": {"entity": "Cloudflare", "country": "US", "category": "analytics", "tracker": true},
-  "cdnjs.cloudflare.com": {"entity": "Cloudflare", "country": "US", "category": "cdn", "tracker": false},
 
   "adobedtm.com": {"entity": "Adobe", "country": "US", "category": "tag-manager", "tracker": true},
   "demdex.net": {"entity": "Adobe", "country": "US", "category": "advertising", "tracker": true},
@@ -84,7 +82,6 @@
   "outbrain.com": {"entity": "Outbrain", "country": "US", "category": "advertising", "tracker": true},
   "taboola.com": {"entity": "Taboola", "country": "US", "category": "advertising", "tracker": true},
   "yandex.ru": {"entity": "Yandex", "country": "Other", "category": "analytics", "tracker": true},
-  "mc.yandex.ru": {"entity": "Yandex", "country": "Other", "category": "analytics", "tracker": true},
 
   "jquery.com": {"entity": "jQuery", "country": "US", "category": "cdn", "tracker": false},
   "jsdelivr.net": {"entity": "jsDelivr", "country": "EU", "category": "cdn", "tracker": false},
@@ -115,7 +112,6 @@
 
   "mapbox.com": {"entity": "Mapbox", "country": "US", "category": "maps", "tracker": false},
   "openstreetmap.org": {"entity": "OpenStreetMap", "country": "EU", "category": "maps", "tracker": false},
-  "google.com/maps": {"entity": "Google", "country": "US", "category": "maps", "tracker": false},
 
   "crisp.chat": {"entity": "Crisp", "country": "EU", "category": "support", "tracker": false},
   "tawk.to": {"entity": "Tawk.to", "country": "US", "category": "support", "tracker": false},

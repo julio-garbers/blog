@@ -1,5 +1,5 @@
 ================================================================================
-Job started at: Sat Jun 27 11:17:37 CEST 2026
+Job started at: Sat Jun 27 12:33:46 CEST 2026
 Node: mel0520
 Array index: 11
 Year: 2024
@@ -10,7 +10,7 @@ Year: 2024
 ======================================================================
 Web Trackers - Third-Party Extraction for 2024
 ======================================================================
-[CONFIG] 31 strong + 12 weak CMP signatures loaded
+[CONFIG] 39 strong + 12 weak CMP signatures loaded
 [2024] Found 123 raw gz files
 [2024]   processed 25/123 files, 1,640 sites so far
 [2024]   processed 50/123 files, 3,181 sites so far
@@ -24,14 +24,14 @@ Web Trackers - Third-Party Extraction for 2024
 [SAVE] Wrote 8,061 website-years -> /project/home/p200812/blog/web_trackers_lux/data/yearly/thirdparty_2024.parquet
 
 [SUMMARY]
-  Median third parties / site: 4.0
-  Mean third parties / site:   4.45
-  Sites with a CMP banner:     2,400 (29.8%)
+  Median third parties / site: 3.0
+  Mean third parties / site:   3.49
+  Sites with a CMP banner:     2,513 (31.2%)
   Sites served over HTTPS:     6,944 (86.1%)
 
 DONE.
 
 ================================================================================
-Job completed at: Sat Jun 27 11:22:15 CEST 2026
+Job completed at: Sat Jun 27 12:38:14 CEST 2026
 Exit code: 0
 ================================================================================

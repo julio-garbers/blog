@@ -1,5 +1,5 @@
 ================================================================================
-Job started at: Sat Jun 27 11:17:37 CEST 2026
+Job started at: Sat Jun 27 12:33:46 CEST 2026
 Node: mel0139
 Array index: 8
 Year: 2021
@@ -10,7 +10,7 @@ Year: 2021
 ======================================================================
 Web Trackers - Third-Party Extraction for 2021
 ======================================================================
-[CONFIG] 31 strong + 12 weak CMP signatures loaded
+[CONFIG] 39 strong + 12 weak CMP signatures loaded
 [2021] Found 150 raw gz files
 [2021]   processed 25/150 files, 1,778 sites so far
 [2021]   processed 50/150 files, 3,489 sites so far
@@ -25,14 +25,14 @@ Web Trackers - Third-Party Extraction for 2021
 [SAVE] Wrote 10,021 website-years -> /project/home/p200812/blog/web_trackers_lux/data/yearly/thirdparty_2021.parquet
 
 [SUMMARY]
-  Median third parties / site: 4.0
-  Mean third parties / site:   4.32
-  Sites with a CMP banner:     2,332 (23.3%)
+  Median third parties / site: 3.0
+  Mean third parties / site:   3.71
+  Sites with a CMP banner:     2,440 (24.3%)
   Sites served over HTTPS:     7,194 (71.8%)
 
 DONE.
 
 ================================================================================
-Job completed at: Sat Jun 27 11:21:34 CEST 2026
+Job completed at: Sat Jun 27 12:37:36 CEST 2026
 Exit code: 0
 ================================================================================

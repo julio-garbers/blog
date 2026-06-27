@@ -1,6 +1,6 @@
 ================================================================================
-Job started at: Sat Jun 27 11:36:11 CEST 2026
-Node: mel0390
+Job started at: Sat Jun 27 12:40:03 CEST 2026
+Node: mel0386
 ================================================================================
 
 [RUN] Generating web-trackers blog statistics...
@@ -8,7 +8,7 @@ Node: mel0390
 ======================================================================
 Web Trackers - Blog Statistics
 ======================================================================
-[LOAD] site_summary: 83,726  classified_requests: 307,494
+[LOAD] site_summary: 83,726  classified_requests: 266,301
 [JOIN] Sites with a sector label: 47,298 (of 83,726)
 
 [SAVE] /project/home/p200812/blog/web_trackers_lux/output/stats.json
@@ -17,24 +17,24 @@ Web Trackers - Blog Statistics
 THE CONSENT ILLUSION (per year)
 ======================================================================
   Year   Sites  MedTrk    CMP%     US%
-  2013    2120     0.0     0.2    49.0
-  2014    1920     0.0     0.4    54.0
-  2015    1841     0.0     1.0    57.3
-  2016    5806     0.0     1.9    59.0
-  2017    7381     0.0     2.8    63.8
-  2018    8401     0.0     7.4    63.4
-  2019    9662     1.0    17.4    69.1
-  2020   10144     1.0    23.6    62.9
-  2021   10021     0.0    23.3    62.9
-  2022    9654     0.0    24.3    59.8
-  2023    8715     0.0    26.0    55.3
-  2024    8061     0.0    29.8    51.7
+  2013    2120     0.0     0.3    50.4
+  2014    1920     0.0     0.5    56.1
+  2015    1841     0.0     1.1    60.0
+  2016    5806     0.0     2.0    62.5
+  2017    7381     0.0     2.9    67.9
+  2018    8401     0.0     7.7    67.8
+  2019    9662     1.0    18.2    75.4
+  2020   10144     1.0    24.5    68.3
+  2021   10021     0.0    24.3    69.9
+  2022    9654     0.0    25.5    67.2
+  2023    8715     0.0    27.4    63.5
+  2024    8061     0.0    31.2    59.9
 
 ======================================================================
 CMP BLIND SPOT (consent possibly delivered via GTM)
 ======================================================================
-  2024: detected CMP 29.8% | any cookie text 65.6% (upper bound)
-  2024: load GTM 27.7% | GTM but no detected CMP 14.3% of all sites (20.3% of CMP-negative sites)
+  2024: detected CMP 31.2% | any cookie text 65.6% (upper bound)
+  2024: load GTM 27.7% | GTM but no detected CMP 13.7% of all sites (19.9% of CMP-negative sites)
 
 [NEXT] Copy output/stats.json to the blog post directory:
   cp output/stats.json <website>/posts/web_trackers_lux/stats.json
@@ -42,6 +42,6 @@ CMP BLIND SPOT (consent possibly delivered via GTM)
 DONE.
 
 ================================================================================
-Job completed at: Sat Jun 27 11:36:24 CEST 2026
+Job completed at: Sat Jun 27 12:40:19 CEST 2026
 Exit code: 0
 ================================================================================
