@@ -143,6 +143,64 @@ def compute_over_time(summary: pl.DataFrame) -> dict:
 
 
 # =============================================================================
+# Block 1b: CMP blind spot (consent we cannot see)
+# =============================================================================
+
+
+def compute_cmp_blindspot(summary: pl.DataFrame, classified: pl.DataFrame) -> dict:
+    """Quantify how much consent activity our HTML fingerprinting may miss.
+
+    `has_cmp` only fires when a known consent-platform string is present in the
+    *server-rendered* HTML. A consent banner injected at runtime through Google
+    Tag Manager leaves no such fingerprint - the raw HTML shows only
+    googletagmanager.com. So GTM-present-but-no-CMP sites are an upper bound on
+    the consent we could be silently missing. We also surface the weak
+    cookie-text signal as the noisy upper bound on "some cookie language".
+    """
+    years = list(range(START_YEAR, END_YEAR + 1))
+
+    gtm = (
+        classified.filter(pl.col("third_party") == "googletagmanager.com")
+        .select(["website_url", "year"])
+        .unique()
+        .with_columns(pl.lit(True).alias("has_gtm"))
+    )
+    s = summary.join(gtm, on=["website_url", "year"], how="left").with_columns(
+        pl.col("has_gtm").fill_null(False)
+    )
+
+    agg = (
+        s.group_by("year")
+        .agg(
+            pl.len().alias("n_sites"),
+            (pl.col("has_gtm").mean() * 100).alias("gtm_pct"),
+            # GTM present but no detected CMP: consent we cannot see in the HTML.
+            ((pl.col("has_gtm") & pl.col("has_cmp").not_()).mean() * 100).alias(
+                "gtm_no_cmp_pct"
+            ),
+            # Among CMP-negative sites, the share that run GTM.
+            (
+                (pl.col("has_gtm") & pl.col("has_cmp").not_()).sum()
+                / pl.col("has_cmp").not_().sum()
+                * 100
+            ).alias("gtm_share_of_no_cmp_pct"),
+        )
+        .sort("year")
+    )
+
+    def col(name: str) -> list:
+        lut = dict(zip(agg["year"].to_list(), agg[name].to_list()))
+        return [round(lut[y], 1) if lut.get(y) is not None else None for y in years]
+
+    return {
+        "years": years,
+        "gtm_pct": col("gtm_pct"),
+        "gtm_no_cmp_pct": col("gtm_no_cmp_pct"),
+        "gtm_share_of_no_cmp_pct": col("gtm_share_of_no_cmp_pct"),
+    }
+
+
+# =============================================================================
 # Block 2: sovereignty
 # =============================================================================
 
@@ -326,6 +384,7 @@ def main() -> None:
     summary_sec = attach_sectors(summary)
 
     over_time = compute_over_time(summary)
+    cmp_blindspot = compute_cmp_blindspot(summary, classified)
     sovereignty = compute_sovereignty(summary, classified)
     top_entities = compute_top_entities(summary, classified, END_YEAR)
     by_sector = compute_by_sector(summary_sec, END_YEAR)
@@ -340,6 +399,8 @@ def main() -> None:
         "median_trackers_latest": round(last["n_trackers"].median(), 1),
         "cmp_pct_latest": round(last["has_cmp"].mean() * 100, 1),
         "cookie_text_pct_latest": round(last["has_cookie_text"].mean() * 100, 1),
+        "gtm_pct_latest": cmp_blindspot["gtm_pct"][-1],
+        "gtm_no_cmp_pct_latest": cmp_blindspot["gtm_no_cmp_pct"][-1],
         "any_tracker_pct_latest": round(last["has_any_tracker"].mean() * 100, 1),
         "google_pct_latest": round(last["has_google"].mean() * 100, 1),
         "meta_pct_latest": round(last["has_meta"].mean() * 100, 1),
@@ -354,6 +415,7 @@ def main() -> None:
     stats = {
         "summary": summary_block,
         "over_time": over_time,
+        "cmp_blindspot": cmp_blindspot,
         "sovereignty": sovereignty,
         "top_entities": top_entities,
         "by_sector": by_sector,
@@ -377,6 +439,21 @@ def main() -> None:
             f"{str(sovereignty['country_share']['US'][i]):>6}",
             flush=True,
         )
+
+    print("\n" + "=" * 70, flush=True)
+    print("CMP BLIND SPOT (consent possibly delivered via GTM)", flush=True)
+    print("=" * 70, flush=True)
+    print(
+        f"  {END_YEAR}: detected CMP {summary_block['cmp_pct_latest']}% | "
+        f"any cookie text {summary_block['cookie_text_pct_latest']}% (upper bound)",
+        flush=True,
+    )
+    print(
+        f"  {END_YEAR}: load GTM {summary_block['gtm_pct_latest']}% | "
+        f"GTM but no detected CMP {summary_block['gtm_no_cmp_pct_latest']}% of all sites "
+        f"({cmp_blindspot['gtm_share_of_no_cmp_pct'][-1]}% of CMP-negative sites)",
+        flush=True,
+    )
 
     print("\n[NEXT] Copy output/stats.json to the blog post directory:", flush=True)
     print(

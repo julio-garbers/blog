@@ -1,6 +1,6 @@
 ================================================================================
-Job started at: Fri Jun 26 20:13:17 CEST 2026
-Node: mel0333
+Job started at: Sat Jun 27 11:17:37 CEST 2026
+Node: mel0138
 Array index: 2
 Year: 2015
 ================================================================================
@@ -10,7 +10,7 @@ Year: 2015
 ======================================================================
 Web Trackers - Third-Party Extraction for 2015
 ======================================================================
-[CONFIG] 25 strong + 12 weak CMP signatures loaded
+[CONFIG] 31 strong + 12 weak CMP signatures loaded
 [2015] Found 32 raw gz files
 [2015]   processed 25/32 files, 1,488 sites so far
 [2015]   processed 32/32 files, 1,931 sites so far
@@ -23,12 +23,12 @@ Web Trackers - Third-Party Extraction for 2015
 [SUMMARY]
   Median third parties / site: 1.0
   Mean third parties / site:   1.94
-  Sites with a CMP banner:     8 (0.4%)
+  Sites with a CMP banner:     18 (1.0%)
   Sites served over HTTPS:     59 (3.2%)
 
 DONE.
 
 ================================================================================
-Job completed at: Fri Jun 26 20:13:44 CEST 2026
+Job completed at: Sat Jun 27 11:18:02 CEST 2026
 Exit code: 0
 ================================================================================

@@ -1,6 +1,6 @@
 ================================================================================
-Job started at: Fri Jun 26 20:13:17 CEST 2026
-Node: mel0309
+Job started at: Sat Jun 27 11:17:37 CEST 2026
+Node: mel0434
 Array index: 6
 Year: 2019
 ================================================================================
@@ -10,7 +10,7 @@ Year: 2019
 ======================================================================
 Web Trackers - Third-Party Extraction for 2019
 ======================================================================
-[CONFIG] 25 strong + 12 weak CMP signatures loaded
+[CONFIG] 31 strong + 12 weak CMP signatures loaded
 [2019] Found 151 raw gz files
 [2019]   processed 25/151 files, 1,756 sites so far
 [2019]   processed 50/151 files, 3,448 sites so far
@@ -28,12 +28,12 @@ Web Trackers - Third-Party Extraction for 2019
 [SUMMARY]
   Median third parties / site: 3.0
   Mean third parties / site:   3.60
-  Sites with a CMP banner:     1,353 (14.0%)
+  Sites with a CMP banner:     1,686 (17.4%)
   Sites served over HTTPS:     3,703 (38.3%)
 
 DONE.
 
 ================================================================================
-Job completed at: Fri Jun 26 20:15:25 CEST 2026
+Job completed at: Sat Jun 27 11:19:45 CEST 2026
 Exit code: 0
 ================================================================================
